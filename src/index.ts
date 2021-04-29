@@ -43,7 +43,7 @@ export const pLimiter2 = async (files: string[], func: Function) => {
   );
   bar1.start(files.length, 0);
 
-  const limiter = pLimit(50);
+  const limiter = pLimit(20);
   const imports: packageImportT[][] = [];
   await Promise.all(
     files.map((file, x) =>
@@ -65,14 +65,14 @@ export const pLimiter2 = async (files: string[], func: Function) => {
 };
 
 const main = async () => {
-  /* console.log("Fetching org repos from github api");
+  console.log("Fetching org repos from github api");
   const repos = await fetch();
-  await pLimiter(repos, CloneOrPull); */
+  await pLimiter(repos, CloneOrPull);
   let files = await glob("./repos/**/*.+(tsx|jsx|js|ts)", {dot: true});
   files = files.filter((file) => !file.includes("node_modules"));
   const imports = await pLimiter2(files, getImportsFromFile);
   const data = manipulateImportData(imports);
-  fs.writeFileSync("imports.json", JSON.stringify(data, null, 2));
+  fs.writeFileSync("imports.json", JSON.stringify(data));
 };
 
 try {
