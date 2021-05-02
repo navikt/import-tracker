@@ -1,48 +1,53 @@
 import { Accordion } from "@navikt/ds-react";
-import React from "react";
+import React, { Fragment } from "react";
 import { packageUsesT } from "../App";
 
-const namedImports = (
-  imports: { [key: string]: number },
-  defaultImports: number
-) => {
+const ImportTable = ({
+  imports,
+  defaultImports,
+}: {
+  imports: { [key: string]: number };
+  defaultImports: number;
+}) => {
   return (
-    <table className="tabell">
-      <thead>
-        <tr>
-          <th>Funksjon/klasse</th>
-          <th>X ganger importert</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Default</td>
-          <td>{defaultImports}</td>
-        </tr>
-        {Object.keys(imports)
-          .map((k) => {
-            return { name: k, value: imports[k] };
-          })
-          .sort((a, b) => (a.value < b.value ? 1 : -1))
-          .map((x) => {
-            return (
-              <>
-                {x.name === "*" ? (
-                  <tr>
-                    <td>import default as alias</td>
-                    <td>{x.value}</td>
-                  </tr>
-                ) : (
-                  <tr>
-                    <td>{x.name}</td>
-                    <td>{x.value}</td>
-                  </tr>
-                )}
-              </>
-            );
-          })}
-      </tbody>
-    </table>
+    <>
+      <table className="tabell tabell--stripet">
+        <thead>
+          <tr>
+            <th>Funksjon/klasse</th>
+            <th>Importert X ganger</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Default</td>
+            <td>{defaultImports}</td>
+          </tr>
+          {Object.keys(imports)
+            .map((k) => {
+              return { name: k, value: imports[k] };
+            })
+            .sort((a, b) => (a.value < b.value ? 1 : -1))
+            .map((x, y) => {
+              return (
+                <Fragment key={x.name + y}>
+                  {x.name === "*" ? (
+                    <tr>
+                      <td>import default as alias</td>
+                      <td>{x.value}</td>
+                    </tr>
+                  ) : (
+                    <tr>
+                      <td>{x.name}</td>
+                      <td>{x.value}</td>
+                    </tr>
+                  )}
+                </Fragment>
+              );
+            })}
+        </tbody>
+      </table>
+    </>
   );
 };
 
@@ -64,18 +69,27 @@ const AccordionList = ({
         </span>
       }
       key={imp.name}
+      renderContentWhenClosed={false}
     >
-      <div className="max-h-96 overflow-auto ">
-        {imp.value.defaultUses === 0 && (
-          <span>
-            Importeres antageligvis i et av formatene <br />{" "}
-            <code>{`import "${imp.name}";`}</code> <br />
-            <code>{`const Package = require("${imp.name}");`}</code>
-          </span>
-        )}
+      <div className="max-h-80 overflow-auto">
+        {imp.value.defaultUses === 0 &&
+          Object.keys(imp.value.namedUses).length === 0 && (
+            <span>
+              Importeres antageligvis i formatene <br /> <br />
+              <code>{`const Package = require("${imp.name}");`}</code>
+              <br />
+              <br />
+              <code>{`import "${imp.name}";`}</code>
+            </span>
+          )}
 
-        {Object.keys(imp.value.namedUses).length > 0 &&
-          namedImports(imp.value.namedUses, imp.value.defaultUses)}
+        {Object.keys(imp.value.namedUses).length > 0 && (
+          <ImportTable
+            key={imp.name + imp.name}
+            imports={imp.value.namedUses}
+            defaultImports={imp.value.defaultUses}
+          />
+        )}
       </div>
     </Accordion>
   );

@@ -47,3 +47,20 @@ h3 {
   padding-left: 0;
   padding-right: 0;
 }
+
+.scroll_shadow {
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: all 0.2s ease-out;
+}
+
+.off-top .scroll_shadow-top {
+  box-shadow: 0 1em 1em -1em black inset;
+}
+.off-bottom .scroll_shadow-bottom {
+  box-shadow: 0 -1em 1em -1em black inset;
+}
