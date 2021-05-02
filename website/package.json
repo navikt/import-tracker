@@ -2,6 +2,7 @@
   "name": "website",
   "version": "1.0.0",
   "private": true,
+  "homepage": "https://navikt.github.io/import-tracker",
   "dependencies": {
     "@navikt/ds-css": "*",
     "@navikt/ds-icons": "*",
