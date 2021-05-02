@@ -1,7 +1,7 @@
 const fs = require("fs");
 import * as ts from "typescript";
 
-import {neededTypescript} from "@unneeded/needed-typescript";
+import { neededTypescript } from "@unneeded/needed-typescript";
 
 export type importT = {
   name: string;
@@ -24,20 +24,27 @@ const walkFileNode = (fileContents: any) => {
         const importDeclaration = tsNode as ts.ImportDeclaration;
 
         /* import x from "package-x" -> "package-x" */
-        const source = (importDeclaration.moduleSpecifier as ts.StringLiteral).text;
+        const source = (importDeclaration.moduleSpecifier as ts.StringLiteral)
+          .text;
         if (source === undefined) {
           break;
         }
         /* import React from "react" -> "React" */
         const name = importDeclaration.importClause?.name?.escapedText;
-        name && dependencies.push({name: name as string, default: true});
+        name && dependencies.push({ name: name as string, default: true });
 
         const namedBindings = importDeclaration.importClause?.namedBindings;
 
         /* import * as React from "react" */
-        if (namedBindings && namedBindings.kind === ts.SyntaxKind.NamespaceImport) {
-          dependencies.push({name: "*", default: false});
-        } else if (namedBindings && namedBindings.kind === ts.SyntaxKind.NamedImports) {
+        if (
+          namedBindings &&
+          namedBindings.kind === ts.SyntaxKind.NamespaceImport
+        ) {
+          dependencies.push({ name: "*", default: true });
+        } else if (
+          namedBindings &&
+          namedBindings.kind === ts.SyntaxKind.NamedImports
+        ) {
           /* import { useContext, useRef } from "react" -> useContext, useRef */
           namedBindings.elements.forEach((element: ts.ImportSpecifier) => {
             dependencies.push({
@@ -54,7 +61,7 @@ const walkFileNode = (fileContents: any) => {
             imports[i].imports = [...imports[i].imports, ...dependencies];
           }
         } else {
-          imports.push({source, imports: dependencies});
+          imports.push({ source, imports: dependencies });
         }
         break;
       }
@@ -82,6 +89,6 @@ export const getImportsFromFile = async (filepath: string) =>
     /* Find imports  walkFileNode() missed*/
     neededTypescript(content)
       .filter((imp) => !imports.find((i) => i.source === imp))
-      .forEach((imp) => imports.push({source: imp, imports: []}));
+      .forEach((imp) => imports.push({ source: imp, imports: [] }));
     resolve(imports);
   });

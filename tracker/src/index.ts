@@ -1,6 +1,6 @@
 require("dotenv").config();
-import {getImportsFromFile, packageImportT} from "./getImports";
-import {manipulateImportData} from "./importsStats";
+import { getImportsFromFile, packageImportT } from "./getImports";
+import { manipulateImportData } from "./importsStats";
 import glob from "fast-glob";
 import fetch from "./fetch";
 import pLimit from "p-limit";
@@ -68,11 +68,11 @@ const main = async () => {
   console.log("Fetching org repos from github api");
   const repos = await fetch();
   await pLimiter(repos, CloneOrPull);
-  let files = await glob("./repos/**/*.+(tsx|jsx|js|ts)", {dot: true});
+  let files = await glob("./repos/**/*.+(tsx|jsx|js|ts)", { dot: true });
   files = files.filter((file) => !file.includes("node_modules"));
   const imports = await pLimiter2(files, getImportsFromFile);
   const data = manipulateImportData(imports);
-  fs.writeFileSync("imports.json", JSON.stringify(data));
+  fs.writeFileSync("../website/public/imports.json", JSON.stringify(data));
 };
 
 try {

@@ -1,4 +1,3 @@
-var cloneOrPull = require("git-clone-or-pull");
 const fs = require("fs");
 const path = require("path");
 const NodeGit = require("nodegit");
@@ -35,7 +34,7 @@ const CloneOrPull = (name: string) =>
 
         NodeGit.Repository.open(repoPath)
           .then(function (repository: any) {
-            repository.fetchAll()
+            repository.fetchAll();
           })
           .then(function () {
             resolve(null);

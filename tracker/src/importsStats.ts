@@ -1,5 +1,5 @@
-import {opt} from "./index";
-import {importT, packageImportT} from "./getImports";
+import { opt } from "./index";
+import { importT, packageImportT } from "./getImports";
 const cliProgress = require("cli-progress");
 
 export type packageT = {
@@ -9,14 +9,17 @@ export type packageT = {
 export type packageUsesT = {
   uses: number;
   defaultUses: number;
-  namedUses: {[key: string]: number};
+  namedUses: { [key: string]: number };
 };
 
 const getDefaultUses = (imports: importT[]) => {
   return imports.filter((imp) => imp.default).length;
 };
 
-const getNamedUses = (imports: importT[], namedUses: {[key: string]: number}) => {
+const getNamedUses = (
+  imports: importT[],
+  namedUses: { [key: string]: number }
+) => {
   const newObj = Object.assign({}, namedUses);
 
   imports
@@ -38,8 +41,12 @@ export const packageEntry = (entry: packageImportT, packageObj: packageT) => {
   } else {
     packageObj[entry.source] = {
       uses: packageObj[entry.source].uses + 1,
-      defaultUses: packageObj[entry.source].defaultUses + getDefaultUses(entry.imports),
-      namedUses: getNamedUses(entry.imports, packageObj[entry.source].namedUses),
+      defaultUses:
+        packageObj[entry.source].defaultUses + getDefaultUses(entry.imports),
+      namedUses: getNamedUses(
+        entry.imports,
+        packageObj[entry.source].namedUses
+      ),
     };
   }
 };

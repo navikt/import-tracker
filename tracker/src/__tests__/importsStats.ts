@@ -1,18 +1,18 @@
-import {manipulateImportData} from "../importsStats";
+import { manipulateImportData } from "../importsStats";
 
 const input = [
   {
     source: "Package-1",
     imports: [
-      {name: "Package", default: true},
-      {name: "function1", default: false},
-      {name: "function2", default: false},
-      {name: "function3", default: false},
+      { name: "Package", default: true },
+      { name: "function1", default: false },
+      { name: "function2", default: false },
+      { name: "function3", default: false },
     ],
   },
-  {source: "Package-3", imports: []},
-  {source: "Package-4", imports: [{name: "*", default: false}]},
-  {source: "Package-2", imports: []},
+  { source: "Package-3", imports: [] },
+  { source: "Package-4", imports: [{ name: "*", default: false }] },
+  { source: "Package-2", imports: [] },
 ];
 
 const res = JSON.stringify({

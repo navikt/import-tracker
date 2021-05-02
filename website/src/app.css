@@ -1,41 +1,3 @@
-.app {
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-}
-
-.content {
-  padding: 2rem;
-  max-width: 750px;
-  width: 100%;
-
-  background-color: var(--navds-color-gray-10);
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 0.5rem;
-  row-gap: 0.25rem;
-  margin-bottom: 1rem;
-}
-
-.tags > .tag {
-  background-color: #c0e1ff;
-  border-color: var(--navds-color-action-default);
-}
-
-.tags > .tag > span {
-  display: flex;
-  column-gap: 0.25rem;
-  align-items: center;
-}
-
-.tags > .tag:hover {
-  background-color: var(--navds-color-action-default);
-  color: white;
-}
-
 .infinitescroll {
   display: flex;
   justify-content: center;
@@ -43,7 +5,7 @@
 }
 
 .accordion.navds-accordion {
-  border: 0px solid transparent;
+  border: none;
   border-radius: 0px;
   box-shadow: inset 0 -0.1rem 0 var(--navds-color-gray-20);
   margin: 0rem;
@@ -69,4 +31,19 @@
 
 button > .navds-accordion__heading {
   width: 100%;
+}
+
+h3 {
+  margin: 0;
+}
+
+.accordion .navds-accordion__content {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.accordion .app__tabell th,
+.accordion .app__tabell td {
+  padding-left: 0;
+  padding-right: 0;
 }

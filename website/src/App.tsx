@@ -1,15 +1,17 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import "./app.css";
-import {Accordion} from "@navikt/ds-react";
-import {Checkbox, Input, SkjemaGruppe} from "nav-frontend-skjema";
+import { Accordion } from "@navikt/ds-react";
+import { Checkbox, Input, SkjemaGruppe } from "nav-frontend-skjema";
 import Etikett from "nav-frontend-etiketter";
-import {SuccessStroke} from "@navikt/ds-icons";
+import { SuccessStroke } from "@navikt/ds-icons";
 import InfiniteScroll from "react-infinite-scroller";
+import "nav-frontend-tabell-style";
+import AccordionList from "./components/Accordion";
 
-type packageUsesT = {
+export type packageUsesT = {
   uses: number;
   defaultUses: number;
-  namedUses: {[key: string]: number};
+  namedUses: { [key: string]: number };
 };
 
 const App = () => {
@@ -18,8 +20,10 @@ const App = () => {
   const [inputText, setInputText] = useState("");
   const [error, setError] = useState<string | undefined>();
   const [tags, setTags] = useState<string[]>([]);
-  const [data, setData] = useState<{name: string; value: packageUsesT}[]>([]);
-  const [dataRoot, setDataRoot] = useState<{name: string; value: packageUsesT}[]>([]);
+  const [data, setData] = useState<{ name: string; value: packageUsesT }[]>([]);
+  const [dataRoot, setDataRoot] = useState<
+    { name: string; value: packageUsesT }[]
+  >([]);
   const [hasMore, setHasMore] = useState(true);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -44,9 +48,11 @@ const App = () => {
     })
       .then((data: Response) => data.json())
       .then((data: any) => {
-        const parsed = Object.keys(data).map((key) => {
-          return {name: key, value: data[key] as packageUsesT};
-        });
+        const parsed = Object.keys(data)
+          .map((key) => {
+            return { name: key, value: data[key] as packageUsesT };
+          })
+          .sort((x, y) => (x.value.uses < y.value.uses ? 1 : -1));
         setDataRoot(parsed);
         setData([...parsed.slice(0, 40)]);
       });
@@ -59,7 +65,9 @@ const App = () => {
       if (tags.length === 0) {
         return true;
       }
-      return tags.find((tag) => s.toLowerCase().indexOf(tag.toLowerCase()) !== -1);
+      return tags.find(
+        (tag) => s.toLowerCase().indexOf(tag.toLowerCase()) !== -1
+      );
     };
 
     const filtered = dataRoot.filter((imp) => {
@@ -67,7 +75,8 @@ const App = () => {
         return true;
       } else if (
         Object.keys(imp.value.namedUses).length > 0 &&
-        Object.keys(imp.value.namedUses).findIndex((x) => filterImports(x)) !== -1
+        Object.keys(imp.value.namedUses).findIndex((x) => filterImports(x)) !==
+          -1
       ) {
         return true;
       }
@@ -90,43 +99,36 @@ const App = () => {
 
   const removeTag = (x: number) => setTags([...tags.filter((_, i) => i !== x)]);
 
-  const imports = data.map((imp, y) => (
-    <Accordion
-      className="accordion"
-      heading={
-        <span style={{display: "flex", justifyContent: "space-between"}}>
-          <span>{imp.name}</span>
-          <span>{imp.value.uses}</span>
-        </span>
-      }
-      key={y + imp.name}
-    >
-      {imp.value.defaultUses === 0 ? (
-        <span>
-          Importeres antageligvis i et av formatene <br />{" "}
-          <code>{`import "${imp.name}";`}</code> <br />
-          <code>{`const Package = require("${imp.name}");`}</code>
-        </span>
-      ) : (
-        <h4>Default Imports: {`${imp.value.defaultUses}`}</h4>
-      )}
+  /* const example3 = document.getElementById('example3');
+const example3sb = document.querySelector('#example3 .scrollbox');
+let example3IsScrolling = false;
 
-      {Object.keys(imp.value.namedUses).length > 0 && (
-        <>
-          <h4>Named imports:</h4>
-          <ul>
-            {Object.keys(imp.value.namedUses).map((key, i) => (
-              <li key={key + i}>{`${key}: ${imp.value.namedUses[key]}`}</li>
-            ))}
-          </ul>
-        </>
-      )}
-    </Accordion>
-  ));
+function setShadows(event) {
+  if (!example3IsScrolling) {
+    window.requestAnimationFrame(function() {
+      if (event.target.scrollTop > 0) {
+        example3.classList.add('off-top');
+      }
+      else {
+        example3.classList.remove('off-top');
+      }
+      if (event.target.scrollTop < 160) {
+        example3.classList.add('off-bottom');
+      }
+      else {
+        example3.classList.remove('off-bottom');
+      }
+      example3IsScrolling = false;
+    });
+    example3IsScrolling = true;
+  }
+}
+
+example3sb.addEventListener('scroll', setShadows); */
 
   return (
-    <div className="app">
-      <div className="content">
+    <div className="flex justify-center vw-100 typo-normal">
+      <div className="p-8 max-w-screen-md">
         <form onSubmit={handleSubmit}>
           <SkjemaGruppe>
             <Input
@@ -136,17 +138,16 @@ const App = () => {
               description={`Eks: react, nextjs/router, useState`}
               feil={error}
             />
-            <div className="tags">
+            <div className="flex flex-wrap gap-x-2 gap-y-1 mb-4">
               {tags.map((tag, x) => (
-                <Etikett
+                <span
                   key={tag + x}
                   onClick={() => removeTag(x)}
-                  className="tag"
-                  type="info"
+                  className="border-blue-600 border bg-blue-200 rounded-sm px-2 py-1 flex gap-x-1 items-center hover:bg-blue-500 hover:text-white active:bg-blue-900"
                 >
                   <SuccessStroke />
                   <span>{tag}</span>
-                </Etikett>
+                </span>
               ))}
             </div>
             <Checkbox
@@ -155,6 +156,10 @@ const App = () => {
             />
           </SkjemaGruppe>
         </form>
+        <span className="flex justify-between p-4 ">
+          <h2>Pakkenavn</h2>
+          <h2 style={{ marginRight: "1rem" }}>Imports</h2>
+        </span>
         <InfiniteScroll
           pageStart={1}
           initialLoad={false}
@@ -163,7 +168,9 @@ const App = () => {
           loader={<div key={"loading"}>Loading...</div>}
           className="infinitescroll"
         >
-          {imports}
+          {data.map((imp, y) => (
+            <AccordionList imp={imp} />
+          ))}
         </InfiniteScroll>
       </div>
     </div>
