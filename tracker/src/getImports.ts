@@ -24,8 +24,7 @@ const walkFileNode = (fileContents: any) => {
         const importDeclaration = tsNode as ts.ImportDeclaration;
 
         /* import x from "package-x" -> "package-x" */
-        const source = (importDeclaration.moduleSpecifier as ts.StringLiteral)
-          .text;
+        const source = (importDeclaration.moduleSpecifier as ts.StringLiteral).text.toLowerCase();
         if (source === undefined) {
           break;
         }
@@ -89,6 +88,8 @@ export const getImportsFromFile = async (filepath: string) =>
     /* Find imports  walkFileNode() missed*/
     neededTypescript(content)
       .filter((imp) => !imports.find((i) => i.source === imp))
-      .forEach((imp) => imports.push({ source: imp, imports: [] }));
+      .forEach((imp) =>
+        imports.push({ source: imp.toLowerCase(), imports: [] })
+      );
     resolve(imports);
   });
