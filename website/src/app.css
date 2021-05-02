@@ -64,3 +64,9 @@ h3 {
 .off-bottom .scroll_shadow-bottom {
   box-shadow: 0 -1em 1em -1em black inset;
 }
+
+@media (max-width: 480px) {
+  .accordion .navds-accordion__content {
+    padding: 0.5rem;
+  }
+}

@@ -108,7 +108,7 @@ const App = () => {
   const removeTag = (x: number) => setTags([...tags.filter((_, i) => i !== x)]);
 
   return (
-    <div className="flex justify-center vw-100 typo-normal">
+    <div className="flex justify-center vw-100 typo-normal overflow-x-hidden">
       <div className="p-8 max-w-screen-md w-full">
         <form onSubmit={handleSubmit}>
           <SkjemaGruppe>
@@ -118,6 +118,7 @@ const App = () => {
               label="Import/Pakke navn"
               description={`Eks: react, nextjs/router, useState`}
               feil={error}
+              autoComplete="off"
             />
             <div className="flex flex-wrap gap-x-2 gap-y-1 mb-4">
               {tags.map((tag, x) => (
@@ -132,7 +133,7 @@ const App = () => {
               ))}
             </div>
             <Checkbox
-              label="Vis lokal-imports"
+              label="Vis lokale imports"
               onChange={() => setShowLocal(!showLocal)}
             />
           </SkjemaGruppe>
