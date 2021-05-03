@@ -59,6 +59,7 @@ const AccordionList = ({
     value: packageUsesT;
   };
 }) => {
+
   return (
     <Accordion
       className="accordion filter drop-shadow-lg"
@@ -72,7 +73,7 @@ const AccordionList = ({
       renderContentWhenClosed={false}
     >
       <div className="max-h-80 overflow-auto">
-        {imp.value.defaultUses === 0 &&
+        {imp.value.defaultUses > 0 &&
           Object.keys(imp.value.namedUses).length === 0 && (
             <span>
               Importeres antageligvis i formatene <br /> <br />

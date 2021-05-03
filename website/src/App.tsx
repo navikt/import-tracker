@@ -4,7 +4,7 @@ import { Checkbox, Input, SkjemaGruppe } from "nav-frontend-skjema";
 import { SuccessStroke } from "@navikt/ds-icons";
 import InfiniteScroll from "react-infinite-scroller";
 import "nav-frontend-tabell-style";
-import AccordionList from "./components/Accordion";
+import AccordionList from "./components/AccordionList";
 import { Element, Undertekst } from "nav-frontend-typografi";
 
 export type packageUsesT = {
