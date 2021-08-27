@@ -69,7 +69,10 @@ const main = async () => {
   const repos = await fetch();
   await pLimiter(repos, CloneOrPull);
   let files = await glob("./repos/**/*.+(tsx|jsx|js|ts)", { dot: true });
-  files = files.filter((file) => !file.includes("node_modules"));
+  files = files.filter(
+    (file) =>
+      !file.includes("node_modules") || !file.includes("nav-frontend-moduler")
+  );
   const imports = await pLimiter2(files, getImportsFromFile);
   const data = manipulateImportData(imports);
   fs.writeFileSync("../website/public/imports.json", JSON.stringify(data));
