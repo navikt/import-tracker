@@ -9,9 +9,13 @@ const octokit = Octokit.plugin(paginateRest, retry).defaults({
 
 const MyOctokit = new octokit();
 
-const fetchRepos = async () =>
-  await (
+const fetchRepos = async () => {
+  console.log("Fetching all repo-names from navikt-org");
+  const repos = await (
     await MyOctokit.paginate("GET /orgs/navikt/repos", { per_page: 100 })
   ).map((repo) => repo.name);
+  console.log("Finished fetching all repo-names from navikt-org");
+  return repos;
+};
 
 export default fetchRepos;

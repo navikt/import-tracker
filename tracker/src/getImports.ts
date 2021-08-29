@@ -11,6 +11,7 @@ export type importT = {
 export type packageImportT = {
   source: string;
   imports: importT[];
+  fileSource?: string;
 };
 
 const walkFileNode = (fileContents: any) => {
@@ -91,5 +92,16 @@ export const getImportsFromFile = async (filepath: string) =>
       .forEach((imp) =>
         imports.push({ source: imp.toLowerCase(), imports: [] })
       );
+    const newImp = imports.map((x) => {
+      return { ...x, fileSource: filepath };
+      /* if (x.source.startsWith("@navikt/ds-react")) {
+        x.imports.forEach((y) => {
+          if (["Grid", "Cell", "ContentContainer"].includes(y.name)) {
+            console.log(filepath);
+          }
+        });
+      } */
+    });
+
     resolve(imports);
   });

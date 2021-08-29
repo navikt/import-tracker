@@ -5,10 +5,11 @@ const NodeGit = require("nodegit");
 const CloneOrPull = (name: string) =>
   new Promise((resolve, reject) => {
     const repoPath = path.join(process.cwd(), `repos/${name}`);
+
+    const cloneUrl = `https://${process.env.TOKEN}:x-oauth-basic@github.com/navikt/${name}`;
     fs.access(repoPath, function (err: Error) {
       if (err) {
-        // Not yet cloned
-        NodeGit.Clone(`https://github.com/navikt/${name}`, repoPath, {
+        NodeGit.Clone(`cloneUrl`, repoPath, {
           fetchOpts: {
             callbacks: {
               certificateCheck: function () {

@@ -10,6 +10,7 @@ export type packageUsesT = {
   uses: number;
   defaultUses: number;
   namedUses: { [key: string]: number };
+  fileSource: string[];
 };
 
 const getDefaultUses = (imports: importT[]) => {
@@ -31,12 +32,12 @@ const getNamedUses = (
 };
 
 export const packageEntry = (entry: packageImportT, packageObj: packageT) => {
-  /* entry.source === "nav-frontend-skjema" && console.count("skjema"); */
   if (!(entry.source in packageObj)) {
     packageObj[entry.source] = {
       uses: 1,
       defaultUses: getDefaultUses(entry.imports),
       namedUses: getNamedUses(entry.imports, {}),
+      fileSource: [entry.fileSource?.replace("./repos/", "") as string],
     };
   } else {
     packageObj[entry.source] = {
@@ -47,6 +48,10 @@ export const packageEntry = (entry: packageImportT, packageObj: packageT) => {
         entry.imports,
         packageObj[entry.source].namedUses
       ),
+      fileSource: [
+        ...packageObj[entry.source].fileSource,
+        entry.fileSource?.replace("./repos/", "") as string,
+      ].sort(),
     };
   }
 };
@@ -64,6 +69,8 @@ export const manipulateImportData = (imports: packageImportT[][]) => {
     });
     bar1.increment();
   });
+
+  const newPack = packages;
   bar1.stop();
   return packages;
 };

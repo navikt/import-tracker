@@ -65,7 +65,6 @@ export const pLimiter2 = async (files: string[], func: Function) => {
 };
 
 const main = async () => {
-  console.log("Fetching org repos from github api");
   const repos = await fetch();
   await pLimiter(repos, CloneOrPull);
   let files = await glob("./repos/**/*.+(tsx|jsx|js|ts)", { dot: true });
