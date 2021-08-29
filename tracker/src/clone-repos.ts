@@ -2,10 +2,12 @@ const fs = require("fs");
 const path = require("path");
 const NodeGit = require("nodegit");
 import pLimit from "p-limit";
+/* const simpleGit = require('simple-git');
+const git = simpleGit(); */
 
 export const cloneRepos = async (repos: string[]) => {
   console.log("Starting repo clone/pull");
-  const limiter = pLimit(10);
+  const limiter = pLimit(3);
   let counter = 0;
   return Promise.all(
     repos.map((repo, x) =>
@@ -21,9 +23,8 @@ export const cloneRepos = async (repos: string[]) => {
           })
       )
     )
-  ).then(() => console.log("Finished repo clone/pull"));
+  ).then(() => console.log("\nFinished repo clone/pull"));
 };
-
 
 const gitAuth = {
   fetchOpts: {

@@ -1,5 +1,4 @@
-import { opt } from "./index";
-import { importT, packageImportT } from "./getImports";
+import { importT, packageImportT } from "./get-imports";
 const cliProgress = require("cli-progress");
 
 export type packageT = {
@@ -58,19 +57,12 @@ export const packageEntry = (entry: packageImportT, packageObj: packageT) => {
 
 export const manipulateImportData = (imports: packageImportT[][]) => {
   let packages: packageT = {};
-  const bar1 = new cliProgress.SingleBar(
-    opt("Import data"),
-    cliProgress.Presets.shades_classic
-  );
-  bar1.start(imports.length, 0);
   imports.forEach((imp: packageImportT[], y) => {
     imp.forEach((x) => {
       packageEntry(x, packages);
     });
-    bar1.increment();
   });
 
   const newPack = packages;
-  bar1.stop();
-  return packages;
+  return newPack;
 };
