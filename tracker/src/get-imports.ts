@@ -2,6 +2,28 @@ const fs = require("fs");
 import * as ts from "typescript";
 
 import { neededTypescript } from "@unneeded/needed-typescript";
+import pLimit from "p-limit";
+
+
+export const getImports = async (files: string[]) => {
+  const limiter = pLimit(20);
+  const imports: packageImportT[][] = [];
+  await Promise.all(
+    files.map((file) =>
+      limiter(() =>
+        getImportsFromFile(file)
+          .then((imp: packageImportT[]) => {
+            imports.push(imp);
+          })
+          .catch((err: Error) => {
+            console.log(file);
+          })
+      )
+    )
+  );
+  return imports;
+};
+
 
 export type importT = {
   name: string;
@@ -82,7 +104,7 @@ const walkFileNode = (fileContents: any) => {
   return imports;
 };
 
-export const getImportsFromFile = async (filepath: string) =>
+export const getImportsFromFile = async (filepath: string):Promise<packageImportT[]> =>
   new Promise((resolve, reject) => {
     const content = fs.readFileSync(filepath, "utf-8");
     const imports = walkFileNode(content);
@@ -103,5 +125,5 @@ export const getImportsFromFile = async (filepath: string) =>
       } */
     });
 
-    resolve(imports);
+    resolve(newImp);
   });
