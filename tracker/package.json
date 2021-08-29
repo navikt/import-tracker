@@ -23,7 +23,8 @@
     "p-limit": "^3.1.0",
     "nodegit": "^0.27.0",
     "cli-progress": "^3.9.0",
-    "simple-git": "^2.45.0"
+    "simple-git": "^2.45.0",
+    "lodash.sorteduniq": "^4.2.0"
   },
   "devDependencies": {
     "@types/node": "^14.14.41",

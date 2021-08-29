@@ -4,16 +4,20 @@ import * as ts from "typescript";
 import { neededTypescript } from "@unneeded/needed-typescript";
 import pLimit from "p-limit";
 
-
 export const getImports = async (files: string[]) => {
-  const limiter = pLimit(20);
+  console.log("Starting search for imports in files");
+  const limiter = pLimit(10);
   const imports: packageImportT[][] = [];
+  let counter = 0;
   await Promise.all(
     files.map((file) =>
       limiter(() =>
         getImportsFromFile(file)
           .then((imp: packageImportT[]) => {
             imports.push(imp);
+            counter = counter + 1;
+            counter % 1000 == 0 &&
+              process.stdout.write(`\x1Bc\r Files: ${counter}/${files.length}`);
           })
           .catch((err: Error) => {
             console.log(file);
@@ -21,9 +25,9 @@ export const getImports = async (files: string[]) => {
       )
     )
   );
+  console.log("\nFinished search for imports in files");
   return imports;
 };
-
 
 export type importT = {
   name: string;
@@ -104,7 +108,9 @@ const walkFileNode = (fileContents: any) => {
   return imports;
 };
 
-export const getImportsFromFile = async (filepath: string):Promise<packageImportT[]> =>
+export const getImportsFromFile = async (
+  filepath: string
+): Promise<packageImportT[]> =>
   new Promise((resolve, reject) => {
     const content = fs.readFileSync(filepath, "utf-8");
     const imports = walkFileNode(content);
