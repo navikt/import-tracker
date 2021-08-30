@@ -1,14 +1,22 @@
-import { Accordion } from "@navikt/ds-react";
-import React, { Fragment } from "react";
+import { Accordion, Button, Link, Modal } from "@navikt/ds-react";
+import React, { Fragment, useState } from "react";
 import { packageUsesT } from "../App";
+import "../app.css";
 
 const ImportTable = ({
   imports,
   defaultImports,
 }: {
-  imports: { [key: string]: number };
+  imports: { [key: string]: { uses: number; repos: string[] } };
   defaultImports: number;
 }) => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalFiles, setModalFiles] = useState<string[]>([]);
+  const handleModal = (files: string[]) => {
+    setModalFiles(files);
+    setModalOpen(true);
+  };
+
   return (
     <>
       <table className="tabell tabell--stripet">
@@ -27,7 +35,7 @@ const ImportTable = ({
             .map((k) => {
               return { name: k, value: imports[k] };
             })
-            .sort((a, b) => (a.value < b.value ? 1 : -1))
+            .sort((a, b) => (a.value.uses < b.value.uses ? 1 : -1))
             .map((x, y) => {
               return (
                 <Fragment key={x.name + y}>
@@ -39,7 +47,18 @@ const ImportTable = ({
                   ) : (
                     <tr>
                       <td>{x.name}</td>
-                      <td>{x.value}</td>
+                      <td
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                        }}
+                      >
+                        {x.value.uses}
+                        <Button onClick={() => handleModal(x.value.repos)}>
+                          Se filer
+                        </Button>
+                      </td>
                     </tr>
                   )}
                 </Fragment>
@@ -47,6 +66,21 @@ const ImportTable = ({
             })}
         </tbody>
       </table>
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+        {modalFiles.map((x) => {
+          const split = x.split("/");
+          return (
+            <div key={x}>
+              <Link
+                target="_blank"
+                href={`https://github.com/navikt/${split[0]}/blob/master/${split[1]}`}
+              >
+                {x}
+              </Link>
+            </div>
+          );
+        })}
+      </Modal>
     </>
   );
 };
@@ -59,7 +93,6 @@ const AccordionList = ({
     value: packageUsesT;
   };
 }) => {
-
   return (
     <Accordion
       className="accordion filter drop-shadow-lg"
