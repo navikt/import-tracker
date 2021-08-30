@@ -69,11 +69,14 @@ const ImportTable = ({
       <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
         {modalFiles.map((x) => {
           const split = x.split("/");
+
           return (
             <div key={x}>
               <Link
                 target="_blank"
-                href={`https://github.com/navikt/${split[0]}/blob/master/${split[1]}`}
+                href={`https://github.com/navikt/${
+                  split[0]
+                }/blob/master/${split.slice(1).join("/")}`}
               >
                 {x}
               </Link>
