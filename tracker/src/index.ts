@@ -48,12 +48,15 @@ const main = async () => {
     );
     rawData = filterPackageNames(rawData);
     const data = manipulateImportData(rawData);
-    /* fs.writeFileSync("../website/public/imports.json", JSON.stringify(data)); */
+    fs.writeFileSync("../website/public/imports.json", JSON.stringify(data));
 
     const info = await getPackageUsage(dsPackages, data);
 
     /* console.log(JSON.stringify(info, null, 2)); */
-    fs.writeFileSync("./package-versions.json", JSON.stringify(info, null, 2));
+    fs.writeFileSync(
+      "../website/public/package-versions.json",
+      JSON.stringify(info, null, 2)
+    );
   });
 };
 
