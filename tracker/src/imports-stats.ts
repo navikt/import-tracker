@@ -31,7 +31,7 @@ const getNamedUses = (
               uses: newObj[imp.name].uses + 1,
               repos: [...newObj[imp.name].repos, file],
             }
-          : { uses: 1, repos: [] };
+          : { uses: 1, repos: [file] };
     });
   return newObj;
 };

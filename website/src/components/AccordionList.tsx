@@ -13,9 +13,18 @@ const ImportTable = ({
   const [modalOpen, setModalOpen] = useState(false);
   const [modalFiles, setModalFiles] = useState<string[]>([]);
   const handleModal = (files: string[]) => {
+    console.log(files);
     setModalFiles(files);
     setModalOpen(true);
   };
+
+  /* useEffect(() => {
+    Modal.setAppElement("#root");
+  }, []); */
+
+  if (Object.keys(imports).length === 0 && defaultImports === 0) {
+    return <div>Importeres bare direkte, eks: `import "@navikt/ds-css"`</div>;
+  }
 
   return (
     <>
@@ -67,6 +76,10 @@ const ImportTable = ({
         </tbody>
       </table>
       <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+        <h2>Linker til filer som bruker komponent: </h2>
+        {modalFiles.length === 0 && (
+          <div>Klarte ikke finne lenke til bruk...</div>
+        )}
         {modalFiles.map((x) => {
           const split = x.split("/");
 
@@ -109,24 +122,11 @@ const AccordionList = ({
       renderContentWhenClosed={false}
     >
       <div className="max-h-80 overflow-auto">
-        {imp.value.defaultUses > 0 &&
-          Object.keys(imp.value.namedUses).length === 0 && (
-            <span>
-              Importeres antageligvis i formatene <br /> <br />
-              <code>{`const Package = require("${imp.name}");`}</code>
-              <br />
-              <br />
-              <code>{`import "${imp.name}";`}</code>
-            </span>
-          )}
-
-        {Object.keys(imp.value.namedUses).length > 0 && (
-          <ImportTable
-            key={imp.name + imp.name}
-            imports={imp.value.namedUses}
-            defaultImports={imp.value.defaultUses}
-          />
-        )}
+        <ImportTable
+          key={imp.name + imp.name}
+          imports={imp.value.namedUses}
+          defaultImports={imp.value.defaultUses}
+        />
       </div>
     </Accordion>
   );
