@@ -4,8 +4,15 @@ import { manipulateImportData } from "./imports-stats";
 import glob from "fast-glob";
 import getRepoNames from "./repo-names";
 import { cloneRepos } from "./clone-repos";
+import { getPackageUsage } from "./package-usage";
 const fs = require("fs");
-const uniq = require("lodash.sorteduniq");
+
+const dsPackages = [
+  "@navikt/ds-react",
+  "@navikt/ds-css",
+  "@navikt/ds-tokens",
+  "@navikt/ds-icons",
+];
 
 const getFiles = async () => {
   console.log("Starting Globbing og tsx|jsx|js|ts files");
@@ -17,6 +24,11 @@ const getFiles = async () => {
   ));
 };
 
+const filterPackageNames = (data: packageImportT[][]) =>
+  data.filter(
+    (x) => x.filter((y) => y.source.startsWith("@navikt/ds-")).length > 0
+  );
+
 const main = async () => {
   let imports: packageImportT[][] = [];
 
@@ -27,23 +39,21 @@ const main = async () => {
     imports = await getImports(files);
     fs.writeFileSync("./raw-imports.json", JSON.stringify(imports));
   }
-  fs.access("./raw-imports.json", (err: Error) => {
+  await fs.access("./raw-imports.json", async (err: Error) => {
     if (err) {
       throw new Error("No raw-imports.json to parse data from");
     }
-    let rawdata: packageImportT[][] = JSON.parse(
+    let rawData: packageImportT[][] = JSON.parse(
       fs.readFileSync("./raw-imports.json")
     );
-    rawdata = rawdata.filter(
-      (x) => x.filter((y) => y.source.startsWith("@navikt/ds-")).length > 0
-    );
-    const data = manipulateImportData(rawdata);
-    fs.writeFileSync("../website/public/imports.json", JSON.stringify(data));
-    /* console.log(JSON.stringify(data["@navikt/ds-react"], null, 2));  */
-    let repos = uniq(
-      data["@navikt/ds-react"].fileSource.map((x) => x.split("/")[0])
-    );
-    console.log(repos);
+    rawData = filterPackageNames(rawData);
+    const data = manipulateImportData(rawData);
+    /* fs.writeFileSync("../website/public/imports.json", JSON.stringify(data)); */
+
+    const info = await getPackageUsage(dsPackages, data);
+
+    /* console.log(JSON.stringify(info, null, 2)); */
+    fs.writeFileSync("./package-versions.json", JSON.stringify(info, null, 2));
   });
 };
 

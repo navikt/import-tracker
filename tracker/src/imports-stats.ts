@@ -1,5 +1,4 @@
 import { importT, packageImportT } from "./get-imports";
-const cliProgress = require("cli-progress");
 
 export type packageT = {
   [key: string]: packageUsesT;
