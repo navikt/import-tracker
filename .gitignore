@@ -2,4 +2,4 @@ dist
 yarn.lock
 repos
 .env
-rwa-imports.json
+raw-imports.json
