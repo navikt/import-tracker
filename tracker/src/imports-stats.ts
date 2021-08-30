@@ -7,7 +7,7 @@ export type packageT = {
 export type packageUsesT = {
   uses: number;
   defaultUses: number;
-  namedUses: { [key: string]: number };
+  namedUses: { [key: string]: { uses: number; repos: string[] } };
   fileSource: string[];
 };
 
@@ -17,14 +17,21 @@ const getDefaultUses = (imports: importT[]) => {
 
 const getNamedUses = (
   imports: importT[],
-  namedUses: { [key: string]: number }
+  namedUses: { [key: string]: { uses: number; repos: string[] } },
+  file: string
 ) => {
   const newObj = Object.assign({}, namedUses);
 
   imports
     .filter((imp) => !imp.default)
     .forEach((imp) => {
-      newObj[imp.name] = imp.name in newObj ? newObj[imp.name] + 1 : 1;
+      newObj[imp.name] =
+        imp.name in newObj
+          ? {
+              uses: newObj[imp.name].uses + 1,
+              repos: [...newObj[imp.name].repos, file],
+            }
+          : { uses: 1, repos: [] };
     });
   return newObj;
 };
@@ -34,7 +41,11 @@ export const packageEntry = (entry: packageImportT, packageObj: packageT) => {
     packageObj[entry.source] = {
       uses: 1,
       defaultUses: getDefaultUses(entry.imports),
-      namedUses: getNamedUses(entry.imports, {}),
+      namedUses: getNamedUses(
+        entry.imports,
+        {},
+        entry.fileSource?.replace("./repos/", "") as string
+      ),
       fileSource: [entry.fileSource?.replace("./repos/", "") as string],
     };
   } else {
@@ -44,7 +55,8 @@ export const packageEntry = (entry: packageImportT, packageObj: packageT) => {
         packageObj[entry.source].defaultUses + getDefaultUses(entry.imports),
       namedUses: getNamedUses(
         entry.imports,
-        packageObj[entry.source].namedUses
+        packageObj[entry.source].namedUses,
+        entry.fileSource?.replace("./repos/", "") as string
       ),
       fileSource: [
         ...packageObj[entry.source].fileSource,
