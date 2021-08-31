@@ -21,7 +21,7 @@ async function run() {
       execSync(`git fetch  origin ${ref}`);
 
       execSync("ls");
-      output = execSync(`cd .. && yarn lerna version patch --no-push`, {
+      output = execSync(`yarn lerna version patch --no-push`, {
         input: "n",
       });
     } catch (error) {
