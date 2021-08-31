@@ -10,7 +10,7 @@ async function run() {
   try {
     let pr = await octokit.rest.repos.listPullRequestsAssociatedWithCommit({
       ...github.context.repo,
-      commit_sha: github.commit_sha,
+      commit_sha: github.event.pull_request.head.sha,
       mediaType: {
         previews: ["groot"],
       },
