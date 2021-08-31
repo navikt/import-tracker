@@ -7,7 +7,7 @@ const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
 run();
 
 async function run() {
-  console.log({ ...github.context });
+  console.log(github.context.payload.pull_request.number);
   return;
   try {
     let pr = await octokit.rest.repos.listPullRequestsAssociatedWithCommit({
