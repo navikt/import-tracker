@@ -15,8 +15,8 @@ async function run() {
     const ref = github.context.sha;
 
     let output;
-    if (github.context.payload.pull_request.title)
-      const title = github.context.payload.pull_request.title;
+
+    const title = github.context.payload.pull_request.title;
     let version = "";
     switch (true) {
       case title.includes("[fix]"):
