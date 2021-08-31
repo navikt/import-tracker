@@ -71,12 +71,12 @@ h3 {
   }
 }
 
-a:visited {
-  color: purple;
-}
-
 .button__flex {
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
+}
+
+a:visited {
+  color: purple;
 }
