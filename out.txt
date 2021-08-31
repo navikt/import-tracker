@@ -1,3 +1,0 @@
-yarn run v1.22.10
-$ /Users/ken/Repos/import-tracker/node_modules/.bin/lerna version patch --include-merged-tags --no-push
-info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
