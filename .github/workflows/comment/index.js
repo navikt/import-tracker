@@ -11,8 +11,9 @@ async function run() {
     if (github.context.payload.pull_request.number === undefined) {
       return;
     }
+    console.log(github.context);
     const ref = github.context.sha;
-    /* console.log(ref); */
+
     let output;
 
     try {
@@ -39,9 +40,9 @@ async function run() {
       return;
     }
 
-    let prText = "### Disse endringene vil oppdatere disse pakkene:\n\n";
+    let prText = "### Denne PRen vil oppdatere disse pakkene:\n\n";
     changes.forEach((x) => {
-      prText = prText + x + "\n";
+      prText = `prText  - ${x}\n`;
     });
 
     await octokit.rest.issues.createComment({
