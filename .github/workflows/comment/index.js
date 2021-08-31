@@ -7,22 +7,8 @@ const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
 run();
 
 async function run() {
-  console.log(github.context.payload.pull_request.number);
-  return;
   try {
-    let pr = await octokit.rest.repos.listPullRequestsAssociatedWithCommit({
-      ...github.context.pull_request.number,
-      commit_sha: github.context.sha,
-      mediaType: {
-        previews: ["groot"],
-      },
-    });
-
-    console.log(pr);
-    console.log(github.context.sha);
-    console.log(github.context.repo);
-    console.log("Finished index.js run");
-    if (!pr) {
+    if (github.context?.payload?.pull_request?.number === undefined) {
       return;
     }
 
@@ -52,8 +38,8 @@ async function run() {
 
     await octokit.issues.createComment({
       ...github.context.repo,
-      issue_number: pr[0].number,
-      body: ``,
+      issue_number: github.context.payload.pull_request.number,
+      body: prText,
     });
   } catch (error) {
     core.setFailed(error.message);
