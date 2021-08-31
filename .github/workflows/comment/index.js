@@ -73,6 +73,9 @@ async function run() {
       }
     });
 
+    console.log(data);
+    console.log(commentIds);
+
     for (const f in commentIds) {
       await octokit.rest.issues.deleteComment({
         ...github.context.repo,
