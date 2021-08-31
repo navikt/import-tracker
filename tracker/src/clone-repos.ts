@@ -7,8 +7,10 @@ const git = simpleGit(); */
 
 export const cloneRepos = async (repos: string[]) => {
   console.log("Starting repo clone/pull");
+
   const limiter = pLimit(3);
   let counter = 0;
+
   return Promise.all(
     repos.map((repo, x) =>
       limiter(() =>
