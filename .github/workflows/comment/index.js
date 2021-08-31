@@ -11,7 +11,7 @@ async function run() {
     if (github.context.payload.pull_request.number === undefined) {
       return;
     }
-    const ref = github.context.ref;
+    const ref = github.context.sha;
     /* console.log(ref); */
     let output;
 
