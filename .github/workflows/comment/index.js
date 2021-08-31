@@ -8,7 +8,7 @@ run();
 
 async function run() {
   try {
-    if (github.context?.payload?.pull_request?.number === undefined) {
+    if (github.context.payload.pull_request.number === undefined) {
       return;
     }
     const ref = github.context;
