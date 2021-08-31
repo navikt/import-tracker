@@ -44,7 +44,8 @@
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "lodash.sorteduniq": "^4.2.0"
   },
   "scripts": {
     "start": "craco start",
@@ -71,6 +72,7 @@
     ]
   },
   "devDependencies": {
+    "@types/lodash.sorteduniq": "^4.2.6",
     "@types/uuid": "^8.3.0"
   }
 }

@@ -1,30 +1,43 @@
-import { Accordion, Button, Link, Modal } from "@navikt/ds-react";
-import React, { Fragment, useState } from "react";
-import { packageUsesT } from "../App";
+import { Accordion, Button } from "@navikt/ds-react";
+import uniq from "lodash.sorteduniq";
+import React, { Fragment, useContext } from "react";
+import { AppContext, packageUsesT } from "../App";
 import "../app.css";
 
 const ImportTable = ({
   imports,
   defaultImports,
+  files,
 }: {
   imports: { [key: string]: { uses: number; repos: string[] } };
   defaultImports: number;
+  files: string[];
 }) => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalFiles, setModalFiles] = useState<string[]>([]);
+  const { setFileLinks, setModalOpen } = useContext(AppContext);
+
   const handleModal = (files: string[]) => {
     console.log(files);
-    setModalFiles(files);
+    setFileLinks(files);
     setModalOpen(true);
   };
 
-  /* useEffect(() => {
-    Modal.setAppElement("#root");
-  }, []); */
-
   if (Object.keys(imports).length === 0 && defaultImports === 0) {
-    return <div>Importeres bare direkte, eks: `import "@navikt/ds-css"`</div>;
+    return (
+      <div className="button__flex">
+        Importeres bare direkte, eks: `import "@navikt/ds-css"`
+        <Button onClick={() => handleModal(files)}>Se filer</Button>
+      </div>
+    );
   }
+
+  const namedLinks = Object.values(imports).reduce(
+    (x, y) => [...x, ...y.repos],
+    [] as string[]
+  );
+
+  const defaultLinks = uniq(files.filter((x) => !namedLinks.includes(x)));
+
+  console.log(defaultLinks);
 
   return (
     <>
@@ -38,7 +51,12 @@ const ImportTable = ({
         <tbody>
           <tr>
             <td>Default</td>
-            <td>{defaultImports}</td>
+            <td className="button__flex">
+              {defaultImports}
+              <Button onClick={() => handleModal(defaultLinks)}>
+                Se filer
+              </Button>
+            </td>
           </tr>
           {Object.keys(imports)
             .map((k) => {
@@ -56,13 +74,7 @@ const ImportTable = ({
                   ) : (
                     <tr>
                       <td>{x.name}</td>
-                      <td
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                        }}
-                      >
+                      <td className="button__flex">
                         {x.value.uses}
                         <Button onClick={() => handleModal(x.value.repos)}>
                           Se filer
@@ -75,28 +87,6 @@ const ImportTable = ({
             })}
         </tbody>
       </table>
-      <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-        <h2>Linker til filer som bruker komponent: </h2>
-        {modalFiles.length === 0 && (
-          <div>Klarte ikke finne lenke til bruk...</div>
-        )}
-        {modalFiles.map((x) => {
-          const split = x.split("/");
-
-          return (
-            <div key={x}>
-              <Link
-                target="_blank"
-                href={`https://github.com/navikt/${
-                  split[0]
-                }/blob/master/${split.slice(1).join("/")}`}
-              >
-                {x}
-              </Link>
-            </div>
-          );
-        })}
-      </Modal>
     </>
   );
 };
@@ -126,6 +116,7 @@ const AccordionList = ({
           key={imp.name + imp.name}
           imports={imp.value.namedUses}
           defaultImports={imp.value.defaultUses}
+          files={imp.value.fileSource}
         />
       </div>
     </Accordion>
