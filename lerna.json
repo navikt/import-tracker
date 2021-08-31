@@ -1,0 +1,15 @@
+{
+  "npmClient": "yarn",
+  "version": "independent",
+  "command": {
+    "publish": {
+      "registry": "http://registry.npmjs.org/",
+      "npmClient": "npm",
+      "message": "Lerna versionbump [ci skip]"
+    },
+    "bootstrap": {
+      "ignore": "*"
+    }
+  },
+  "packages": ["website", "tracker"]
+}

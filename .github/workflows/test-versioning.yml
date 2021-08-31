@@ -28,7 +28,9 @@ jobs:
       - name: install
         if: steps.node-cache.outputs.cache-hit != 'true'
         run: yarn install
+
       - name: comment on PR
+        if: always()
         uses: ./.github/workflows/comment
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
