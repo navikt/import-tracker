@@ -1,7 +1,7 @@
 {
   "name": "tracker",
   "version": "1.0.1",
-  "private": true,
+  "private": false,
   "scripts": {
     "start": "node dist/index.js",
     "build": "tsc",
