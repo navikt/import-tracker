@@ -11,6 +11,9 @@ async function run() {
     let pr = await octokit.rest.repos.listPullRequestsAssociatedWithCommit({
       ...github.context.repo,
       commit_sha: github.context.sha,
+      mediaType: {
+        previews: ["groot"],
+      },
     });
 
     console.log(pr);
