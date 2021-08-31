@@ -71,7 +71,7 @@ async function run() {
       });
     }
 
-    let prText = "### Denne PRen vil oppdatere disse pakkene:\n\n";
+    let prText = `### Denne PRen vil bumpe pakkene med semver: ${version}:\n\n`;
     changes.forEach((x) => {
       prText = `${prText} - ${x}\n`;
     });
