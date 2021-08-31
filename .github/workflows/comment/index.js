@@ -1,5 +1,6 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
+const { execSync } = require("child_process");
 
 const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
 
@@ -20,11 +21,35 @@ async function run() {
       return;
     }
 
-    /* await octokit.issues.createComment({
+    let output;
+
+    try {
+      output = execSync(`yarn lerna version patch --no-push`, { input: "n" });
+    } catch (error) {
+      console.error(error.message);
+      return;
+    }
+
+    const changes = output
+      .toString()
+      .split("\n")
+      .filter((x) => x.startsWith(" - "))
+      .map((x) => x.replace(" - ", ""));
+
+    if (changes.length === 0) {
+      return;
+    }
+
+    let prText = "### Disse endringene vil oppdatere disse pakkene:\n\n";
+    changes.forEach((x) => {
+      prText = prText + x + "\n";
+    });
+
+    await octokit.issues.createComment({
       ...github.context.repo,
       issue_number: prs[0].number,
-      body: `Build successful! [View the storybook](https://reactspectrum.blob.core.windows.net/reactspectrum/${github.context.sha}/index.html)`,
-    }); */
+      body: ``,
+    });
   } catch (error) {
     core.setFailed(error.message);
   }
