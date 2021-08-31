@@ -42,5 +42,5 @@ try {
 
 const lines = output.toString().split("\n");
 /* const changedPackages = JSON.parse(output.toString()); */
-console.log(lines);
+console.log(lines.filter((x) => x.startsWith(" - ")));
 /* const packageNames = changedPackages.map(project => project.name); */
