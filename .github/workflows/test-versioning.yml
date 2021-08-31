@@ -29,8 +29,10 @@ jobs:
         if: steps.node-cache.outputs.cache-hit != 'true'
         run: yarn install
       - name: run lerna changed
-        run: yarn lerna changed
+        run: yarn lerna changed --all
+
       - name: comment on PR
+        if: always()
         uses: ./.github/workflows/comment
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
