@@ -8,18 +8,16 @@ run();
 
 async function run() {
   try {
-    let {
-      data: prs,
-    } = await octokit.rest.repos.listPullRequestsAssociatedWithCommit({
+    let pr = await octokit.rest.repos.listPullRequestsAssociatedWithCommit({
       ...github.context.repo,
       commit_sha: github.context.sha,
     });
 
-    console.log(prs);
+    console.log(pr);
     console.log(github.context.sha);
     console.log(github.context.repo);
     console.log("Finished index.js run");
-    if (!prs || !prs.length) {
+    if (!pr) {
       return;
     }
 
@@ -49,7 +47,7 @@ async function run() {
 
     await octokit.issues.createComment({
       ...github.context.repo,
-      issue_number: prs[0].number,
+      issue_number: pr[0].number,
       body: ``,
     });
   } catch (error) {
