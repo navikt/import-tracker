@@ -1,0 +1,10 @@
+yarn run v1.22.10
+$ /Users/ken/Repos/import-tracker/node_modules/.bin/lerna version patch --include-merged-tags --no-push
+
+Changes:
+ - tracker: 1.0.1 => 1.0.2
+ - website: 1.0.1 => 1.0.2
+
+? Are you sure you want to create these versions? (ynH) [56D[56C[2K[G? Are you sure you want to create these versions? (ynH) n
+>> No[1A[5D[57C[1B[2K[1A[2K[G? Are you sure you want to create these versions? No[52D[52C
+Done in 0.85s.

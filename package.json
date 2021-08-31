@@ -12,7 +12,8 @@
     "start": "yarn workspace website start",
     "build": "yarn workspace website build",
     "predeploy": "yarn workspace website build",
-    "deploy": "yarn workspace website deploy"
+    "deploy": "yarn workspace website deploy",
+    "parse": "node index.js"
   },
   "workspaces": [
     "tracker",
