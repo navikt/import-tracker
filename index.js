@@ -34,7 +34,7 @@ const { execSync } = require("child_process");
 let output;
 
 try {
-  output = execSync(`yarn lerna version patch --no-push`);
+  output = execSync(`yarn lerna version patch --no-push`, { input: "n" });
 } catch (error) {
   console.error(error.message);
   process.exit(0);
