@@ -28,6 +28,8 @@ jobs:
       - name: install
         if: steps.node-cache.outputs.cache-hit != 'true'
         run: yarn install
+      - name: run lerna changed
+        run: yarn lerna changed
       - name: comment on PR
         uses: ./.github/workflows/comment
         env:
