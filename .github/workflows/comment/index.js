@@ -76,7 +76,8 @@ async function run() {
     console.log(data);
     console.log(commentIds);
 
-    for (const f in commentIds) {
+    for (const f of commentIds) {
+      console.log(`Deleting comment ${f}`);
       await octokit.rest.issues.deleteComment({
         ...github.context.repo,
         comment_id: f,
