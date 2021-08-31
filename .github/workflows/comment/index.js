@@ -60,24 +60,24 @@ async function run() {
       prText = `${prText} - ${x}\n`;
     });
 
-    const comments = await octokit.rest.issues.listComments({
+    const { data } = await octokit.rest.issues.listComments({
       ...github.context.repo,
       issue_number: github.context.payload.pull_request.number,
     });
 
     console.log(comments);
 
-    let commentId = "";
-    comments.forEach((x) => {
+    let commentId = [];
+    data.forEach((x) => {
       if (x.user.login === "github-actions[bot]") {
-        commentId = x.id;
+        commentId.push(x.id);
       }
     });
 
-    if (commentId !== "") {
+    for (const f in commentId) {
       await octokit.rest.issues.deleteComment({
         ...github.context.repo,
-        comment_id: commentId,
+        comment_id: f,
       });
     }
 
