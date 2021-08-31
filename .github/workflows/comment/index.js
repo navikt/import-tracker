@@ -16,7 +16,7 @@ async function run() {
     let output;
 
     try {
-      execSync(`git fetch --depth 0 origin ${ref}`);
+      /* execSync(`git fetch --depth 0 origin ${ref}`); */
       output = execSync(`yarn lerna version patch --no-push`, { input: "n" });
     } catch (error) {
       console.error(error.message);
