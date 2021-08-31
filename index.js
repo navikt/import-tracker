@@ -1,4 +1,4 @@
-const fs = require("fs");
+/* const fs = require("fs");
 const readline = require("readline");
 
 async function processLineByLine() {
@@ -27,3 +27,21 @@ async function processLineByLine() {
 }
 
 processLineByLine();
+ */
+
+const { execSync } = require("child_process");
+
+let output;
+
+try {
+  output = execSync(`yarn lerna version patch --all --no-push`);
+} catch (error) {
+  console.info(
+    `No local packages have changed since the last tagged releases.`
+  );
+  process.exit(0);
+}
+
+const changedPackages = JSON.parse(output.toString());
+console.log(changedPackages);
+/* const packageNames = changedPackages.map(project => project.name); */
