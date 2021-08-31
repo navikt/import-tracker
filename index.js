@@ -40,6 +40,6 @@ try {
   process.exit(0);
 }
 
-const changedPackages = JSON.parse(output.toString());
-console.log(changedPackages);
+/* const changedPackages = JSON.parse(output.toString()); */
+console.log(output);
 /* const packageNames = changedPackages.map(project => project.name); */
