@@ -19,9 +19,10 @@
     "website"
   ],
   "devDependencies": {
-    "prettier": "^2.2.1",
     "@actions/core": "^1.5.0",
-    "@actions/github": "^5.0.0"
+    "@actions/github": "^5.0.0",
+    "lerna": "^4.0.0",
+    "prettier": "^2.2.1"
   },
   "prettier": {}
 }
