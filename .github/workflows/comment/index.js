@@ -7,11 +7,11 @@ const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
 run();
 
 async function run() {
-  console.log(github.context);
+  console.log(github.context.pull_request.number);
   return;
   try {
     let pr = await octokit.rest.repos.listPullRequestsAssociatedWithCommit({
-      ...github.context.repo,
+      ...github.context.pull_request.number,
       commit_sha: github.context.sha,
       mediaType: {
         previews: ["groot"],
