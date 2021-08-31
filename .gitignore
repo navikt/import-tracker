@@ -1,5 +1,4 @@
 dist
-yarn.lock
 repos
 .env
 raw-imports.json
