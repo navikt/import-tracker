@@ -40,6 +40,7 @@ try {
   process.exit(0);
 }
 
+const lines = output.toString().split("\n");
 /* const changedPackages = JSON.parse(output.toString()); */
-console.log(output.toString());
+console.log(lines);
 /* const packageNames = changedPackages.map(project => project.name); */
