@@ -12,11 +12,10 @@ async function run() {
       return;
     }
 
-    const ref = github.context.sha;
-
     let output;
-
+    const ref = github.context.sha;
     const title = github.context.payload.pull_request.title;
+
     let version = "";
     switch (true) {
       case title.includes("[fix]"):
@@ -33,10 +32,7 @@ async function run() {
     }
     try {
       execSync("git checkout main");
-
       execSync(`git fetch  origin ${ref}`);
-
-      execSync("ls");
       output = execSync(`yarn lerna version ${version} --no-push`, {
         input: "n",
       });
@@ -55,11 +51,6 @@ async function run() {
       return;
     }
 
-    let prText = "### Denne PRen vil oppdatere disse pakkene:\n\n";
-    changes.forEach((x) => {
-      prText = `${prText} - ${x}\n`;
-    });
-
     const { data } = await octokit.rest.issues.listComments({
       ...github.context.repo,
       issue_number: github.context.payload.pull_request.number,
@@ -73,16 +64,17 @@ async function run() {
       }
     });
 
-    console.log(data);
-    console.log(commentIds);
-
     for (const f of commentIds) {
-      console.log(`Deleting comment ${f}`);
       await octokit.rest.issues.deleteComment({
         ...github.context.repo,
         comment_id: f,
       });
     }
+
+    let prText = "### Denne PRen vil oppdatere disse pakkene:\n\n";
+    changes.forEach((x) => {
+      prText = `${prText} - ${x}\n`;
+    });
 
     await octokit.rest.issues.createComment({
       ...github.context.repo,
@@ -90,6 +82,7 @@ async function run() {
       body: prText,
     });
   } catch (error) {
-    core.setFailed(error.message);
+    /* core.setFailed(error.message); */
+    console.log(error);
   }
 }
