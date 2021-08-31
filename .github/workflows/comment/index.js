@@ -65,8 +65,6 @@ async function run() {
       issue_number: github.context.payload.pull_request.number,
     });
 
-    console.log(comments);
-
     let commentId = [];
     data.forEach((x) => {
       if (x.user.login === "github-actions[bot]") {
