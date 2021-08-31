@@ -16,12 +16,12 @@ async function run() {
     let output;
 
     try {
-      execSync("git status");
       execSync("git checkout main");
-      execSync("git status");
+
       execSync(`git fetch  origin ${ref}`);
-      execSync("git status");
-      output = execSync(`cd ... && yarn lerna version patch --no-push`, {
+
+      execSync("ls");
+      output = execSync(`cd .. && yarn lerna version patch --no-push`, {
         input: "n",
       });
     } catch (error) {
