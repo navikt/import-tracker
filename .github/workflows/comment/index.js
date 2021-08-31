@@ -16,6 +16,8 @@ async function run() {
     });
 
     console.log(prs);
+    console.log(github.context.sha);
+    console.log(github.context.repo);
     console.log("Finished index.js run");
     if (!prs || !prs.length) {
       return;
