@@ -17,7 +17,7 @@ async function run() {
 
     try {
       execSync("git status");
-      execSync(`git fetch --depth 1 origin ${ref}`);
+      execSync(`git fetch origin ${ref}`);
       execSync("git status");
       output = execSync(`yarn lerna version patch --no-push`, { input: "n" });
     } catch (error) {
