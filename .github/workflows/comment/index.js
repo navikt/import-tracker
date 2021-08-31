@@ -14,11 +14,11 @@ async function run() {
       commit_sha: github.context.sha,
     });
 
+    console.log(prs);
+    console.log("Finished index.js run");
     if (!prs || !prs.length) {
       return;
     }
-    console.log(prs);
-    console.log("Finished index.js run");
 
     /* await octokit.issues.createComment({
       ...github.context.repo,
