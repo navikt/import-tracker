@@ -65,14 +65,15 @@ async function run() {
       issue_number: github.context.payload.pull_request.number,
     });
 
-    let commentId = [];
+    let commentIds = [];
+
     data.forEach((x) => {
       if (x.user.login === "github-actions[bot]") {
-        commentId.push(x.id);
+        commentIds.push(x.id);
       }
     });
 
-    for (const f in commentId) {
+    for (const f in commentIds) {
       await octokit.rest.issues.deleteComment({
         ...github.context.repo,
         comment_id: f,
