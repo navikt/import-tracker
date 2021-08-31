@@ -11,7 +11,7 @@ async function run() {
     if (github.context.payload.pull_request.number === undefined) {
       return;
     }
-    console.log(github.context);
+
     const ref = github.context.sha;
 
     let output;
@@ -64,6 +64,8 @@ async function run() {
       ...github.context.repo,
       issue_number: github.context.payload.pull_request.number,
     });
+
+    console.log(comments);
 
     let commentId = "";
     comments.forEach((x) => {
