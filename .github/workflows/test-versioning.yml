@@ -20,6 +20,6 @@ jobs:
           registry-url: http://registry.npmjs.org
           node-version: 14
       - name: comment on PR
-        uses: ./.github/workflows/action.yml
+        uses: .github/workflows/action.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
