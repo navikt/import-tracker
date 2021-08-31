@@ -41,5 +41,5 @@ try {
 }
 
 /* const changedPackages = JSON.parse(output.toString()); */
-console.log(output);
+console.log(output.toString());
 /* const packageNames = changedPackages.map(project => project.name); */
