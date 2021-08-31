@@ -11,12 +11,14 @@ async function run() {
     if (github.context.payload.pull_request.number === undefined) {
       return;
     }
-    const ref = github.context;
-    console.log(ref);
+    const ref = github.context.ref;
+    /* console.log(ref); */
     let output;
 
     try {
-      /* execSync(`git fetch --depth 0 origin ${ref}`); */
+      execSync("git status");
+      execSync(`git fetch --depth 1 origin ${ref}`);
+      execSync("git status");
       output = execSync(`yarn lerna version patch --no-push`, { input: "n" });
     } catch (error) {
       console.error(error.message);
