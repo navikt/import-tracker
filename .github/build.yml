@@ -1,0 +1,25 @@
+name: Build, test and maybe publish
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  test-versioning:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: "0"
+          token: ${{secrets.GIT_REPO}}
+      - uses: actions/setup-node@v1
+        with:
+          registry-url: http://registry.npmjs.org
+          node-version: 14
+      - name: comment on PR
+        uses: ./.github/action.yml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

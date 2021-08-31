@@ -1,0 +1,5 @@
+name: "PR Changed comment"
+description: "Comment on PR with lerna changed information"
+runs:
+  using: "node12"
+  main: "index.js"
