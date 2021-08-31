@@ -20,7 +20,7 @@ async function processLineByLine() {
     if (isChange && line.startsWith(" - ")) {
       changes.push(line);
     } else {
-      isChange = true;
+      isChange = false;
     }
   }
   console.log(changes);
