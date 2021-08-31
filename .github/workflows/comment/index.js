@@ -44,7 +44,6 @@ async function run() {
       prText = prText + x + "\n";
     });
 
-    octokit.issues.
     await octokit.rest.issues.createComment({
       ...github.context.repo,
       issue_number: github.context.payload.pull_request.number,
