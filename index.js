@@ -34,11 +34,9 @@ const { execSync } = require("child_process");
 let output;
 
 try {
-  output = execSync(`yarn lerna version patch --all --no-push`);
+  output = execSync(`yarn lerna version patch --no-push`);
 } catch (error) {
-  console.info(
-    `No local packages have changed since the last tagged releases.`
-  );
+  console.error(error.message);
   process.exit(0);
 }
 
