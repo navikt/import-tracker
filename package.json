@@ -9,7 +9,7 @@
     "tracker:watch": "yarn workspace tracker watch",
     "tracker:test": "yarn workspace tracker test",
     "tracker:test:watch": "yarn workspace tracker test:watch",
-    "start": "yarn workspace app start",
+    "start": "yarn workspace app dev",
     "build": "yarn workspace app build"
   },
   "workspaces": [

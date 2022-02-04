@@ -1,8 +1,7 @@
 import { Accordion, Button } from "@navikt/ds-react";
 import uniq from "lodash.sorteduniq";
 import React, { Fragment, useContext } from "react";
-import { AppContext, packageUsesT } from "../App";
-import "../app.css";
+import { AppContext, packageUsesT } from "../pages/index";
 
 const ImportTable = ({
   imports,

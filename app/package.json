@@ -1,4 +1,5 @@
 {
+  "version": "0.1.0",
   "name": "app",
   "private": true,
   "scripts": {
@@ -14,7 +15,8 @@
     "postcss": "^8.4.5",
     "tailwindcss": "^3.0.15",
     "@navikt/ds-css": "0.14.1",
-    "@navikt/ds-react": "^0.15.3"
+    "@navikt/ds-react": "^0.15.3",
+    "lodash.sorteduniq": "^4.2.0"
   },
   "devDependencies": {
     "@types/node": "17.0.14",
