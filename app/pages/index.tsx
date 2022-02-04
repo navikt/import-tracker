@@ -1,10 +1,8 @@
 import type { NextPage } from "next";
 import React, { createContext, useEffect, useState } from "react";
-import "./app.css";
-import "nav-frontend-tabell-style";
-import AccordionList from "../components/AccordionList";
-import { Element } from "nav-frontend-typografi";
-import { Link, Modal } from "@navikt/ds-react";
+import List from "../components/List";
+import { Detail, Heading, Link, Modal } from "@navikt/ds-react";
+import Panel from "../components/Panel";
 
 export type packageUsesT = {
   uses: number;
@@ -19,6 +17,7 @@ const App: NextPage = () => {
   const [dataRoot, setDataRoot] = useState<any[]>([]);
   const [fileLinks, setFileLinks] = useState<string[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
+  const [activeView, setActiveView] = useState<any>(null);
 
   useEffect(() => {
     fetch("imports.json", {
@@ -38,20 +37,23 @@ const App: NextPage = () => {
       });
   }, []);
 
-  /* console.log(dataRoot); */
   return (
     <div className="flex justify-center vw-100 typo-normal overflow-x-hidden">
-      <div className="p-8 max-w-screen-md w-full">
-        <span className="flex justify-between p-4 ">
-          <Element>Pakkenavn</Element>
-          <Element className="mx-4">Imports</Element>
-        </span>
-        <AppContext.Provider value={{ setFileLinks, setModalOpen }}>
-          {dataRoot.map((imp) => (
-            <AccordionList key={imp.name} imp={imp} />
-          ))}
+      <div className="w-full flex">
+        <AppContext.Provider
+          value={{
+            setFileLinks,
+            setModalOpen,
+            setActiveView,
+            activeView,
+            data: dataRoot,
+          }}
+        >
+          <List />
+          <Panel />
         </AppContext.Provider>
       </div>
+
       <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
         <h2>Linker til filer som bruker komponent: </h2>
         {fileLinks.length === 0 && (

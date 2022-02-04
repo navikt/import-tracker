@@ -1,8 +1,9 @@
-import { Accordion, Button } from "@navikt/ds-react";
+import { Next } from "@navikt/ds-icons";
+import { BodyShort, Button, Detail, Label } from "@navikt/ds-react";
 import uniq from "lodash.sorteduniq";
 import React, { Fragment, useContext } from "react";
-import { AppContext, packageUsesT } from "../App";
-import "../app.css";
+import { AppContext, packageUsesT } from "../pages/index";
+import cl from "classnames";
 
 const ImportTable = ({
   imports,
@@ -24,7 +25,7 @@ const ImportTable = ({
   if (Object.keys(imports).length === 0 && defaultImports === 0) {
     return (
       <div className="button__flex">
-        Importeres bare direkte, eks: `import "@navikt/ds-css"`
+        Importeres direkte
         <Button onClick={() => handleModal(files)}>Se filer</Button>
       </div>
     );
@@ -91,36 +92,49 @@ const ImportTable = ({
   );
 };
 
-const AccordionList = ({
-  imp,
-}: {
-  imp: {
-    name: string;
-    value: packageUsesT;
-  };
-}) => {
+const List = () => {
+  const { setActiveView, activeView, data } = useContext(AppContext);
+
+  {
+    /* <ImportTable
+        key={imp.name + imp.name}
+        imports={imp.value.namedUses}
+        defaultImports={imp.value.defaultUses}
+        files={imp.value.fileSource}
+      /> */
+  }
+
+  if (!data) return null;
+
   return (
-    <Accordion
-      className="accordion filter drop-shadow-lg"
-      heading={
-        <span style={{ display: "flex", justifyContent: "space-between" }}>
-          <span>{imp.name}</span>
-          <span>{imp.value.uses}</span>
-        </span>
-      }
-      key={imp.name}
-      renderContentWhenClosed={false}
-    >
-      <div className="max-h-80 overflow-auto">
-        <ImportTable
-          key={imp.name + imp.name}
-          imports={imp.value.namedUses}
-          defaultImports={imp.value.defaultUses}
-          files={imp.value.fileSource}
-        />
-      </div>
-    </Accordion>
+    <div className="max-w-xl bg-gray-900 text-gray-100 max-h-screen overflow-y-auto">
+      {data.map((imp) => (
+        <button
+          className={cl(
+            "w-full inline-flex items-center px-4 py-4 focus:outline-none",
+            {
+              "bg-gray-50 text-text ": activeView?.name === imp.name,
+              "hover:bg-gray-800": activeView?.name !== imp.name,
+            }
+          )}
+          onClick={() => setActiveView(imp)}
+          onFocus={() => setActiveView(imp)}
+        >
+          <div
+            className={cl(
+              "inline-flex justify-between min-w-full font-semibold text-base"
+            )}
+          >
+            <span>{imp.name}</span>
+            <span className="flex gap-2 items-center">
+              <span className="mr-2">{imp.value.uses}</span>
+              <Next aria-hidden />
+            </span>
+          </div>
+        </button>
+      ))}
+    </div>
   );
 };
 
-export default AccordionList;
+export default List;
