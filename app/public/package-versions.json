@@ -1,0 +1,1978 @@
+[
+  {
+    "name": "@navikt/ds-react",
+    "repos": [
+      {
+        "repo": "aap-innsyn-dittnav",
+        "versions": [
+          {
+            "version": "^0.13.1",
+            "file": "aap-innsyn-dittnav/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "aap-soknad-behandling",
+        "versions": [
+          {
+            "version": "^0.14.11",
+            "file": "aap-soknad-behandling/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "aap-soknad",
+        "versions": [
+          {
+            "version": "^0.14.11",
+            "file": "aap-soknad/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "altinn-metrics-frontend",
+        "versions": [
+          {
+            "version": "^0.12.3",
+            "file": "altinn-metrics-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "amt-informasjon-flate",
+        "versions": [
+          {
+            "version": "^0.12.2",
+            "file": "amt-informasjon-flate/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "amt-tiltaksarrangor-flate",
+        "versions": [
+          {
+            "version": "^0.14.6",
+            "file": "amt-tiltaksarrangor-flate/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "arbeidsgiver-notifikasjon-widget",
+        "versions": [
+          {
+            "version": "0.14.8",
+            "file": "arbeidsgiver-notifikasjon-widget/component/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "bidrag-dokument-ui",
+        "versions": [
+          {
+            "version": "^0.14.11",
+            "file": "bidrag-dokument-ui/web/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "dialogmote-frontend",
+        "versions": [
+          {
+            "version": "^0.14.15",
+            "file": "dialogmote-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "dinesykmeldte",
+        "versions": [
+          {
+            "version": "^0.15.1-rc.search.0",
+            "file": "dinesykmeldte/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "ditt-sykefravaer",
+        "versions": [
+          {
+            "version": "^0.11.7",
+            "file": "ditt-sykefravaer/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "dp-faktasider-frontend",
+        "versions": [
+          {
+            "version": "^0.11.8",
+            "file": "dp-faktasider-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "dp-quizshow",
+        "versions": [
+          {
+            "version": "^0.14.0",
+            "file": "dp-quizshow/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "dp-soknad-veileder",
+        "versions": [
+          {
+            "version": "^0.13.1",
+            "file": "dp-soknad-veileder/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "dp-soknadsdialog",
+        "versions": [
+          {
+            "version": "^0.14.0",
+            "file": "dp-soknadsdialog/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "ds-datepicker",
+        "versions": [
+          {
+            "version": "^0.11.0",
+            "file": "ds-datepicker/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "eessi-pensjon-saksbehandling-ui",
+        "versions": [
+          {
+            "version": "^0.15.3",
+            "file": "eessi-pensjon-saksbehandling-ui/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "familie-ba-sak-frontend",
+        "versions": [
+          {
+            "version": "0.15.3",
+            "file": "familie-ba-sak-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "familie-ef-ettersending",
+        "versions": [
+          {
+            "version": "^0.15.2",
+            "file": "familie-ef-ettersending/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "familie-ef-sak-frontend",
+        "versions": [
+          {
+            "version": "^0.15.2",
+            "file": "familie-ef-sak-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "filopplasting",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "filopplasting/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "flagg-ikoner",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "flagg-ikoner/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "forhandsvisningsfil",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "forhandsvisningsfil/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "fremdriftslinje",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "fremdriftslinje/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "helse-speil",
+        "versions": [
+          {
+            "version": "^0.9.0",
+            "file": "helse-speil/packages/frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "helseopplysninger-frontend",
+        "versions": [
+          {
+            "version": "^0.11.4",
+            "file": "helseopplysninger-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "histark",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "histark/web/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "hotsak-frontend",
+        "versions": [
+          {
+            "version": "^0.13.3",
+            "file": "hotsak-frontend/client/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "import-tracker",
+        "versions": [
+          {
+            "version": "*",
+            "file": "import-tracker/website/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "innbyggerpanelet",
+        "versions": [
+          {
+            "version": "^0.14.1",
+            "file": "innbyggerpanelet/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "javazone-2021",
+        "versions": [
+          {
+            "version": "0.13.1",
+            "file": "javazone-2021/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "land-verktoy",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "land-verktoy/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "landvelger",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "landvelger/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "lydia-radgiver-frontend",
+        "versions": [
+          {
+            "version": "^0.14.10-next.0",
+            "file": "lydia-radgiver-frontend/client/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "min-ia",
+        "versions": [
+          {
+            "version": "^0.14.11",
+            "file": "min-ia/client/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "min-side-arbeidsgiver",
+        "versions": [
+          {
+            "version": "^0.15.2",
+            "file": "min-side-arbeidsgiver/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "min-side-microfrontend-example",
+        "versions": [
+          {
+            "version": "^0.14.0-beta.1",
+            "file": "min-side-microfrontend-example/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "mulighetsrommet",
+        "versions": [
+          {
+            "version": "^0.14.6",
+            "file": "mulighetsrommet/frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "nada-frontend",
+        "versions": [
+          {
+            "version": "^0.10.1",
+            "file": "nada-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "nav-dashboard",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "nav-dashboard/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "nav-enonicxp-frontend",
+        "versions": [
+          {
+            "version": "^0.14.15",
+            "file": "nav-enonicxp-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "nav-frontend-moduler-old",
+        "versions": [
+          {
+            "version": "0.13.3",
+            "file": "nav-frontend-moduler-old/website/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "nav-hoykontrast",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "nav-hoykontrast/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "nav-office-search",
+        "versions": [
+          {
+            "version": "^0.10.1",
+            "file": "nav-office-search/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "navno-search",
+        "versions": [
+          {
+            "version": "^0.14.15",
+            "file": "navno-search/search-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "nextjs-podium-experiment",
+        "versions": [
+          {
+            "version": "^0.11.8",
+            "file": "nextjs-podium-experiment/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "okonomi-gjeldsradgivning-veiviser",
+        "versions": [
+          {
+            "version": "^0.15.1",
+            "file": "okonomi-gjeldsradgivning-veiviser/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "paginering",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "paginering/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "pensjon-etterlatte",
+        "versions": [
+          {
+            "version": "^0.10.2",
+            "file": "pensjon-etterlatte/apps/selvbetjening-ui/client/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "permittering-og-omstilling",
+        "versions": [
+          {
+            "version": "^0.8.1",
+            "file": "permittering-og-omstilling/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "permitteringsvarsel-generator",
+        "versions": [
+          {
+            "version": "^0.11.3",
+            "file": "permitteringsvarsel-generator/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "portal-frontend",
+        "versions": [
+          {
+            "version": "^0.14.10-next.0",
+            "file": "portal-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "prim-admin-gui",
+        "versions": [
+          {
+            "version": "^0.14.6",
+            "file": "prim-admin-gui/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "samisk-samtale-bestilling",
+        "versions": [
+          {
+            "version": "^0.14.0",
+            "file": "samisk-samtale-bestilling/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "samtalestotte-arbeidsgiver",
+        "versions": [
+          {
+            "version": "^0.14.3",
+            "file": "samtalestotte-arbeidsgiver/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "samtalestotte-podlet",
+        "versions": [
+          {
+            "version": "^0.7.7",
+            "file": "samtalestotte-podlet/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "siste-saker-podlet",
+        "versions": [
+          {
+            "version": "^0.12.2",
+            "file": "siste-saker-podlet/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "sof",
+        "versions": [
+          {
+            "version": "^0.6.9",
+            "file": "sof/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "sosialhjelp-adminpanel",
+        "versions": [
+          {
+            "version": "^0.10.0",
+            "file": "sosialhjelp-adminpanel/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "sosialhjelp-dialog",
+        "versions": [
+          {
+            "version": "^0.14.3",
+            "file": "sosialhjelp-dialog/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "sosialhjelp-innsyn",
+        "versions": [
+          {
+            "version": "^0.12.2",
+            "file": "sosialhjelp-innsyn/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "sosialhjelp-soknad",
+        "versions": [
+          {
+            "version": "^0.14.8",
+            "file": "sosialhjelp-soknad/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "sosialhjelp-veiviser-ny",
+        "versions": [
+          {
+            "version": "^0.15.1",
+            "file": "sosialhjelp-veiviser-ny/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "spinnsyn-frontend",
+        "versions": [
+          {
+            "version": "^0.11.7",
+            "file": "spinnsyn-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "su-se-framover",
+        "versions": [
+          {
+            "version": "^0.15.2",
+            "file": "su-se-framover/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "syfomodiaperson",
+        "versions": [
+          {
+            "version": "0.14.4",
+            "file": "syfomodiaperson/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "sykmeldinger",
+        "versions": [
+          {
+            "version": "^0.14.15",
+            "file": "sykmeldinger/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "tabell",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "tabell/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "tms-mikrofrontend-template-vitejs",
+        "versions": [
+          {
+            "version": "0.14.1",
+            "file": "tms-mikrofrontend-template-vitejs/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "tms-mikrofrontend-template-vitets",
+        "versions": [
+          {
+            "version": "0.14.3-beta.1",
+            "file": "tms-mikrofrontend-template-vitets/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "tms-prototyper",
+        "versions": [
+          {
+            "version": "0.5.4",
+            "file": "tms-prototyper/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "tms-vta-microfrontend",
+        "versions": [
+          {
+            "version": "0.14.6",
+            "file": "tms-vta-microfrontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "veientilarbeid",
+        "versions": [
+          {
+            "version": "0.14.15",
+            "file": "veientilarbeid/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "veilarbmaofs",
+        "versions": [
+          {
+            "version": "^0.14.15",
+            "file": "veilarbmaofs/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "veiviserarbeidsgiver",
+        "versions": [
+          {
+            "version": "^0.13.3",
+            "file": "veiviserarbeidsgiver/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "verktoykassen",
+        "versions": [
+          {
+            "version": "^0.15",
+            "file": "verktoykassen/sanity/package.json"
+          },
+          {
+            "version": "0.15.1-rc.search.0",
+            "file": "verktoykassen/website/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "vta-frontend-esm",
+        "versions": [
+          {
+            "version": "0.14.0",
+            "file": "vta-frontend-esm/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "yrkesskade-melding-frontend",
+        "versions": [
+          {
+            "version": "^0.11.4",
+            "file": "yrkesskade-melding-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "yrkesskade-saksbehandling",
+        "versions": [
+          {
+            "version": "^0.14.0-beta.1",
+            "file": "yrkesskade-saksbehandling/client/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "yrkesskade-skjema",
+        "versions": [
+          {
+            "version": "^0.14.0-beta.1",
+            "file": "yrkesskade-skjema/client/package.json"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "@navikt/ds-css",
+    "repos": [
+      {
+        "repo": "aap-innsyn-dittnav",
+        "versions": [
+          {
+            "version": "^0.11.4",
+            "file": "aap-innsyn-dittnav/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "aap-soknad-behandling",
+        "versions": [
+          {
+            "version": "^0.11.4",
+            "file": "aap-soknad-behandling/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "aap-soknad",
+        "versions": [
+          {
+            "version": "^0.12.0",
+            "file": "aap-soknad/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "altinn-metrics-frontend",
+        "versions": [
+          {
+            "version": "^0.10.0",
+            "file": "altinn-metrics-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "amt-informasjon-flate",
+        "versions": [
+          {
+            "version": "^0.10.0",
+            "file": "amt-informasjon-flate/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "arbeidsgiver-notifikasjon-widget",
+        "versions": [
+          {
+            "version": "0.12.9",
+            "file": "arbeidsgiver-notifikasjon-widget/component/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "chatbot",
+        "versions": [
+          {
+            "version": "^0.12.6",
+            "file": "chatbot/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "dp-soknad-veileder",
+        "versions": [
+          {
+            "version": "^0.11.3",
+            "file": "dp-soknad-veileder/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "ds-datepicker",
+        "versions": [
+          {
+            "version": "^0.10.0",
+            "file": "ds-datepicker/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "eessi-pensjon-saksbehandling-ui",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "eessi-pensjon-saksbehandling-ui/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "familie-ba-sak-frontend",
+        "versions": [
+          {
+            "version": "0.14.1",
+            "file": "familie-ba-sak-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "familie-ef-ettersending",
+        "versions": [
+          {
+            "version": "^0.14.1-rc.search.0",
+            "file": "familie-ef-ettersending/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "filopplasting",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "filopplasting/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "flagg-ikoner",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "flagg-ikoner/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "forhandsvisningsfil",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "forhandsvisningsfil/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "fremdriftslinje",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "fremdriftslinje/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "helse-speil",
+        "versions": [
+          {
+            "version": "^0.8.3",
+            "file": "helse-speil/packages/frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "helseopplysninger-frontend",
+        "versions": [
+          {
+            "version": "^0.10.0",
+            "file": "helseopplysninger-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "histark",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "histark/web/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "import-tracker",
+        "versions": [
+          {
+            "version": "*",
+            "file": "import-tracker/website/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "javazone-2021",
+        "versions": [
+          {
+            "version": "0.11.4",
+            "file": "javazone-2021/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "land-verktoy",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "land-verktoy/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "landvelger",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "landvelger/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "lydia-radgiver-frontend",
+        "versions": [
+          {
+            "version": "^0.12.11-next.0",
+            "file": "lydia-radgiver-frontend/client/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "min-ia",
+        "versions": [
+          {
+            "version": "^0.12.11",
+            "file": "min-ia/client/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "min-side-arbeidsgiver",
+        "versions": [
+          {
+            "version": "^0.14.1",
+            "file": "min-side-arbeidsgiver/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "min-side-microfrontend-example",
+        "versions": [
+          {
+            "version": "^0.12.2",
+            "file": "min-side-microfrontend-example/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "mulighetsrommet",
+        "versions": [
+          {
+            "version": "^0.12.9",
+            "file": "mulighetsrommet/frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "nada-frontend",
+        "versions": [
+          {
+            "version": "^0.9.0",
+            "file": "nada-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "nav-dashboard",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "nav-dashboard/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "nav-frontend-moduler-old",
+        "versions": [
+          {
+            "version": "0.11.5",
+            "file": "nav-frontend-moduler-old/website/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "nav-hoykontrast",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "nav-hoykontrast/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "nextjs-podium-experiment",
+        "versions": [
+          {
+            "version": "^0.10.0",
+            "file": "nextjs-podium-experiment/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "okonomi-gjeldsradgivning-veiviser",
+        "versions": [
+          {
+            "version": "^0.14.1",
+            "file": "okonomi-gjeldsradgivning-veiviser/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "paginering",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "paginering/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "permittering-og-omstilling",
+        "versions": [
+          {
+            "version": "^0.8.1",
+            "file": "permittering-og-omstilling/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "permitteringsvarsel-generator",
+        "versions": [
+          {
+            "version": "^0.10.0",
+            "file": "permitteringsvarsel-generator/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "portal-frontend",
+        "versions": [
+          {
+            "version": "^0.12.11-next.0",
+            "file": "portal-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "prim-admin-gui",
+        "versions": [
+          {
+            "version": "^0.12.9",
+            "file": "prim-admin-gui/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "samtalestotte-podlet",
+        "versions": [
+          {
+            "version": "^0.7.4",
+            "file": "samtalestotte-podlet/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "siste-saker-podlet",
+        "versions": [
+          {
+            "version": "^0.10.0",
+            "file": "siste-saker-podlet/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "sof",
+        "versions": [
+          {
+            "version": "^0.6.14",
+            "file": "sof/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "sosialhjelp-adminpanel",
+        "versions": [
+          {
+            "version": "^0.9.0",
+            "file": "sosialhjelp-adminpanel/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "sosialhjelp-dialog",
+        "versions": [
+          {
+            "version": "^0.12.6",
+            "file": "sosialhjelp-dialog/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "sosialhjelp-innsyn",
+        "versions": [
+          {
+            "version": "^0.10.0",
+            "file": "sosialhjelp-innsyn/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "sosialhjelp-soknad",
+        "versions": [
+          {
+            "version": "^0.12.9",
+            "file": "sosialhjelp-soknad/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "sosialhjelp-veiviser-ny",
+        "versions": [
+          {
+            "version": "^0.14.1",
+            "file": "sosialhjelp-veiviser-ny/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "su-se-framover",
+        "versions": [
+          {
+            "version": "^0.12.14",
+            "file": "su-se-framover/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "tabell",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "tabell/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "tms-mikrofrontend-template-vitejs",
+        "versions": [
+          {
+            "version": "0.12.5",
+            "file": "tms-mikrofrontend-template-vitejs/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "tms-mikrofrontend-template-vitets",
+        "versions": [
+          {
+            "version": "0.12.6",
+            "file": "tms-mikrofrontend-template-vitets/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "tms-prototyper",
+        "versions": [
+          {
+            "version": "0.5.4",
+            "file": "tms-prototyper/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "tms-vta-microfrontend",
+        "versions": [
+          {
+            "version": "0.12.9",
+            "file": "tms-vta-microfrontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "tpts-admin",
+        "versions": [
+          {
+            "version": "^0.11.4",
+            "file": "tpts-admin/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "tpts-tiltakspenger-flate",
+        "versions": [
+          {
+            "version": "^0.12.0",
+            "file": "tpts-tiltakspenger-flate/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "veilarbmaofs",
+        "versions": [
+          {
+            "version": "^0.12.14",
+            "file": "veilarbmaofs/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "veiviserarbeidsgiver",
+        "versions": [
+          {
+            "version": "^0.11.5",
+            "file": "veiviserarbeidsgiver/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "vta-frontend-esm",
+        "versions": [
+          {
+            "version": "0.12.1",
+            "file": "vta-frontend-esm/package.json"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "@navikt/ds-icons",
+    "repos": [
+      {
+        "repo": "aap-soknad",
+        "versions": []
+      },
+      {
+        "repo": "aktivitetsplan",
+        "versions": [
+          {
+            "version": "^0.5.7",
+            "file": "aktivitetsplan/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "amt-informasjon-flate",
+        "versions": [
+          {
+            "version": "^0.5.4",
+            "file": "amt-informasjon-flate/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "amt-tiltaksarrangor-flate",
+        "versions": [
+          {
+            "version": "^0.7.2",
+            "file": "amt-tiltaksarrangor-flate/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "arbeidsgiver-notifikasjon-widget",
+        "versions": [
+          {
+            "version": "0.7.2",
+            "file": "arbeidsgiver-notifikasjon-widget/component/package.json"
+          },
+          {
+            "version": "^0.3.3",
+            "file": "arbeidsgiver-notifikasjon-widget/demo/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "beslutteroversikt",
+        "versions": [
+          {
+            "version": "^0.3.3",
+            "file": "beslutteroversikt/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "bidrag-dokument-ui",
+        "versions": [
+          {
+            "version": "^0.7.2",
+            "file": "bidrag-dokument-ui/web/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "brukertest-portal",
+        "versions": [
+          {
+            "version": "^0.3.3",
+            "file": "brukertest-portal/frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "dialogmote-frontend",
+        "versions": [
+          {
+            "version": "^0.7.2",
+            "file": "dialogmote-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "dialogmote",
+        "versions": [
+          {
+            "version": "^0.6.3",
+            "file": "dialogmote/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "dialogmotearbeidsgiver",
+        "versions": [
+          {
+            "version": "^0.6.3",
+            "file": "dialogmotearbeidsgiver/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "dinesykmeldte",
+        "versions": [
+          {
+            "version": "^0.8.0",
+            "file": "dinesykmeldte/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "dolly-frontend",
+        "versions": [
+          {
+            "version": "^0.1.1",
+            "file": "dolly-frontend/src/main/web_src/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "dp-dagpenger",
+        "versions": [
+          {
+            "version": "^0.3.3",
+            "file": "dp-dagpenger/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "dp-faktasider-frontend",
+        "versions": [
+          {
+            "version": "^0.5.8",
+            "file": "dp-faktasider-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "dp-soknad-veileder",
+        "versions": []
+      },
+      {
+        "repo": "dp-soknadsdialog",
+        "versions": [
+          {
+            "version": "^0.7.0",
+            "file": "dp-soknadsdialog/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "eessi-pensjon-saksbehandling-ui",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "eessi-pensjon-saksbehandling-ui/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "familie-ba-sak-frontend",
+        "versions": [
+          {
+            "version": "^0.5.4",
+            "file": "familie-ba-sak-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "familie-ba-soknad",
+        "versions": [
+          {
+            "version": "^0.5.2",
+            "file": "familie-ba-soknad/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "familie-ef-sak-frontend",
+        "versions": [
+          {
+            "version": "^0.7.2",
+            "file": "familie-ef-sak-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "familie-felles-frontend",
+        "versions": [
+          {
+            "version": "^0.2.1",
+            "file": "familie-felles-frontend/packages/familie-header/package.json"
+          },
+          {
+            "version": "^0.5.4",
+            "file": "familie-felles-frontend/packages/familie-sprakvelger/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "familie-tilbake-frontend",
+        "versions": [
+          {
+            "version": "^0.8.1",
+            "file": "familie-tilbake-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "farskapsportal-ui",
+        "versions": [
+          {
+            "version": "^0.3.3",
+            "file": "farskapsportal-ui/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "filopplasting",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "filopplasting/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "forhandsvisningsfil",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "forhandsvisningsfil/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "helse-spanner",
+        "versions": [
+          {
+            "version": "^0.5.2",
+            "file": "helse-spanner/frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "helse-speil",
+        "versions": [
+          {
+            "version": "^0.5.3",
+            "file": "helse-speil/packages/frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "helseopplysninger-frontend",
+        "versions": [
+          {
+            "version": "^0.5.6",
+            "file": "helseopplysninger-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "histark",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "histark/web/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "hm-dinehjelpemidler",
+        "versions": [
+          {
+            "version": "^0.5.2",
+            "file": "hm-dinehjelpemidler/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "hm-soknad",
+        "versions": [
+          {
+            "version": "^0.5.4",
+            "file": "hm-soknad/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "hotsak-frontend",
+        "versions": [
+          {
+            "version": "^0.7.2",
+            "file": "hotsak-frontend/client/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "innbyggerpanelet",
+        "versions": [
+          {
+            "version": "^0.7.2",
+            "file": "innbyggerpanelet/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "k9-frontend-modules",
+        "versions": [
+          {
+            "version": "^0.5.5",
+            "file": "k9-frontend-modules/packages/ui/react-components/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "k9-punsj-frontend",
+        "versions": [
+          {
+            "version": "^0.7.2",
+            "file": "k9-punsj-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "k9-sak-web",
+        "versions": []
+      },
+      {
+        "repo": "kabal",
+        "versions": [
+          {
+            "version": "^0.7.0",
+            "file": "kabal/frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "kaka",
+        "versions": [
+          {
+            "version": "^0.7.3",
+            "file": "kaka/frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "landvelger",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "landvelger/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "medisinsk-vilkar-frontend",
+        "versions": [
+          {
+            "version": "^0.5.2",
+            "file": "medisinsk-vilkar-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "min-side-arbeidsgiver",
+        "versions": [
+          {
+            "version": "^0.7.2",
+            "file": "min-side-arbeidsgiver/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "mulighetsrommet",
+        "versions": [
+          {
+            "version": "^0.7.2",
+            "file": "mulighetsrommet/frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "nada-frontend",
+        "versions": [
+          {
+            "version": "^0.5.4",
+            "file": "nada-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "nav-dashboard",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "nav-dashboard/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "nav-enonicxp-frontend",
+        "versions": [
+          {
+            "version": "^0.7.3",
+            "file": "nav-enonicxp-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "nav-frontend-moduler-old",
+        "versions": []
+      },
+      {
+        "repo": "nav-hoykontrast",
+        "versions": []
+      },
+      {
+        "repo": "nextjs-podium-experiment",
+        "versions": [
+          {
+            "version": "^0.5.8",
+            "file": "nextjs-podium-experiment/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "paginering",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "paginering/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "pensjon-etterlatte",
+        "versions": [
+          {
+            "version": "0.5.2",
+            "file": "pensjon-etterlatte/apps/selvbetjening-ui/client/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "pensjon-selvbetjening-soknad-alder-frontend",
+        "versions": [
+          {
+            "version": "^0.5.2",
+            "file": "pensjon-selvbetjening-soknad-alder-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "portal-frontend",
+        "versions": [
+          {
+            "version": "^0.7.2",
+            "file": "portal-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "prim-admin-gui",
+        "versions": [
+          {
+            "version": "^0.7.2",
+            "file": "prim-admin-gui/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "psb-inntektsmelding-frontend",
+        "versions": [
+          {
+            "version": "^0.6.3",
+            "file": "psb-inntektsmelding-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "rekrutteringsbistand-kandidat",
+        "versions": [
+          {
+            "version": "^0.3.2",
+            "file": "rekrutteringsbistand-kandidat/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "rekrutteringsbistand-stillingssok",
+        "versions": [
+          {
+            "version": "^0.1.2",
+            "file": "rekrutteringsbistand-stillingssok/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "samtalestotte-arbeidsgiver",
+        "versions": [
+          {
+            "version": "^0.7.1",
+            "file": "samtalestotte-arbeidsgiver/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "sif-inntektsmelding-frontend",
+        "versions": [
+          {
+            "version": "^0.3.3",
+            "file": "sif-inntektsmelding-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "skjemabygger-monorepo-poc",
+        "versions": [
+          {
+            "version": "^0.2.0",
+            "file": "skjemabygger-monorepo-poc/packages/shared-components/package.json"
+          },
+          {
+            "version": "^0.2.0",
+            "file": "skjemabygger-monorepo-poc/packages/skjemabygging-formio/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "skjemabygging-formio",
+        "versions": [
+          {
+            "version": "^0.2.0",
+            "file": "skjemabygging-formio/packages/bygger/package.json"
+          },
+          {
+            "version": "^0.2.0",
+            "file": "skjemabygging-formio/packages/shared-components/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "sosialhjelp-dialog",
+        "versions": [
+          {
+            "version": "^0.7.1",
+            "file": "sosialhjelp-dialog/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "sosialhjelp-innsyn",
+        "versions": [
+          {
+            "version": "^0.6.2",
+            "file": "sosialhjelp-innsyn/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "sosialhjelp-soknad",
+        "versions": [
+          {
+            "version": "^0.7.2",
+            "file": "sosialhjelp-soknad/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "sosialhjelp-veiviser-ny",
+        "versions": [
+          {
+            "version": "^0.8.0",
+            "file": "sosialhjelp-veiviser-ny/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "su-se-framover",
+        "versions": [
+          {
+            "version": "^0.8.1",
+            "file": "su-se-framover/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "syfomodiaperson",
+        "versions": [
+          {
+            "version": "0.7.2",
+            "file": "syfomodiaperson/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "sykmeldinger",
+        "versions": [
+          {
+            "version": "^0.7.3",
+            "file": "sykmeldinger/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "tabell",
+        "versions": [
+          {
+            "version": "^0.x",
+            "file": "tabell/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "team-ai-finnkandidater",
+        "versions": [
+          {
+            "version": "^0.3.2",
+            "file": "team-ai-finnkandidater/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "tiltak-refusjon-arbeidsgiver",
+        "versions": [
+          {
+            "version": "^0.6.3",
+            "file": "tiltak-refusjon-arbeidsgiver/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "tiltak-refusjon-saksbehandler",
+        "versions": [
+          {
+            "version": "^0.3.3",
+            "file": "tiltak-refusjon-saksbehandler/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "tms-prototyper",
+        "versions": [
+          {
+            "version": "0.3.3",
+            "file": "tms-prototyper/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "tp-frontend",
+        "versions": [
+          {
+            "version": "^0.3.3",
+            "file": "tp-frontend/tp-frontend/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "tpts-tiltakspenger-flate",
+        "versions": [
+          {
+            "version": "^0.7.0",
+            "file": "tpts-tiltakspenger-flate/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "veientilarbeid",
+        "versions": [
+          {
+            "version": "0.8.0",
+            "file": "veientilarbeid/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "veilarbmaofs",
+        "versions": [
+          {
+            "version": "^0.7.3",
+            "file": "veilarbmaofs/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "verktoykassen",
+        "versions": [
+          {
+            "version": "^0.8",
+            "file": "verktoykassen/sanity/package.json"
+          },
+          {
+            "version": "^0.8.0",
+            "file": "verktoykassen/website/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "vis-stilling",
+        "versions": [
+          {
+            "version": "^0.6.3",
+            "file": "vis-stilling/package.json"
+          }
+        ]
+      },
+      {
+        "repo": "yrkesskade-skjema",
+        "versions": [
+          {
+            "version": "^0.7.1",
+            "file": "yrkesskade-skjema/package.json"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -2,13 +2,11 @@ const fs = require("fs");
 const path = require("path");
 const NodeGit = require("nodegit");
 import pLimit from "p-limit";
-/* const simpleGit = require('simple-git');
-const git = simpleGit(); */
 
 export const cloneRepos = async (repos: string[]) => {
   console.log("Starting repo clone/pull");
 
-  const limiter = pLimit(3);
+  const limiter = pLimit(2);
   let counter = 0;
 
   return Promise.all(
@@ -30,6 +28,7 @@ export const cloneRepos = async (repos: string[]) => {
 
 const gitAuth = {
   fetchOpts: {
+    depth: 1,
     callbacks: {
       certificateCheck: function () {
         return 1;
@@ -63,30 +62,6 @@ const CloneOrPull = (name: string) =>
           });
       } else {
         resolve(null);
-        // Cloned already; we need to pull
-        /* console.log("merging repo"); */
-        /*
-        let currentBranch: Git.Reference = await repo.getCurrentBranch();
-
-let currentBranchName: string = currentBranch.shorthand();
- */
-        /* NodeGit.Repository.open(repoPath)
-          .then(async (x: any) => {
-            await x.fetchAll(gitAuth);
-            return x;
-          })
-          .then(async (x: any) => {
-            const currentBranch = await x.getCurrentBranch();
-            x.mergeBranches(
-              currentBranch.shorthand(),
-              `origin/${currentBranch.shorthand()}`
-            );
-          })
-          .then(() => resolve(null))
-          .catch((e: Error) => {
-            console.log("FAILED ON Fetch/merge");
-            reject(e);
-          }); */
       }
     });
   });
