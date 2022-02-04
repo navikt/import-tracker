@@ -27,7 +27,7 @@ const List = () => {
               "inline-flex justify-between min-w-full font-semibold text-base"
             )}
           >
-            <span>{imp.name}</span>
+            <span>{imp.name.replace("@navikt/", "")}</span>
             <span className="flex gap-2 items-center">
               <span className="mr-2">{imp.value.uses}</span>
               <Next aria-hidden />
