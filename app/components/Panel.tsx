@@ -1,13 +1,15 @@
 import { Close } from "@navikt/ds-icons";
-import { BodyLong, Button, Heading } from "@navikt/ds-react";
+import { BodyLong, Button, Heading, Label } from "@navikt/ds-react";
 import { useContext } from "react";
 import { AppContext } from "../pages";
+import ImportTable from "./Table";
 
 const Panel = () => {
   const { setActiveView, activeView } = useContext(AppContext);
+
   return (
     <>
-      <div className="bg-gray-50 w-full p-4 min-w-[400px] relative">
+      <div className="bg-gray-50 w-full p-4 min-w-[400px] relative overflow-y-auto max-h-screen">
         {activeView ? (
           <>
             <Button
@@ -17,9 +19,15 @@ const Panel = () => {
             >
               <Close aria-hidden />
             </Button>
-            <Heading size="small" level="2">
-              {activeView?.name}
-            </Heading>
+            <div className="p-6">
+              <Label spacing>{activeView?.name}</Label>
+              <Label spacing>
+                {`Importert i ${
+                  activeView.value.uses + activeView.value.defaultUses
+                } filer`}
+              </Label>
+              <ImportTable />
+            </div>
           </>
         ) : (
           <div className="max-w-xl">

@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
+import Head from "next/head";
 import React, { createContext, useEffect, useState } from "react";
 import List from "../components/List";
-import { Detail, Heading, Link, Modal } from "@navikt/ds-react";
+import ImportsModal from "../components/Modal";
 import Panel from "../components/Panel";
 
 export type packageUsesT = {
@@ -11,11 +12,26 @@ export type packageUsesT = {
   fileSource: string[];
 };
 
-export const AppContext = createContext<any>(null);
+export const AppContext = createContext<{
+  activeView: { name: string; value: packageUsesT };
+  setActiveView: React.Dispatch<any>;
+  setNamedImport: React.Dispatch<
+    React.SetStateAction<{
+      name: string;
+      uses: number;
+      repos: string[];
+    }>
+  >;
+  namedImport: { name: string; uses: number; repos: string[] };
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  modalOpen: boolean;
+  data: any[];
+}>(null);
 
 const App: NextPage = () => {
   const [dataRoot, setDataRoot] = useState<any[]>([]);
-  const [fileLinks, setFileLinks] = useState<string[]>([]);
+  const [namedImport, setNamedImport] =
+    useState<{ name: string; uses: number; repos: string[] }>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [activeView, setActiveView] = useState<any>(null);
 
@@ -38,45 +54,31 @@ const App: NextPage = () => {
   }, []);
 
   return (
-    <div className="flex justify-center vw-100 typo-normal overflow-x-hidden">
-      <div className="w-full flex">
-        <AppContext.Provider
-          value={{
-            setFileLinks,
-            setModalOpen,
-            setActiveView,
-            activeView,
-            data: dataRoot,
-          }}
-        >
-          <List />
-          <Panel />
-        </AppContext.Provider>
+    <>
+      <Head>
+        <title>Imports DS</title>
+        <link rel="icon" href="/favicon-32x32.png" />
+      </Head>
+      <div className="flex justify-center vw-100 typo-normal overflow-x-hidden">
+        <div className="w-full flex">
+          <AppContext.Provider
+            value={{
+              setNamedImport,
+              namedImport,
+              modalOpen,
+              setModalOpen,
+              setActiveView,
+              activeView,
+              data: dataRoot,
+            }}
+          >
+            <List />
+            <Panel />
+            <ImportsModal />
+          </AppContext.Provider>
+        </div>
       </div>
-
-      <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-        <h2>Linker til filer som bruker komponent: </h2>
-        {fileLinks.length === 0 && (
-          <div>Klarte ikke finne lenke til bruk...</div>
-        )}
-        {fileLinks.map((x) => {
-          const split = x.split("/");
-
-          return (
-            <div key={x}>
-              <Link
-                target="_blank"
-                href={`https://github.com/navikt/${split[0]}/blob/master/${split
-                  .slice(1)
-                  .join("/")}`}
-              >
-                {x}
-              </Link>
-            </div>
-          );
-        })}
-      </Modal>
-    </div>
+    </>
   );
 };
 
