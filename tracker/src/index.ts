@@ -33,8 +33,8 @@ const main = async () => {
   let imports: packageImportT[][] = [];
 
   if (process.env.FULLRUN) {
-    const repos = await getRepoNames();
-    await cloneRepos(repos);
+    /* const repos = await getRepoNames();
+    await cloneRepos(repos); */
     const files = await getFiles();
     imports = await getImports(files);
     fs.writeFileSync("./raw-imports.json", JSON.stringify(imports));
@@ -53,7 +53,7 @@ const main = async () => {
     const info = await getPackageUsage(dsPackages, data);
 
     fs.writeFileSync(
-      "../website/app/package-versions.json",
+      "../app/package-versions.json",
       JSON.stringify(info, null, 2)
     );
   });

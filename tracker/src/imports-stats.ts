@@ -7,7 +7,13 @@ export type packageT = {
 export type packageUsesT = {
   uses: number;
   defaultUses: number;
-  namedUses: { [key: string]: { uses: number; repos: string[] } };
+  namedUses: {
+    [key: string]: {
+      uses: number;
+      repos: string[];
+      props: { tag: string; props: string[] }[][];
+    };
+  };
   fileSource: string[];
 };
 
@@ -17,8 +23,15 @@ const getDefaultUses = (imports: importT[]) => {
 
 const getNamedUses = (
   imports: importT[],
-  namedUses: { [key: string]: { uses: number; repos: string[] } },
-  file: string
+  namedUses: {
+    [key: string]: {
+      uses: number;
+      repos: string[];
+      props: { tag: string; props: string[] }[][];
+    };
+  },
+  file: string,
+  props: { tag: string; props: string[] }[]
 ) => {
   const newObj = Object.assign({}, namedUses);
 
@@ -30,8 +43,16 @@ const getNamedUses = (
           ? {
               uses: newObj[imp.name].uses + 1,
               repos: [...newObj[imp.name].repos, file],
+              props:
+                props.length !== 0
+                  ? [...newObj[imp.name].props, props]
+                  : [...newObj[imp.name].props],
             }
-          : { uses: 1, repos: [file] };
+          : {
+              uses: 1,
+              repos: [file],
+              props: props.length !== 0 ? [props] : [],
+            };
     });
   return newObj;
 };
@@ -44,7 +65,8 @@ export const packageEntry = (entry: packageImportT, packageObj: packageT) => {
       namedUses: getNamedUses(
         entry.imports,
         {},
-        entry.fileSource?.replace("./repos/", "") as string
+        entry.fileSource?.replace("./repos/", "") as string,
+        entry.props
       ),
       fileSource: [entry.fileSource?.replace("./repos/", "") as string],
     };
@@ -56,7 +78,8 @@ export const packageEntry = (entry: packageImportT, packageObj: packageT) => {
       namedUses: getNamedUses(
         entry.imports,
         packageObj[entry.source].namedUses,
-        entry.fileSource?.replace("./repos/", "") as string
+        entry.fileSource?.replace("./repos/", "") as string,
+        entry.props
       ),
       fileSource: [
         ...packageObj[entry.source].fileSource,

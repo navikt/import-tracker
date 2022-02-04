@@ -18,7 +18,13 @@
     "@navikt/ds-react": "^0.15.3",
     "@navikt/ds-icons": "^0.8.1",
     "lodash.sorteduniq": "^4.2.0",
-    "classnames": "^2.3.1"
+    "classnames": "^2.3.1",
+    "p-limit": "^4.0.0",
+    "@octokit/core": "^3.5.1",
+    "@octokit/plugin-paginate-rest": "^2.13.3",
+    "@octokit/plugin-retry": "^3.0.7",
+    "dotenv": "^8.2.0",
+    "fast-glob": "3.2.5"
   },
   "devDependencies": {
     "@types/node": "17.0.14",
