@@ -3,7 +3,7 @@ import git from "./git";
 const Crawler = async () => {
   console.time("Used time");
 
-  git();
+  await git();
 
   console.timeEnd("Used time");
 };
