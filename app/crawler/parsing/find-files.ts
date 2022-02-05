@@ -7,8 +7,8 @@ export type GroupedFilesByRepoT = {
   files: string[];
 };
 
-const getDirectories = (): Promise<string[]> =>
-  fg(`${repoLocation}/*`, {
+export const getDirectories = (root?: string): Promise<string[]> =>
+  fg(`${root ?? repoLocation}/*`, {
     onlyFiles: false,
     deep: 1,
     onlyDirectories: true,
@@ -25,8 +25,10 @@ const getDirectories = (): Promise<string[]> =>
       throw new Error(e);
     });
 
-export const getGroupedFiles = async (): Promise<GroupedFilesByRepoT[]> => {
-  const directories = await getDirectories().then((r) => r.slice(0, 10));
+export const getGroupedFiles = async (
+  root?: string
+): Promise<GroupedFilesByRepoT[]> => {
+  const directories = await getDirectories(root).then((r) => r.slice(0, 10));
 
   const files: GroupedFilesByRepoT[] = [];
 
@@ -35,8 +37,7 @@ export const getGroupedFiles = async (): Promise<GroupedFilesByRepoT[]> => {
       [
         `${r}/**/*.+(tsx|jsx|js|ts|mjs)`,
         "!**/node_modules/**",
-        "!**/test/**",
-        "!**/tests/**",
+        `!**/*.(spec|test).*`,
       ],
       {
         dot: true,
@@ -46,7 +47,7 @@ export const getGroupedFiles = async (): Promise<GroupedFilesByRepoT[]> => {
       throw new Error(e);
     });
     files.push({
-      name: r.split(`${repoLocation}/`)[1],
+      name: r.split(`${root ?? repoLocation}/`)[1],
       source: r,
       files: repoFiles,
     });
