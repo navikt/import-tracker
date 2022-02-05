@@ -9,7 +9,7 @@ const createJestConfig = nextJest({
 const customJestConfig = {
   moduleDirectories: ["node_modules", "<rootDir>/"],
   testEnvironment: "node",
-  modulePathIgnorePatterns: ["repositories"],
+  modulePathIgnorePatterns: ["repositories", "test-files"],
   /* setupFiles: ["core-js"], */
 };
 
