@@ -1,7 +1,7 @@
 import fg from "fast-glob";
 import { repoLocation } from "..";
 
-type GroupedFilesByRepoT = {
+export type GroupedFilesByRepoT = {
   name: string;
   source: string;
   files: string[];
@@ -51,9 +51,11 @@ export const getGroupedFiles = async (): Promise<GroupedFilesByRepoT[]> => {
       files: repoFiles,
     });
   }
+
   console.log({
     "n-repo": directories.length,
     "n-files": files.reduce((old, n) => old + n.files.length, 0),
   });
+
   return files;
 };
