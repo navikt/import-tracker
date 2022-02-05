@@ -12,7 +12,7 @@ const deleteRepos = (repos: RepoMetadataT[]) =>
  * Instead of running git pull on repos with changes,
  * we just delete them and re-clone them later.
  */
-const removeUnsyncedRepos = async () => {
+const removeUnsynced = async () => {
   const metadata = await readMetadata().catch(() => {
     throw new Error("Could not read metadata - remove-unsynced-repos.ts ");
   });
@@ -30,4 +30,4 @@ const removeUnsyncedRepos = async () => {
   deleteRepos(unsyncedRepos);
 };
 
-export default removeUnsyncedRepos;
+export default removeUnsynced;

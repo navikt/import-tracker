@@ -27,7 +27,7 @@ const languages = [
   "scss",
 ];
 
-const syncGitRepos = async (): Promise<RepoMetadataListT> => {
+const syncGit = async (): Promise<RepoMetadataListT> => {
   /* Skip sync if data is assumed "fresh" */
   if (!metadataNeedsSync(await readMetadata().catch(() => null))) return;
 
@@ -55,4 +55,4 @@ const syncGitRepos = async (): Promise<RepoMetadataListT> => {
   );
 };
 
-export default syncGitRepos;
+export default syncGit;

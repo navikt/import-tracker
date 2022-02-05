@@ -1,12 +1,12 @@
-import cloneRepos from "./clone-repos";
-import removeUnsyncedRepos from "./remove-unsynced-repos";
-import syncGitRepos from "./sync-git-repos";
+import clone from "./clone";
+import removeUnsynced from "./remove-unsynced";
+import syncGit from "./sync-git";
 
 const Git = async () => {
-  await syncGitRepos();
-  await removeUnsyncedRepos();
-  await cloneRepos();
-  console.log("Finished GIT sync");
+  await syncGit();
+  await removeUnsynced();
+  await clone();
+  console.log("Finished GITHUB sync");
 };
 
 export default Git;
