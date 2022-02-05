@@ -50,8 +50,8 @@ export const writeMetadata = (data: Partial<RepoMetadataListT>) =>
 export const metadataNeedsSync = (data: RepoMetadataListT | null) => {
   if (!data || !data.repo_sync) return true;
   return (
-    new Date().getMilliseconds() -
-      new Date(data.repo_sync).getMilliseconds() / 1000 / 3600 <
+    new Date().getTime() -
+      new Date(data.repo_sync).getTime() / 1000 / 3600 / 24 <
     24
   );
 };
