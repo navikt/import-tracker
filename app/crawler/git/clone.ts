@@ -5,14 +5,13 @@ import { readMetadata, RepoMetadataT } from "../metadata";
 
 const cloneSelected = async (git: SimpleGit, repos: RepoMetadataT[]) => {
   if (repos.length === 0) return;
-
   await Promise.all(
     repos.map((repo) =>
       git
         .clone(
           `https://${process.env.TOKEN}:x-oauth-basic@github.com/navikt/${repo.name}`,
           repo.name,
-          { "--depth": 1, "--no-checkout": null }
+          { "--depth": 1 }
         )
         .catch((e) => {
           console.error(e);
@@ -41,9 +40,12 @@ const clone = async () => {
     maxConcurrentProcesses: 10,
   });
 
-  await cloneSelected(git, getUnsyncedRepos(metadata.repos)).catch((e) =>
-    console.error(e)
-  );
+  await cloneSelected(
+    git,
+    getUnsyncedRepos(metadata.repos).sort((a, b) =>
+      a.name.localeCompare(b.name)
+    )
+  ).catch((e) => console.error(e));
 };
 
 export default clone;

@@ -36,6 +36,8 @@ const main = async () => {
     /* const repos = await getRepoNames();
     await cloneRepos(repos); */
     const files = await getFiles();
+    console.log(files.length);
+    return;
     imports = await getImports(files);
     fs.writeFileSync("./raw-imports.json", JSON.stringify(imports));
   }
