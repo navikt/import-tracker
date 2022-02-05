@@ -1,20 +1,10 @@
-import getRepoMetadata from "./get-repo-metadata";
-
-export type RepoMetadataT = {
-  name: string;
-  language: string;
-  pushed_at: Date;
-  archived: boolean;
-};
-
-export type RepoMetadataListT = {
-  last_update: Date;
-  repos: RepoMetadataT[];
-};
+import removeUnsyncedRepos from "./remove-unsynced-repos";
+import syncGitRepos from "./sync-git-repos";
 
 const Git = async () => {
-  const repoMetadata = await getRepoMetadata();
-  return null;
+  await syncGitRepos();
+  await removeUnsyncedRepos();
+  console.log("Finished GIT sync");
 };
 
 export default Git;

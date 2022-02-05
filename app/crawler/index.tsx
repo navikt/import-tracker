@@ -1,11 +1,11 @@
 import git from "./git";
+import { updateLastCrawl, writeMetadata } from "./metadata";
 
 const Crawler = async () => {
-  console.time("Used time");
-
   await git();
+  await updateLastCrawl();
 
-  console.timeEnd("Used time");
+  console.log("Finished CRAWL");
 };
 
 export default Crawler;
