@@ -6,7 +6,7 @@ const Git = async () => {
   await syncGit();
   await removeUnsynced();
   await clone();
-  console.log("Finished GITHUB sync");
+  console.log("Finished GITHUB-job");
 };
 
 export default Git;
