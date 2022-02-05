@@ -15,7 +15,7 @@ const crawl = (req: NextApiRequest, res: NextApiResponse) => {
   if (STATUS !== "OK") {
     res.status(500).json({
       status: "500 - Internal server error",
-      message: `Aborting crawl synce something has failed. Try restarting. Error: ${STATUS}`,
+      message: `Aborting crawl sync something has failed. Try restarting. Error: ${STATUS}`,
     });
     return;
   }
