@@ -3,7 +3,7 @@ import fs from "fs";
 import { repoLocation } from "..";
 
 /* Force deletes repos, ignored if repo dir doesn't exist */
-const deleteRepos = (repos: RepoMetadataT[]) =>
+export const deleteRepos = (repos: RepoMetadataT[]) =>
   repos.forEach((repo) =>
     fs.rmSync(`${repoLocation}/${repo.name}`, { force: true, recursive: true })
   );

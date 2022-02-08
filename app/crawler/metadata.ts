@@ -18,9 +18,9 @@ const fileLocation = "crawler/files/metadata.json";
 /**
  * Reads metada if avaliable
  */
-export const readMetadata = (location?: string) =>
+export const readMetadata = () =>
   new Promise<RepoMetadataListT | null>((resolve, reject) =>
-    fs.readFile(location ?? fileLocation, (e, data) =>
+    fs.readFile(fileLocation, (e, data) =>
       e ? reject(null) : resolve(JSON.parse(data.toString()))
     )
   );
@@ -28,10 +28,7 @@ export const readMetadata = (location?: string) =>
 /**
  * Writes metadata to JSON file.
  */
-export const writeMetadata = (
-  data: Partial<RepoMetadataListT>,
-  location?: string
-) =>
+export const writeMetadata = (data: Partial<RepoMetadataListT>) =>
   new Promise<number>(async (resolve, reject) => {
     readMetadata()
       .then((metadata) =>
