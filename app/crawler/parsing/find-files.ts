@@ -43,6 +43,7 @@ export const getGroupedFiles = async (
     ).catch((e) => {
       throw new Error(e);
     });
+
     files.push({
       name: r.split(`${root ?? repoLocation}/`)[1],
       source: r,
