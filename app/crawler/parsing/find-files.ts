@@ -26,6 +26,7 @@ export const getDirectories = (root?: string): Promise<string[]> =>
     });
 
 export const getGroupedFiles = async (
+  glob: string,
   root?: string
 ): Promise<GroupedFilesByRepoT[]> => {
   const directories = await getDirectories(root).then((r) => r.slice(0, 10));
@@ -34,11 +35,7 @@ export const getGroupedFiles = async (
 
   for (const r of directories) {
     let repoFiles = await fg(
-      [
-        `${r}/**/*.+(tsx|jsx|js|ts|mjs)`,
-        "!**/node_modules/**",
-        `!**/*.(spec|test).*`,
-      ],
+      [`${r}/${glob}`, "!**/node_modules/**", `!**/*.(spec|test).*`],
       {
         dot: true,
         concurrency: 5,

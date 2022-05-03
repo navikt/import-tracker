@@ -3,7 +3,7 @@ import simpleGit, { SimpleGit } from "simple-git";
 import { repoLocation } from "..";
 import { readMetadata, RepoMetadataT } from "../metadata";
 
-const cloneSelected = async (git: SimpleGit, repos: RepoMetadataT[]) => {
+export const cloneSelected = async (git: SimpleGit, repos: RepoMetadataT[]) => {
   if (repos.length === 0) return;
   await Promise.all(
     repos.map((repo) =>

@@ -7,16 +7,31 @@ test("getDirectories", async () => {
   expect(dirs.length).toBe(1);
 });
 
-test("getGroupedFiles", async () => {
+test("getGroupedFiles js", async () => {
   const prefix = `${testFiles}/test-repo`;
 
-  const files = await getGroupedFiles(testFiles);
+  const files = await getGroupedFiles(`**/*.+(tsx|jsx|js|ts|mjs)`, testFiles);
   expect(JSON.stringify(files)).toEqual(
     JSON.stringify([
       {
         name: "test-repo",
         source: prefix,
         files: [`${prefix}/files/Component.tsx`],
+      },
+    ])
+  );
+});
+
+test("getGroupedFiles package.json", async () => {
+  const prefix = `${testFiles}/test-repo`;
+
+  const files = await getGroupedFiles(`**/package.json`, testFiles);
+  expect(JSON.stringify(files)).toEqual(
+    JSON.stringify([
+      {
+        name: "test-repo",
+        source: prefix,
+        files: [`${prefix}/package.json`],
       },
     ])
   );
