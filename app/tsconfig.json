@@ -23,6 +23,11 @@
       "lib": ["ES2021.String"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "pages/**/*.(ts|tsx)",
+    "crawler/**/*.(ts|tsx)",
+    "components/**/*.(ts|tsx)"
+  ],
+  "exclude": ["node_modules", "files", "files/**"]
 }

@@ -4,6 +4,9 @@ const nextConfig = {
   experimental: {
     esmExternals: false,
   },
+  serverRuntimeConfig: {
+    gh_token: process.env.TOKEN,
+  },
 };
 
 module.exports = nextConfig;

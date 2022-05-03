@@ -9,13 +9,14 @@ const List = () => {
   if (!data) return null;
 
   return (
-    <div className="max-w-xl bg-gray-900 text-gray-100 max-h-screen overflow-y-auto">
-      {data.map((imp) => (
+    <div className="max-h-screen max-w-xl overflow-y-auto bg-gray-900 text-gray-100">
+      {data.map((imp, x) => (
         <button
+          key={x}
           className={cl(
-            "w-full inline-flex items-center px-4 py-4 focus:outline-none",
+            "inline-flex w-full items-center px-4 py-4 focus:outline-none",
             {
-              "bg-gray-50 text-text ": activeView?.name === imp.name,
+              "text-text bg-gray-50 ": activeView?.name === imp.name,
               "hover:bg-gray-800": activeView?.name !== imp.name,
             }
           )}
@@ -24,11 +25,11 @@ const List = () => {
         >
           <div
             className={cl(
-              "inline-flex justify-between min-w-full font-semibold text-base"
+              "inline-flex min-w-full justify-between text-base font-semibold"
             )}
           >
             <span>{imp.name.replace("@navikt/", "")}</span>
-            <span className="flex gap-2 items-center">
+            <span className="flex items-center gap-2">
               <span className="mr-2">{imp.value.uses}</span>
               <Next aria-hidden />
             </span>

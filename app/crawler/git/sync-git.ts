@@ -42,12 +42,12 @@ const syncGit = async (): Promise<RepoMetadataListT> => {
       archived,
     }))
   );
-
+  console.log({ b: repos.length });
   /* Lets skip archived and assumed irrelevant languages */
   repos = repos
     .filter((r) => !r.archived)
     .filter((r) => languages.includes(r.language?.toLowerCase?.()));
-
+  console.log({ a: repos.length });
   const data: Partial<RepoMetadataListT> = { repo_sync: new Date(), repos };
 
   await writeMetadata(data).catch(() =>
