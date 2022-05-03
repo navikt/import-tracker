@@ -1,8 +1,10 @@
 import fg from "fast-glob";
 import { repoLocation } from "..";
+import { readMetadata } from "../metadata";
 
 export type GroupedFilesByRepoT = {
   name: string;
+  last_update: Date | null;
   source: string;
   files: string[];
 };
@@ -29,7 +31,8 @@ export const getGroupedFiles = async (
   glob: string,
   root?: string
 ): Promise<GroupedFilesByRepoT[]> => {
-  const directories = await getDirectories(root).then((r) => r.slice(0, 10));
+  const directories = await getDirectories(root);
+  const metadata = await readMetadata();
 
   const files: GroupedFilesByRepoT[] = [];
 
@@ -47,6 +50,10 @@ export const getGroupedFiles = async (
     files.push({
       name: r.split(`${root ?? repoLocation}/`)[1],
       source: r,
+      last_update:
+        metadata.repos.find(
+          (x) => x.name === r.split(`${root ?? repoLocation}/`)[1]
+        )?.pushed_at ?? null,
       files: repoFiles,
     });
   }
