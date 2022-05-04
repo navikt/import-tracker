@@ -1,4 +1,4 @@
-import { replacer, stringify } from "../parsing/map-to-json";
+import { replacer, reviver, stringify } from "../parsing/map-to-json";
 
 test("replacer", async () => {
   const testMap = new Map();
@@ -15,6 +15,16 @@ test("replacer", async () => {
       ],
     })
   );
+});
+
+test("reviver", async () => {
+  const data = JSON.parse(
+    `{"_type":"map","map":[["a","1"],["b","2"]]}`,
+    reviver
+  );
+  const map = new Map().set("a", "1").set("b", "2");
+
+  map.forEach((val, key) => expect(data.get(key)).toEqual(val));
 });
 
 test("stringify", async () => {
