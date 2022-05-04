@@ -9,7 +9,7 @@ export type PackageJsonResults = {
   packages: Map<string, PackageSummary>;
 };
 
-const updatePackageMap = (
+export const updatePackageMap = (
   key: string,
   val: string,
   sourceRepo: string,
@@ -78,17 +78,3 @@ export const parseJsonData = (
     throw error;
   }
 };
-
-/* function replacer(key, value) {
-  if (value instanceof Map) {
-    return {
-      _type: "map",
-      map: [...value],
-    };
-  } else return value;
-} */
-
-/* function reviver(key, value) {
-    if (value._type == "map") return new Map(value.map);
-    else return value;
-  } */

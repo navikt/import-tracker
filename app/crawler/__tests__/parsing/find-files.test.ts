@@ -16,6 +16,7 @@ test("getGroupedFiles js", async () => {
       {
         name: "test-repo",
         source: prefix,
+        last_update: null,
         files: [`${prefix}/files/Component.tsx`],
       },
     ])
@@ -31,6 +32,7 @@ test("getGroupedFiles package.json", async () => {
       {
         name: "test-repo",
         source: prefix,
+        last_update: null,
         files: [`${prefix}/package.json`],
       },
     ])
