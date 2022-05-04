@@ -59,8 +59,8 @@ export const getGroupedFiles = async (
   }
 
   console.log({
-    "n-repo": directories.length,
-    "n-files": files.reduce((old, n) => old + n.files.length, 0),
+    "n-repo gjennomsøkt": directories.length,
+    "n-files gjennomsøkt": files.reduce((old, n) => old + n.files.length, 0),
   });
 
   return files;
