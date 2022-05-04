@@ -3,7 +3,7 @@ import Header from "../components/Header.client";
 import PackageList from "../components/PackageList.server";
 import { replacer, reviver } from "../crawler/parsing/map-to-json";
 
-export default function Home({ jsonData, ...rest }) {
+export default function Home({ files, ...rest }) {
   const filter = (data) => {
     const str = JSON.stringify(data);
     const map = JSON.parse(str, reviver);
@@ -14,16 +14,36 @@ export default function Home({ jsonData, ...rest }) {
     );
   };
 
+  const pickKey = (obj) => {
+    const map = {
+      all: "packages",
+      dep: "packagesDeps",
+      dev: "packagesDevDeps",
+      peer: "packagesPeerDeps",
+      "90d": "last90",
+      "180d": "last180",
+    };
+    return obj[map[rest?.selectedFilter ?? "all"]];
+  };
+
+  const pickedFile = rest.selectedFile
+    ? files.find((x) => x.name === rest.selectedFile)
+    : files[0];
+
   const data = rest.searchText
-    ? filter(jsonData.packages)
-    : JSON.stringify(jsonData.packages);
+    ? filter(pickKey(pickedFile.data))
+    : JSON.stringify(pickKey(pickedFile.data));
 
   return (
     <div className="bg-gray-50">
-      <Header />
+      <Header {...rest} />
       <div className="flex w-full">
         <Suspense fallback={"Loading..."}>
-          <PackageList data={data} {...rest} />
+          <PackageList
+            data={data}
+            options={files.map((x) => x.name)}
+            {...rest}
+          />
         </Suspense>
       </div>
     </div>
@@ -31,10 +51,19 @@ export default function Home({ jsonData, ...rest }) {
 }
 
 export async function getServerSideProps(context) {
-  const { readFileSync } = require("fs");
-  const jsonData = readFileSync("public/data/result.json");
+  const { readFileSync, readdirSync } = require("fs");
+  const fileNames = readdirSync("public/data").reverse();
+
+  const files = [];
+  for (const fileName of fileNames) {
+    const file = readFileSync(`public/data/${fileName}`, "utf8");
+    files.push({
+      name: fileName,
+      data: JSON.parse(file),
+    });
+  }
 
   return {
-    props: { jsonData: JSON.parse(jsonData) },
+    props: { files },
   };
 }

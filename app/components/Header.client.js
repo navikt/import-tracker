@@ -1,33 +1,35 @@
 import { unstable_useRefreshRoot as useRefreshRoot } from "next/streaming";
 import { Header as DsHeader } from "@navikt/ds-react-internal";
-import { Loader, Search } from "@navikt/ds-react";
+import { Loader, Search, Heading } from "@navikt/ds-react";
 import React, { useTransition } from "react";
 
-const Header = () => {
+const Header = ({ ...rest }) => {
   const refresh = useRefreshRoot();
-  const [isSearching, startSearching] = useTransition({ timeoutMs: 200 });
+  const [isSearching, startSearching] = useTransition(/* { timeoutMs: 200 } */);
 
   return (
     <DsHeader>
-      <DsHeader.Title>Import tracker</DsHeader.Title>
       <div className="my-auto w-64 px-4">
         <Search
           size="small"
           label="Søk i pakkenavn"
           variant="simple"
-          onChange={(e) => {
+          onChange={(e) =>
             startSearching(() => {
-              refresh({ searchText: e });
-            });
-          }}
-          onClear={(e) => {
+              refresh({ ...rest, searchText: e });
+            })
+          }
+          onClear={() =>
             startSearching(() => {
-              refresh({ searchText: "" });
-            });
-          }}
+              refresh({ ...rest, searchText: "" });
+            })
+          }
         />
       </div>
       {isSearching && <Loader variant="inverted" />}
+      <Heading level="1" size="small" className="my-auto ml-auto px-8">
+        Dependency-oversikt NAV IT
+      </Heading>
     </DsHeader>
   );
 };
