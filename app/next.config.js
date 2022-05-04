@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
   experimental: {
-    esmExternals: false,
+    runtime: "nodejs",
+    serverComponents: true,
   },
   serverRuntimeConfig: {
     gh_token: process.env.TOKEN,

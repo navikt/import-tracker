@@ -1,7 +1,8 @@
-@import "@navikt/ds-css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "@navikt/ds-css";
+@import "@navikt/ds-css-internal";
 
 html,
 body {
