@@ -7,6 +7,11 @@ type PackageSummary = {
 
 export type PackageJsonResults = {
   packages: Map<string, PackageSummary>;
+  packagesDeps: Map<string, PackageSummary>;
+  packagesDevDeps: Map<string, PackageSummary>;
+  packagesPeerDeps: Map<string, PackageSummary>;
+  last90: Map<string, PackageSummary>;
+  last180: Map<string, PackageSummary>;
 };
 
 export const updatePackageMap = (
@@ -38,23 +43,41 @@ export const updatePackageMap = (
 };
 
 const getPackageSummary = (
-  source: GroupedPackagesByRepoT[]
+  source: GroupedPackagesByRepoT[],
+  opt: Partial<{
+    dependencies: boolean;
+    devDependencies: boolean;
+    peerDependencies: boolean;
+    beforeDate: Date;
+  }> = {
+    dependencies: true,
+    devDependencies: true,
+    peerDependencies: true,
+  }
 ): Map<string, PackageSummary> => {
   let packages = new Map();
 
-  source.map((data) => {
+  let filteredSource = source;
+
+  if (opt?.beforeDate) {
+    filteredSource = filteredSource.filter((x) =>
+      x?.last_update ? opt?.beforeDate < new Date(x?.last_update) : true
+    );
+  }
+
+  filteredSource.map((data) => {
     data.files.map((file) => {
-      if (file?.dependencies) {
+      if (file?.dependencies && opt?.dependencies) {
         Object.entries(file.dependencies).map(([key, val]) => {
           packages = updatePackageMap(key, val, data.name, packages);
         });
       }
-      if (file?.devDependencies) {
+      if (file?.devDependencies && opt?.devDependencies) {
         Object.entries(file.devDependencies).map(([key, val]) => {
           packages = updatePackageMap(key, val, data.name, packages);
         });
       }
-      if (file?.peerDependencies) {
+      if (file?.peerDependencies && opt?.peerDependencies) {
         Object.entries(file.peerDependencies).map(([key, val]) => {
           packages = updatePackageMap(key, val, data.name, packages);
         });
@@ -68,12 +91,25 @@ const getPackageSummary = (
 export const parseJsonData = (
   source: GroupedPackagesByRepoT[]
 ): PackageJsonResults => {
-  /* const dependencies = new Map();
-  const peerDependencies = new Map();
-  const devDependencies = new Map(); */
-
   try {
-    return { packages: getPackageSummary(source) };
+    return {
+      packages: getPackageSummary(source),
+      packagesDeps: getPackageSummary(source, { dependencies: true }),
+      packagesDevDeps: getPackageSummary(source, { devDependencies: true }),
+      packagesPeerDeps: getPackageSummary(source, { peerDependencies: true }),
+      last90: getPackageSummary(source, {
+        beforeDate: new Date(new Date().setDate(new Date().getDate() - 90)),
+        dependencies: true,
+        peerDependencies: true,
+        devDependencies: true,
+      }),
+      last180: getPackageSummary(source, {
+        beforeDate: new Date(new Date().setDate(new Date().getDate() - 180)),
+        dependencies: true,
+        peerDependencies: true,
+        devDependencies: true,
+      }),
+    };
   } catch (error) {
     throw error;
   }

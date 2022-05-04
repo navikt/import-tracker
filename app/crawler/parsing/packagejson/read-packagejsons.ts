@@ -10,6 +10,7 @@ export type PackageJsonT = {
 export type GroupedPackagesByRepoT = {
   name: string;
   source: string;
+  last_update: Date | null;
   files: PackageJsonT[];
 };
 
