@@ -34,5 +34,11 @@
     "crawler/**/*.(ts|tsx)",
     "components/**/*.(ts|tsx)"
   ],
-  "exclude": ["node_modules", "files", "files/**"]
+  "exclude": [
+    "node_modules",
+    "files",
+    "files copy",
+    "files copy/**",
+    "files/**"
+  ]
 }

@@ -36,5 +36,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
+crawler/files copy
 crawler/files/
 public/data/*
