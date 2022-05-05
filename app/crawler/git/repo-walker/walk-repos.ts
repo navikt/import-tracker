@@ -46,7 +46,9 @@ const walkRepos = async (hist: RepoHistoryT[], dates: string[]) => {
 
   for (const key of dates) {
     histories = prepareRepos(histories, key);
+    console.count("prepared");
     histories = await checkoutRepos(histories);
+    console.count("checkedout");
     histories = await generateJsonData(histories, key);
     console.log(key);
   }

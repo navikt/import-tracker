@@ -4,8 +4,9 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "yarn workspace app dev",
+    "dev": "yarn workspace app dev",
     "build": "yarn workspace app build",
+    "start": "yarn workspace app start",
     "test": "yarn workspace app test",
     "test:watch": "yarn workspace app test:watch"
   },

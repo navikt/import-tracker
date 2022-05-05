@@ -33,9 +33,14 @@ export const readPackageJsons = async (
 
 export const readPackageJsonFile = (path: string) =>
   new Promise<PackageJsonT | null>((resolve, reject) =>
-    fs.readFile(path, (e, data) =>
-      e ? reject(null) : resolve(JSON.parse(data.toString()))
-    )
+    fs.readFile(path, (e, data) => {
+      if (e) return null;
+      try {
+        return resolve(JSON.parse(data.toString()));
+      } catch (e) {
+        return null;
+      }
+    })
   );
 
 export const filterPackageJsons = (data: GroupedPackagesByRepoT[]) =>
