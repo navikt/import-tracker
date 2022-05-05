@@ -44,9 +44,8 @@ const syncGit = async (): Promise<RepoMetadataListT> => {
   );
 
   /* Lets skip archived and assumed irrelevant languages */
-  repos = repos
-    .filter((r) => !r.archived)
-    .filter((r) => languages.includes(r.language?.toLowerCase?.()));
+  repos = repos.filter((r) => !r.archived);
+  /* .filter((r) => languages.includes(r.language?.toLowerCase?.())) */
 
   const data: Partial<RepoMetadataListT> = { repo_sync: new Date(), repos };
 
