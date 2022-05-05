@@ -1,5 +1,9 @@
+import simpleGit, { SimpleGit } from "simple-git";
+import { repoLocation } from "../..";
 import checkoutRepos from "./checkout-repos";
 import { RepoHistoryT } from "./histories";
+import fs from "fs";
+import Parsing from "../../parsing/index";
 
 const prepareRepos = (
   histories: RepoHistoryT[],
@@ -16,7 +20,7 @@ const prepareRepos = (
       hist = [...rest];
     }
     if (hist.length === 0) {
-      return { ...repo, completed: true };
+      return { ...repo, history: hist, completed: true };
     }
 
     return { ...repo, history: hist };
@@ -25,17 +29,29 @@ const prepareRepos = (
   return [...checked];
 };
 
+const generateJsonData = async (histories: RepoHistoryT[], date) => {
+  histories.forEach(
+    (x) =>
+      x.completed &&
+      fs.rmSync(`${repoLocation}/${x.name}`, { recursive: true, force: true })
+  );
+
+  await Parsing(date);
+
+  return histories.filter((x) => !x.completed);
+};
+
 const walkRepos = async (hist: RepoHistoryT[], dates: string[]) => {
-  console.log("walked");
   let histories = [...hist];
 
   for (const key of dates) {
-    console.log(key);
     histories = prepareRepos(histories, key);
-    await checkoutRepos(histories);
-    console.log(histories);
+    histories = await checkoutRepos(histories);
+    histories = await generateJsonData(histories, key);
+    console.log(key);
   }
-  /* console.log(JSON.stringify(hist, null, 2)); */
+
+  console.log("walked");
 };
 
 export default walkRepos;

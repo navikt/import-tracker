@@ -12,7 +12,10 @@ const checkoutRepos = async (
   let compl: RepoHistoryT[] = [];
 
   for (const repo of hist) {
-    if (repo.completed || repo?.curCommit === repo.history[0].hash) continue;
+    if (repo.completed || repo?.curCommit === repo.history[0].hash) {
+      compl.push({ ...repo });
+      continue;
+    }
 
     const git = simpleGit({
       baseDir: `${repoLocation}/${repo.name}`,
@@ -23,8 +26,10 @@ const checkoutRepos = async (
     try {
       await git.checkout(repo.history[0].hash);
     } catch (e) {
+      compl.push({ ...repo });
       continue;
     }
+
     compl.push({ ...repo, curCommit: repo.history[0].hash });
   }
   return [...compl];

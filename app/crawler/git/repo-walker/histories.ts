@@ -38,7 +38,7 @@ const getHistory = async (repo: string): Promise<RepoHistoryT> => {
 };
 
 export const getRepoHistories = async () => {
-  const dirs = dirInDir().slice(0, 6);
+  const dirs = dirInDir();
 
   let res: RepoHistoryT[] = [];
 
@@ -57,5 +57,7 @@ export const getRepoHistories = async () => {
 export const getAllDates = (data: RepoHistoryT[]): string[] => {
   const dateSet = new Set<string>();
   data.forEach((x) => x.history.map((y) => dateSet.add(y.shortDate)));
-  return [...dateSet.keys()];
+  return [...dateSet.keys()]
+    .sort((a, b) => new Date(b).getTime() - new Date(a).getTime())
+    .slice(0, 24);
 };

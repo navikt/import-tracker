@@ -1,8 +1,8 @@
 import fs from "fs";
 import { filesLocation } from "..";
 
-const getTimeStr = () => {
-  const date = new Date();
+const getTimeStr = (datestr: string) => {
+  const date = datestr ? new Date(datestr) : new Date();
 
   return (
     `${date.getFullYear()}`.slice(2, 4) +
@@ -17,5 +17,5 @@ const getTimeStr = () => {
   );
 };
 
-export const writeData = (data: any, path?: string) =>
-  fs.writeFileSync(path ?? `${filesLocation}/${getTimeStr()}.json`, data);
+export const writeData = (data: any, datestr?: string) =>
+  fs.writeFileSync(`${filesLocation}/${getTimeStr(datestr)}.json`, data);
