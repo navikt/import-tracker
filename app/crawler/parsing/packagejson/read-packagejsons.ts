@@ -34,11 +34,11 @@ export const readPackageJsons = async (
 export const readPackageJsonFile = (path: string) =>
   new Promise<PackageJsonT | null>((resolve, reject) =>
     fs.readFile(path, (e, data) => {
-      if (e) return null;
+      if (e) resolve({});
       try {
         return resolve(JSON.parse(data.toString()));
       } catch (e) {
-        return null;
+        return resolve({});
       }
     })
   );

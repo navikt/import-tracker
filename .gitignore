@@ -3,3 +3,4 @@ repos
 .env
 raw-imports.json
 ./out.txt
+tmp
