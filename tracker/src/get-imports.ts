@@ -3,6 +3,7 @@ import * as ts from "typescript";
 
 import { neededTypescript } from "@unneeded/needed-typescript";
 import pLimit from "p-limit";
+import { getProps } from "./getProps";
 
 export const getImports = async (files: string[]) => {
   console.log("Starting search for imports in files");
@@ -37,6 +38,7 @@ export type importT = {
 export type packageImportT = {
   source: string;
   imports: importT[];
+  props: { tag: string; props: string[] }[];
   fileSource?: string;
 };
 
@@ -51,7 +53,9 @@ const walkFileNode = (fileContents: any) => {
         const importDeclaration = tsNode as ts.ImportDeclaration;
 
         /* import x from "package-x" -> "package-x" */
-        const source = (importDeclaration.moduleSpecifier as ts.StringLiteral).text.toLowerCase();
+        const source = (
+          importDeclaration.moduleSpecifier as ts.StringLiteral
+        ).text.toLowerCase();
         if (source === undefined) {
           break;
         }
@@ -87,7 +91,7 @@ const walkFileNode = (fileContents: any) => {
             imports[i].imports = [...imports[i].imports, ...dependencies];
           }
         } else {
-          imports.push({ source, imports: dependencies });
+          imports.push({ source, imports: dependencies, props: [] });
         }
         break;
       }
@@ -105,7 +109,20 @@ const walkFileNode = (fileContents: any) => {
   );
 
   ts.forEachChild(sourceFile, parseImport);
-  return imports;
+
+  return imports.map((x) => {
+    return {
+      ...x,
+      props: !!["@navikt/ds-react", "@navikt/ds-icons"].find((y) =>
+        x.source.startsWith(y)
+      )
+        ? getProps(
+            sourceFile,
+            x.imports.map((x) => x.name)
+          )
+        : [],
+    };
+  });
 };
 
 export const getImportsFromFile = async (
@@ -114,21 +131,15 @@ export const getImportsFromFile = async (
   new Promise((resolve, reject) => {
     const content = fs.readFileSync(filepath, "utf-8");
     const imports = walkFileNode(content);
+
     /* Find imports  walkFileNode() missed*/
     neededTypescript(content)
       .filter((imp) => !imports.find((i) => i.source === imp))
       .forEach((imp) =>
-        imports.push({ source: imp.toLowerCase(), imports: [] })
+        imports.push({ source: imp.toLowerCase(), imports: [], props: [] })
       );
     const newImp = imports.map((x) => {
       return { ...x, fileSource: filepath };
-      /* if (x.source.startsWith("@navikt/ds-react")) {
-        x.imports.forEach((y) => {
-          if (["Grid", "Cell", "ContentContainer"].includes(y.name)) {
-            console.log(filepath);
-          }
-        });
-      } */
     });
 
     resolve(newImp);

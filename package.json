@@ -4,25 +4,21 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "tracker": "yarn workspace tracker start",
-    "tracker:b": "yarn workspace tracker build",
-    "tracker:watch": "yarn workspace tracker watch",
-    "tracker:test": "yarn workspace tracker test",
-    "tracker:test:watch": "yarn workspace tracker test:watch",
-    "start": "yarn workspace website start",
-    "build": "yarn workspace website build",
-    "predeploy": "yarn workspace website build",
-    "deploy": "yarn workspace website deploy"
+    "start": "yarn workspace app dev",
+    "build": "yarn workspace app build",
+    "test": "yarn workspace app test",
+    "test:watch": "yarn workspace app test:watch"
   },
   "workspaces": [
-    "tracker",
-    "website"
+    "website",
+    "app"
   ],
   "devDependencies": {
     "@actions/core": "^1.5.0",
     "@actions/github": "^5.0.0",
     "lerna": "^4.0.0",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "prettier-plugin-tailwindcss": "^0.1.5"
   },
   "prettier": {}
 }

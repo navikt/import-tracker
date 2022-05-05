@@ -33,9 +33,11 @@ const main = async () => {
   let imports: packageImportT[][] = [];
 
   if (process.env.FULLRUN) {
-    const repos = await getRepoNames();
-    await cloneRepos(repos);
+    /* const repos = await getRepoNames();
+    await cloneRepos(repos); */
     const files = await getFiles();
+    console.log(files.length);
+    return;
     imports = await getImports(files);
     fs.writeFileSync("./raw-imports.json", JSON.stringify(imports));
   }
@@ -48,13 +50,12 @@ const main = async () => {
     );
     rawData = filterPackageNames(rawData);
     const data = manipulateImportData(rawData);
-    fs.writeFileSync("../website/public/imports.json", JSON.stringify(data));
+    fs.writeFileSync("../app/public/imports.json", JSON.stringify(data));
 
     const info = await getPackageUsage(dsPackages, data);
 
-    /* console.log(JSON.stringify(info, null, 2)); */
     fs.writeFileSync(
-      "../website/public/package-versions.json",
+      "../app/package-versions.json",
       JSON.stringify(info, null, 2)
     );
   });
