@@ -10,21 +10,24 @@ const Header = ({ ...rest }) => {
   return (
     <DsHeader className="shadow-lg">
       <div className="my-auto w-64 px-4">
-        <Search
-          size="small"
-          label="Søk i pakkenavn"
-          variant="simple"
-          onChange={(e) =>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
             startSearching(() => {
-              refresh({ ...rest, searchText: e });
-            })
-          }
-          onClear={() =>
-            startSearching(() => {
-              refresh({ ...rest, searchText: "" });
-            })
-          }
-        />
+              refresh({
+                ...rest,
+                searchText: document.getElementById("searchfieldid").value,
+              });
+            });
+          }}
+        >
+          <Search
+            size="small"
+            id="searchfieldid"
+            label="Søk i pakkenavn"
+            variant="secondary"
+          />
+        </form>
       </div>
       {isSearching && <Loader variant="inverted" />}
       <Heading level="1" size="small" className="my-auto ml-auto px-8">

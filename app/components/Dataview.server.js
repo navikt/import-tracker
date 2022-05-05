@@ -75,11 +75,11 @@ const Dataview = ({ data, fileName, options, files, ...rest }) => {
             <div className="flex flex-wrap gap-4">
               <Card
                 desc="Totalt"
-                content={<span>{`${pack.counter}`}</span>}
+                content={<span>{`${pack?.counter}`}</span>}
                 src={
                   <FindPrevRes
-                    prevCounter={prevResults?.packages.counter}
-                    currentCount={pack.counter}
+                    prevCounter={prevResults?.packages?.counter}
+                    currentCount={pack?.counter}
                   />
                 }
               />
@@ -88,15 +88,15 @@ const Dataview = ({ data, fileName, options, files, ...rest }) => {
                 content={
                   <span>{`${
                     curFile?.data.packagesDeps.get(rest?.selectedPackage)
-                      .counter
+                      ?.counter ?? 0
                   }`}</span>
                 }
                 src={
                   <FindPrevRes
-                    prevCounter={prevResults?.packagesDeps.counter}
+                    prevCounter={prevResults?.packagesDeps?.counter}
                     currentCount={
                       curFile?.data.packagesDeps.get(rest?.selectedPackage)
-                        .counter
+                        ?.counter
                     }
                   />
                 }
@@ -106,15 +106,15 @@ const Dataview = ({ data, fileName, options, files, ...rest }) => {
                 content={
                   <span>{`${
                     curFile?.data.packagesDevDeps.get(rest?.selectedPackage)
-                      .counter
+                      ?.counter ?? 0
                   }`}</span>
                 }
                 src={
                   <FindPrevRes
-                    prevCounter={prevResults?.packagesDevDeps.counter}
+                    prevCounter={prevResults?.packagesDevDeps?.counter}
                     currentCount={
                       curFile?.data.packagesDevDeps.get(rest?.selectedPackage)
-                        .counter
+                        ?.counter
                     }
                   />
                 }
@@ -124,76 +124,83 @@ const Dataview = ({ data, fileName, options, files, ...rest }) => {
                 content={
                   <span>{`${
                     curFile?.data.packagesPeerDeps.get(rest?.selectedPackage)
-                      .counter
+                      ?.counter ?? 0
                   }`}</span>
                 }
                 src={
                   <FindPrevRes
-                    prevCounter={prevResults?.packagesPeerDeps.counter}
+                    prevCounter={prevResults?.packagesPeerDeps?.counter}
                     currentCount={
                       curFile?.data.packagesPeerDeps.get(rest?.selectedPackage)
-                        .counter
+                        ?.counter
                     }
                   />
                 }
               />
             </div>
 
-            <div className="flex flex-wrap gap-4">
-              <Card
-                desc="Pushet < 90 dager"
-                content={
-                  <span>{`${
-                    curFile?.data.last90.get(rest?.selectedPackage).counter
-                  }`}</span>
-                }
-                src={
-                  <FindPrevRes
-                    prevCounter={prevResults?.last90.counter}
-                    currentCount={
-                      curFile?.data.last90.get(rest?.selectedPackage).counter
-                    }
-                  />
-                }
-              />
-              <Card
-                desc="Pushet < 180 dager"
-                content={
-                  <span>{`${
-                    curFile?.data.last180.get(rest?.selectedPackage).counter
-                  }`}</span>
-                }
-                src={
-                  <FindPrevRes
-                    prevCounter={prevResults?.last180.counter}
-                    currentCount={
-                      curFile?.data.last180.get(rest?.selectedPackage).counter
-                    }
-                  />
-                }
-              />
-              <Card
-                desc="Ikke oppdaterte repo"
-                content={
-                  <span>{`${
-                    pack.counter -
-                    curFile?.data.last180.get(rest?.selectedPackage).counter
-                  }`}</span>
-                }
-                src={
-                  <FindPrevRes
-                    prevCounter={
-                      prevResults?.packages.counter -
-                      prevResults?.last180.counter
-                    }
-                    currentCount={
-                      pack.counter -
-                      curFile?.data.last180.get(rest?.selectedPackage).counter
-                    }
-                  />
-                }
-              />
-            </div>
+            {(!rest?.selectedFile || rest?.selectedFile === files[0].name) && (
+              <div className="flex flex-wrap gap-4">
+                <Card
+                  desc="Pushet < 90 dager"
+                  content={
+                    <span>{`${
+                      curFile?.data.last90.get(rest?.selectedPackage)
+                        ?.counter ?? 0
+                    }`}</span>
+                  }
+                  src={
+                    <FindPrevRes
+                      prevCounter={prevResults?.last90?.counter}
+                      currentCount={
+                        curFile?.data.last90.get(rest?.selectedPackage)?.counter
+                      }
+                    />
+                  }
+                />
+                <Card
+                  desc="Pushet < 180 dager"
+                  content={
+                    <span>{`${
+                      curFile?.data.last180.get(rest?.selectedPackage)
+                        ?.counter ?? 0
+                    }`}</span>
+                  }
+                  src={
+                    <FindPrevRes
+                      prevCounter={prevResults?.last180?.counter}
+                      currentCount={
+                        curFile?.data.last180.get(rest?.selectedPackage)
+                          ?.counter
+                      }
+                    />
+                  }
+                />
+                <Card
+                  desc="Ikke oppdaterte repo"
+                  content={
+                    <span>{`${
+                      pack?.counter -
+                        curFile?.data.last180.get(rest?.selectedPackage)
+                          ?.counter ?? 0
+                    }`}</span>
+                  }
+                  src={
+                    <FindPrevRes
+                      prevCounter={
+                        prevResults?.packages?.counter -
+                        prevResults?.last180?.counter
+                      }
+                      currentCount={
+                        pack?.counter -
+                        curFile?.data.last180.get(rest?.selectedPackage)
+                          ?.counter
+                      }
+                    />
+                  }
+                />
+              </div>
+            )}
           </div>
           <VersionTable pack={JSON.stringify(pack, replacer)} />
         </div>

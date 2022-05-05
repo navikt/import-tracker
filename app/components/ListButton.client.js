@@ -7,7 +7,9 @@ const ListButton = ({ children, counter, index, ...rest }) => {
 
   return (
     <button
-      onClick={() => refresh({ ...rest, selectedPackage: children })}
+      onClick={() =>
+        refresh({ ...rest, selectedPackage: children, dataFilter: "default" })
+      }
       className={cl(
         "focus:shadow-focus-inset flex w-11/12 items-center justify-between rounded-lg border-none  px-6 py-4 text-left focus:outline-none",
         {

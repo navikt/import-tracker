@@ -50,11 +50,11 @@ const Filter = ({ options, ...rest }) => {
           }
         `}
       </style>
-      {/* {isSearching && (
+      {isSearching && (
         <div className="animate-fadeIn absolute inset-0 flex items-center justify-center bg-gray-900/30">
           <Loader size="2xlarge" />
         </div>
-      )} */}
+      )}
     </div>
   );
 };

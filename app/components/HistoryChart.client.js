@@ -26,17 +26,17 @@ ChartJS.register(
 const getChartData = (files, name) => {
   return {
     labels: files.map((x) =>
-      x.name.split(" ")[0].split("-").reverse().join("/")
+      x.name.split(" ")[0].substring(0, 5).split("-").reverse().join("/")
     ),
     datasets: [
       {
-        label: "Endring i bruk",
+        label: "Bruk",
         backgroundColor: "rgba(0, 86, 180, 0.5)",
         borderColor: "rgba(0, 86, 180, 0.5)",
         data: files.map(
           (x) =>
             JSON.parse(JSON.stringify(x.data.packages), reviver).get(name)
-              .counter
+              ?.counter ?? 0
         ),
       },
     ],

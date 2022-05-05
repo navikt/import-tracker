@@ -1,4 +1,4 @@
-import { ToggleGroup } from "@navikt/ds-react";
+import { ToggleGroup, Loader } from "@navikt/ds-react";
 import { unstable_useRefreshRoot as useRefreshRoot } from "next/streaming";
 import React, { useTransition } from "react";
 
@@ -26,6 +26,11 @@ const DataFilter = ({ options, ...rest }) => {
           }
         `}
       </style>
+      {isSearching && (
+        <div className="animate-fadeIn absolute inset-0 flex items-center justify-center bg-gray-900/30">
+          <Loader size="2xlarge" />
+        </div>
+      )}
     </div>
   );
 };
