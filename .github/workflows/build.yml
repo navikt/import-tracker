@@ -50,6 +50,6 @@ jobs:
         uses: nais/deploy/actions/deploy@master
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          RESOURCE: nais/dev/nais.yaml
+          RESOURCE: nais.yaml
           CLUSTER: dev-gcp
           IMAGE: ${{ env.DOCKER_TAG }}
