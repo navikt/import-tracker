@@ -68,7 +68,7 @@ const Dataview = ({ data, fileName, options, files, ...rest }) => {
 
   return (
     <div className="min-h-screen-header max-h-screen-header item-start flex h-full w-full flex-col justify-start gap-6 overflow-auto bg-blue-900/10 py-6 px-12 ">
-      <DataFilter />
+      <DataFilter {...rest} />
       {rest.dataFilter !== "history" ? (
         <div className="item-start flex h-full max-h-[75vh] w-full flex-row gap-6">
           <div className="flex flex-col gap-12">
@@ -198,7 +198,7 @@ const Dataview = ({ data, fileName, options, files, ...rest }) => {
           <VersionTable pack={JSON.stringify(pack, replacer)} />
         </div>
       ) : (
-        <HistoryTable files={files} />
+        <HistoryTable files={files} name={rest?.selectedPackage} />
       )}
     </div>
   );

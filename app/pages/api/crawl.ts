@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import Crawler from "../../crawler";
+import getConfig from "next/config";
 
 let RUNNING = false;
 let STATUS = "OK";
@@ -7,6 +8,8 @@ let STATUS = "OK";
 export const getStatus = () => STATUS;
 
 const crawl = (req: NextApiRequest, res: NextApiResponse) => {
+  const { serverRuntimeConfig } = getConfig();
+
   if (RUNNING) {
     res.status(200).json({ status: "Crawler already running" });
     return;
@@ -18,6 +21,10 @@ const crawl = (req: NextApiRequest, res: NextApiResponse) => {
       message: `Aborting crawl sync something has failed. Try restarting. Error: ${STATUS}`,
     });
     return;
+  }
+
+  if (!serverRuntimeConfig.LOCAL) {
+    res.status(200).json({ status: "Can only run crawler in local env" });
   }
 
   RUNNING = true;

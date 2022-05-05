@@ -4,18 +4,12 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "tracker": "yarn workspace tracker start",
-    "tracker:b": "yarn workspace tracker build",
-    "tracker:watch": "yarn workspace tracker watch",
-    "tracker:test": "yarn workspace tracker test",
-    "tracker:test:watch": "yarn workspace tracker test:watch",
     "start": "yarn workspace app dev",
     "build": "yarn workspace app build",
     "test": "yarn workspace app test",
     "test:watch": "yarn workspace app test:watch"
   },
   "workspaces": [
-    "tracker",
     "website",
     "app"
   ],

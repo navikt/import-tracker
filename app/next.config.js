@@ -6,6 +6,7 @@ const nextConfig = {
   },
   serverRuntimeConfig: {
     gh_token: process.env.TOKEN,
+    isLocal: process.env.LOCAL,
   },
 };
 

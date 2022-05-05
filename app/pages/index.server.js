@@ -70,6 +70,6 @@ export async function getServerSideProps(context) {
   }
 
   return {
-    props: { files, selectedPackage: "react" },
+    props: { files },
   };
 }
