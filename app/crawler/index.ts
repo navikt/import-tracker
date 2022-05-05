@@ -10,10 +10,10 @@ const Crawler = async () => {
   if (!fs.existsSync(filesLocation)) fs.mkdirSync(filesLocation);
   /* Jobs */
   await git();
-  await parsing();
 
+  /* await parsing(); */
   /* Update status */
-  await updateLastCrawl();
+  /* await updateLastCrawl(); */
   console.log("Completed!");
 };
 
