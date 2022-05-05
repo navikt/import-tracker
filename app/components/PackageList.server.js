@@ -13,12 +13,17 @@ const PackageList = ({ data, options, ...rest }) => {
   );
 
   return (
-    <div className="max-h-screen-header min-h-screen-header flex w-full max-w-sm flex-col items-center gap-2 overflow-auto bg-white py-4 shadow-lg">
+    <div className="max-h-screen-header min-h-screen-header flex w-full max-w-sm flex-col items-center gap-2 overflow-auto bg-white py-2 shadow-lg">
       <Filter options={options} {...rest} />
       <div className="flex w-full flex-col items-center gap-2">
         {map.size === 0 && <Label>Ingen treff på søk</Label>}
-        {[...map.keys()].slice(0, 30).map((x) => (
-          <ListButton key={x} counter={map.get(x).counter} {...rest}>
+        {[...map.keys()].map((x, y) => (
+          <ListButton
+            key={x + y}
+            index={y + 1}
+            counter={map.get(x).counter}
+            {...rest}
+          >
             {x}
           </ListButton>
         ))}

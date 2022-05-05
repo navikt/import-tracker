@@ -8,7 +8,7 @@ const Header = ({ ...rest }) => {
   const [isSearching, startSearching] = useTransition(/* { timeoutMs: 200 } */);
 
   return (
-    <DsHeader>
+    <DsHeader className="shadow-lg">
       <div className="my-auto w-64 px-4">
         <Search
           size="small"

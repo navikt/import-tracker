@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import Header from "../components/Header.client";
 import PackageList from "../components/PackageList.server";
+import Dataview from "../components/Dataview.server";
 import { replacer, reviver } from "../crawler/parsing/map-to-json";
 
 export default function Home({ files, ...rest }) {
@@ -20,8 +21,7 @@ export default function Home({ files, ...rest }) {
       dep: "packagesDeps",
       dev: "packagesDevDeps",
       peer: "packagesPeerDeps",
-      "90d": "last90",
-      "180d": "last180",
+      trend: "packages",
     };
     return obj[map[rest?.selectedFilter ?? "all"]];
   };
@@ -37,11 +37,17 @@ export default function Home({ files, ...rest }) {
   return (
     <div className="bg-gray-50">
       <Header {...rest} />
-      <div className="flex w-full">
+      <div className="flex w-full items-center">
         <Suspense fallback={"Loading..."}>
           <PackageList
             data={data}
             options={files.map((x) => x.name)}
+            {...rest}
+          />
+          <Dataview
+            data={JSON.stringify(pickedFile.data.packages)}
+            files={files}
+            fileName={pickedFile.name}
             {...rest}
           />
         </Suspense>
@@ -64,6 +70,6 @@ export async function getServerSideProps(context) {
   }
 
   return {
-    props: { files },
+    props: { files, selectedPackage: "react" },
   };
 }

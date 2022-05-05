@@ -1,20 +1,27 @@
 import { Label } from "@navikt/ds-react";
-import { unstable_useRefreshRoot as useRefreshRoot } from "next/streaming";
 import cl from "classnames";
+import { unstable_useRefreshRoot as useRefreshRoot } from "next/streaming";
 
-const ListButton = ({ children, counter, ...rest }) => {
-  /* const [isPending, startTransition] = useTransition(); */
+const ListButton = ({ children, counter, index, ...rest }) => {
   const refresh = useRefreshRoot();
 
   return (
     <button
       onClick={() => refresh({ ...rest, selectedPackage: children })}
       className={cl(
-        "focus:shadow-focus-inset flex w-11/12 items-center justify-between rounded-lg border-none bg-purple-50 px-6 py-4 text-left focus:outline-none",
-        { "bg-blue-200": rest.selectedPackage === children }
+        "focus:shadow-focus-inset flex w-11/12 items-center justify-between rounded-lg border-none  px-6 py-4 text-left focus:outline-none",
+        {
+          "text-text-inverted bg-blue-900/60 hover:bg-blue-900/50":
+            rest.selectedPackage === children,
+          "bg-blue-900/20 hover:bg-blue-900/30":
+            rest.selectedPackage !== children,
+        }
       )}
     >
-      <Label>{children}</Label>
+      <Label>
+        {`${index}. `}
+        {children}
+      </Label>
       <span>
         {rest.selectedPackage === children ? (
           <svg

@@ -15,7 +15,12 @@
     "jsx": "preserve",
     "noImplicitAny": false,
     "incremental": true,
-    "types": ["node"]
+    "types": ["node"],
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/crawler/*": ["crawler/*"]
+    }
   },
   "ts-node": {
     "compilerOptions": {
