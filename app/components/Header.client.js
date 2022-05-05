@@ -28,7 +28,7 @@ const Header = ({ ...rest }) => {
       </div>
       {isSearching && <Loader variant="inverted" />}
       <Heading level="1" size="small" className="my-auto ml-auto px-8">
-        Dependency-oversikt NAV IT
+        Dependency oversikt NAV IT
       </Heading>
     </DsHeader>
   );
