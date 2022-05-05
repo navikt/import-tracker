@@ -11,7 +11,7 @@ const DataFilter = ({ options, ...rest }) => {
       <ToggleGroup
         className="toggleGroup"
         size="small"
-        defaultValue="default"
+        value={rest?.dataFilter ?? "default"}
         onChange={(e) =>
           startSearching(() => refresh({ ...rest, dataFilter: e }))
         }

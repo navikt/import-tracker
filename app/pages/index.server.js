@@ -3,8 +3,20 @@ import Header from "../components/Header.client";
 import PackageList from "../components/PackageList.server";
 import Dataview from "../components/Dataview.server";
 import { replacer, reviver } from "../crawler/parsing/map-to-json";
+const { readFileSync, readdirSync } = require("fs");
 
-export default function Home({ files, ...rest }) {
+export default function Home({ ...rest }) {
+  const fileNames = readdirSync("public/data").reverse();
+
+  const files = [];
+  for (const fileName of fileNames) {
+    const file = readFileSync(`public/data/${fileName}`, "utf8");
+    files.push({
+      name: fileName,
+      data: JSON.parse(file),
+    });
+  }
+
   const filter = (data) => {
     const str = JSON.stringify(data);
     const map = JSON.parse(str, reviver);
@@ -56,7 +68,7 @@ export default function Home({ files, ...rest }) {
   );
 }
 
-export async function getServerSideProps(context) {
+/* export async function getServerSideProps(context) {
   const { readFileSync, readdirSync } = require("fs");
   const fileNames = readdirSync("public/data").reverse();
 
@@ -73,3 +85,4 @@ export async function getServerSideProps(context) {
     props: { files },
   };
 }
+ */
