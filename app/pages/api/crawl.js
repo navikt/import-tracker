@@ -1,4 +1,3 @@
-import type { NextApiRequest, NextApiResponse } from "next";
 import Crawler from "../../crawler";
 import getConfig from "next/config";
 
@@ -7,7 +6,7 @@ let STATUS = "OK";
 
 export const getStatus = () => STATUS;
 
-const crawl = (req: NextApiRequest, res: NextApiResponse) => {
+const crawl = (req, res) => {
   const { serverRuntimeConfig } = getConfig();
 
   if (RUNNING) {
@@ -23,7 +22,7 @@ const crawl = (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  if (!serverRuntimeConfig.LOCAL) {
+  if (!serverRuntimeConfig.isLocal) {
     res.status(200).json({ status: "Can only run crawler in local env" });
   }
 
@@ -36,7 +35,7 @@ const crawl = (req: NextApiRequest, res: NextApiResponse) => {
       RUNNING = false;
       STATUS = "OK";
     })
-    .catch((e: Error) => {
+    .catch((e) => {
       STATUS = e.message;
       RUNNING = false;
     });
