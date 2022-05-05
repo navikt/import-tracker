@@ -31,14 +31,21 @@
   "include": [
     "next-env.d.ts",
     "pages/**/*.(ts|tsx)",
-    "crawler/**/*.(ts|tsx)",
-    "components/**/*.(ts|tsx)"
+    "components/**/*.(ts|tsx)",
+    "crawler/__tests__/**/*.(ts|tsx)",
+    "crawler/git/**/*.(ts|tsx)",
+    "crawler/parsing/**/*.(ts|tsx)",
+    "crawler/index.ts",
+    "crawler/metadata.ts",
+    "crawler/run.ts"
   ],
   "exclude": [
     "node_modules",
     "files",
     "files copy",
     "files copy/**",
-    "files/**"
+    "files/**",
+    "files*/**",
+    "files*"
   ]
 }
