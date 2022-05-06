@@ -19,7 +19,9 @@ const getFiles = () => {
 };
 
 export default function Home({ ...rest }) {
-  if (!files.length > 0) getFiles();
+  if (!files.length > 0) {
+    getFiles();
+  }
 
   const filter = (data) => {
     const str = JSON.stringify(data);
