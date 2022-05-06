@@ -32,7 +32,7 @@ jobs:
       - name: 'Setup gcloud'
         uses: 'google-github-actions/setup-gcloud@v0'
       - name: 'Download data'
-        run: gsutil cp gs://dependency-tracker-designsystem/data app/public/data
+        run: gsutil cp -r gs://dependency-tracker-designsystem/data app/public/data
 
       - name: Build application
         run: yarn build
