@@ -5,7 +5,7 @@ import React, { useTransition } from "react";
 
 const Header = ({ ...rest }) => {
   const refresh = useRefreshRoot();
-  const [isSearching, startSearching] = useTransition(/* { timeoutMs: 200 } */);
+  const [isSearching, startSearching] = useTransition();
 
   return (
     <DsHeader className="shadow-lg">
@@ -26,6 +26,14 @@ const Header = ({ ...rest }) => {
             id="searchfieldid"
             label="Søk i pakkenavn"
             variant="secondary"
+            onClear={() =>
+              startSearching(() => {
+                refresh({
+                  ...rest,
+                  searchText: "",
+                });
+              })
+            }
           />
         </form>
       </div>

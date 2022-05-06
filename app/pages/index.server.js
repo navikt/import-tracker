@@ -5,10 +5,10 @@ import Dataview from "../components/Dataview.server";
 import { replacer, reviver } from "../crawler/parsing/map-to-json";
 const { readFileSync, readdirSync } = require("fs");
 
-export default function Home({ ...rest }) {
-  const fileNames = readdirSync("public/data").reverse();
+export const files = [];
 
-  const files = [];
+const getFiles = () => {
+  const fileNames = readdirSync("public/data").reverse();
   for (const fileName of fileNames) {
     const file = readFileSync(`public/data/${fileName}`, "utf8");
     files.push({
@@ -16,6 +16,10 @@ export default function Home({ ...rest }) {
       data: JSON.parse(file),
     });
   }
+};
+
+export default function Home({ ...rest }) {
+  if (!files.length > 0) getFiles();
 
   const filter = (data) => {
     const str = JSON.stringify(data);
@@ -58,7 +62,6 @@ export default function Home({ ...rest }) {
           />
           <Dataview
             data={JSON.stringify(pickedFile.data.packages)}
-            files={files}
             fileName={pickedFile.name}
             {...rest}
           />

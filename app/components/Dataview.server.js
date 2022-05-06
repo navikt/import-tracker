@@ -1,10 +1,11 @@
+import { replacer, reviver } from "@/crawler/parsing/map-to-json";
+import { Detail, Heading, Label } from "@navikt/ds-react";
 import React from "react";
-import { reviver, replacer } from "@/crawler/parsing/map-to-json";
-import { Detail, Label, Heading } from "@navikt/ds-react";
-import FindPrevRes from "./FindPrevResult.server";
-import VersionTable from "./VersionTable.client";
-import HistoryTable from "./HistoryChart.client";
+import { files } from "./../pages/index.server";
 import DataFilter from "./DataFilter.client";
+import FindPrevRes from "./FindPrevResult.server";
+import HistoryTable from "./HistoryChart.client";
+import VersionTable from "./VersionTable.client";
 
 const Card = ({ desc, content, src }) => {
   return (
@@ -22,7 +23,71 @@ const Card = ({ desc, content, src }) => {
   );
 };
 
-const Dataview = ({ data, fileName, options, files, ...rest }) => {
+const generateTableData = (currentPackage) => {
+  return {
+    labels: files
+      .map((x) =>
+        x.name.split(" ")[0].substring(0, 5).split("-").reverse().join("/")
+      )
+      .reverse(),
+    datasets: [
+      {
+        label: "Bruk totalt",
+        backgroundColor: "rgba(0, 86, 180, 1)",
+        borderColor: "rgba(0, 86, 180, 1)",
+        data: files
+          .map(
+            (x) =>
+              JSON.parse(JSON.stringify(x.data.packages), reviver).get(
+                currentPackage
+              )?.counter ?? 0
+          )
+          .reverse(),
+      },
+      {
+        label: "dependencies",
+        backgroundColor: "rgba(51, 170, 95, 1)",
+        borderColor: "rgba(51, 170, 95, 1)",
+        data: files
+          .map(
+            (x) =>
+              JSON.parse(JSON.stringify(x.data.packagesDeps), reviver).get(
+                currentPackage
+              )?.counter ?? 0
+          )
+          .reverse(),
+      },
+      {
+        label: "devDependencies",
+        backgroundColor: "rgba(255, 145, 0, 1)",
+        borderColor: "rgba(255, 145, 0, 1)",
+        data: files
+          .map(
+            (x) =>
+              JSON.parse(JSON.stringify(x.data.packagesDevDeps), reviver).get(
+                currentPackage
+              )?.counter ?? 0
+          )
+          .reverse(),
+      },
+      {
+        label: "peerDependencies",
+        backgroundColor: "rgba(0, 86, 180, 0.5)",
+        borderColor: "rgba(0, 86, 180, 0.5)",
+        data: files
+          .map(
+            (x) =>
+              JSON.parse(JSON.stringify(x.data.packagesPeerDeps), reviver).get(
+                currentPackage
+              )?.counter ?? 0
+          )
+          .reverse(),
+      },
+    ],
+  };
+};
+
+const Dataview = ({ data, fileName, options, ...rest }) => {
   const map = JSON.parse(data, reviver);
   const curFile = JSON.parse(
     JSON.stringify(files.find((x) => x.name === fileName)),
@@ -205,7 +270,7 @@ const Dataview = ({ data, fileName, options, files, ...rest }) => {
           <VersionTable pack={JSON.stringify(pack, replacer)} />
         </div>
       ) : (
-        <HistoryTable files={files} name={rest?.selectedPackage} />
+        <HistoryTable data={generateTableData(rest?.selectedPackage)} />
       )}
     </div>
   );

@@ -11,7 +11,6 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { reviver } from "../crawler/parsing/map-to-json";
 
 ChartJS.register(
   CategoryScale,
@@ -23,41 +22,12 @@ ChartJS.register(
   Legend
 );
 
-const getChartData = (files, name) => {
-  return {
-    labels: files.map((x) =>
-      x.name.split(" ")[0].substring(0, 5).split("-").reverse().join("/")
-    ),
-    datasets: [
-      {
-        label: "Bruk",
-        backgroundColor: "rgba(0, 86, 180, 0.5)",
-        borderColor: "rgba(0, 86, 180, 0.5)",
-        data: files.map(
-          (x) =>
-            JSON.parse(JSON.stringify(x.data.packages), reviver).get(name)
-              ?.counter ?? 0
-        ),
-      },
-    ],
-  };
-};
-
-const HistoryTable = ({ files, name, ...rest }) => {
-  /* const data = JSON.parse(pack, reviver);
-  const versions = new Map(
-    [...data.versions].sort((a, b) => {
-      return b[1].length - a[1].length;
-    })
-  ); */
-
+const HistoryTable = ({ data }) => {
   return (
     <div className="relative mt-8 w-full overflow-scroll rounded-lg bg-white px-4 py-2 shadow-md">
-      <Line
-        /* options={...} */
-        data={getChartData(files.reverse(), name)}
-      />
+      <Line data={data} />
     </div>
   );
 };
+
 export default HistoryTable;
