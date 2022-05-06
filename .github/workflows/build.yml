@@ -25,9 +25,6 @@ jobs:
       - name: Install deps
         if: steps.node-cache.outputs.cache-hit != 'true'
         run: yarn install
-      - name: Build application
-        run: yarn build
-
       - name: Download data from GCP bucket
         uses: "google-github-actions/auth@v0"
         with:
@@ -36,6 +33,9 @@ jobs:
         uses: 'google-github-actions/setup-gcloud@v0'
       - name: 'Download data'
         run: gsutil cp gs://dependency-tracker-designsystem/data app/public/data
+
+      - name: Build application
+        run: yarn build
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@ab80d026d4753220c4243394c07c7d80f9638d06 # Use commit-sha1 instead of tag for security concerns
