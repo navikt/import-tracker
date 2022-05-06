@@ -26,7 +26,11 @@ export default function Home({ ...rest }) {
     const map = JSON.parse(str, reviver);
 
     return JSON.stringify(
-      new Map([...map].filter(([key, val]) => key.includes(rest.searchText))),
+      new Map(
+        [...map].filter(([key]) =>
+          rest?.searchTags.find((x) => key.includes(x))
+        )
+      ),
       replacer
     );
   };
@@ -46,9 +50,10 @@ export default function Home({ ...rest }) {
     ? files.find((x) => x.name === rest.selectedFile)
     : files[0];
 
-  const data = rest.searchText
-    ? filter(pickKey(pickedFile.data))
-    : JSON.stringify(pickKey(pickedFile.data));
+  const data =
+    rest.searchTags && rest.searchTags.length > 0
+      ? filter(pickKey(pickedFile.data))
+      : JSON.stringify(pickKey(pickedFile.data));
 
   return (
     <div className="bg-gray-50">
@@ -58,6 +63,7 @@ export default function Home({ ...rest }) {
           <PackageList
             data={data}
             options={files.map((x) => x.name)}
+            original={JSON.stringify(pickKey(pickedFile.data))}
             {...rest}
           />
           <Dataview

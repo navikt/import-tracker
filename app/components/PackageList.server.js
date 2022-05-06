@@ -4,13 +4,25 @@ import { reviver } from "../crawler/parsing/map-to-json";
 import Filter from "./Filter.client";
 import { Label } from "@navikt/ds-react";
 
-const PackageList = ({ data, options, ...rest }) => {
+const PackageList = ({ data, options, original, ...rest }) => {
   let map = JSON.parse(data, reviver);
   map = new Map(
     [...map].sort((a, b) => {
       return b[1].counter - a[1].counter;
     })
   );
+
+  let originalMap = JSON.parse(original, reviver);
+  originalMap = new Map(
+    [...originalMap].sort((a, b) => {
+      return b[1].counter - a[1].counter;
+    })
+  );
+  originalMap = [...originalMap.keys()];
+
+  const getIndex = (x) => {
+    return originalMap.findIndex((y) => y === x) + 1;
+  };
 
   return (
     <div className="max-h-screen-header min-h-screen-header flex w-full max-w-sm flex-col items-center gap-2 overflow-auto bg-white py-2 shadow-lg">
@@ -20,7 +32,11 @@ const PackageList = ({ data, options, ...rest }) => {
         {[...map.keys()].map((x, y) => (
           <ListButton
             key={x + y}
-            index={y + 1}
+            index={
+              rest?.searchTags && rest?.searchTags.length > 0
+                ? getIndex(x)
+                : y + 1
+            }
             counter={map.get(x).counter}
             {...rest}
           >
