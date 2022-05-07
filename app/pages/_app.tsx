@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <div className="flex bg-gray-100">
         {pageProps?.indexList && <Sidebar {...pageProps} />}
-        <main>
+        <main className="w-full">
           <Component {...pageProps} />
         </main>
       </div>

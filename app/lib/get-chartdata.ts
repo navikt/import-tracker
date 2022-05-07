@@ -14,9 +14,11 @@ export const getChartData = (name: string) => {
   if (!files) getFiles();
 
   return {
-    labels: files.map((y) =>
-      y.name.split(" ")[0].substring(0, 5).split("-").reverse().join("/")
-    ),
+    labels: files
+      .map((y) =>
+        y.name.split(" ")[0].substring(0, 5).split("-").reverse().join("/")
+      )
+      .reverse(),
     datasets: [
       "packages",
       "packagesDeps",
@@ -26,7 +28,7 @@ export const getChartData = (name: string) => {
       label: nameMap[x].name,
       backgroundColor: nameMap[x].color,
       borderColor: nameMap[x].color,
-      data: files.map((z) => z.data[x].get(name)?.counter ?? 0),
+      data: files.map((z) => z.data[x].get(name)?.counter ?? 0).reverse(),
     })),
   };
 };

@@ -71,7 +71,7 @@ const Sidebar = ({ indexList }: { indexList: indexListT }) => {
   );
 
   return (
-    <div className="flex max-h-screen min-h-screen w-full max-w-sm flex-col items-center bg-gray-50 shadow-lg">
+    <div className="flex max-h-screen min-h-screen w-full max-w-xs flex-col items-center bg-gray-50 shadow-lg">
       <div className="sticky top-0 flex w-full flex-col items-center gap-2 bg-white/90 py-4 px-8 shadow-lg">
         <ToggleGroup
           size="small"
@@ -101,10 +101,10 @@ const Sidebar = ({ indexList }: { indexList: indexListT }) => {
         </form>
 
         <div className="flex w-full flex-wrap gap-2">
-          {filter.tags.map((x) => (
+          {filter.tags.map((x, y) => (
             <button
               className="focus:shadow-focus flex items-center justify-center gap-1 rounded border border-gray-600 py-1 px-2 hover:border-blue-100 hover:bg-blue-100 focus:outline-none"
-              key={x}
+              key={x + y}
               onClick={() =>
                 setFilter((z) => ({
                   ...z,

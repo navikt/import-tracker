@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "react-render-if-visible": "1.0.3",
+    "download-stats": "0.3.4",
     "next": "^12.1.0",
     "react": "18.1.0",
     "react-dom": "18.1.0",

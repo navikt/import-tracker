@@ -29,6 +29,15 @@ const yearToDate = (name: string) => {
   return { current: current, prev: prev };
 };
 
+const getRepos = (name: string) => {
+  if (!files) getFiles();
+  const versions = files[0].data.packages.get(name)?.versions;
+  if (!versions) return 0;
+  return [...versions.values()]
+    .reduce((old, val) => [...old, ...val], [])
+    .filter((value, index, array) => array.indexOf(value) === index).length;
+};
+
 export const getDataPoints = (name: string) => {
   return {
     all: dataFrom(name),
@@ -38,5 +47,6 @@ export const getDataPoints = (name: string) => {
     yearToDate: yearToDate(name),
     halfYearTrend: dataFrom(name, "default", 6),
     YearTrend: dataFrom(name, "default", 12),
+    reposN: getRepos(name),
   };
 };

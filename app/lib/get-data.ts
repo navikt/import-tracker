@@ -18,7 +18,7 @@ const packageList = (
     index: y + 1,
     name: x,
     count: files[0].data[dataKey].get(x).counter ?? 0,
-    url: `/package/${encodeURI(x).replace("/", "-")}`,
+    url: `/package/${encodeURI(x).replace("/", "__")}`,
   }));
 
   const old = getPages(key)
