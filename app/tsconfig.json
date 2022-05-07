@@ -19,7 +19,8 @@
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["components/*"],
-      "@/crawler/*": ["crawler/*"]
+      "@/crawler/*": ["crawler/*"],
+      "@/lib/*": ["lib/*"]
     }
   },
   "ts-node": {
