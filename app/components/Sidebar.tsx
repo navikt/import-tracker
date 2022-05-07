@@ -1,5 +1,11 @@
 import { Close } from "@navikt/ds-icons";
-import { BodyShort, Label, Search, ToggleGroup } from "@navikt/ds-react";
+import {
+  BodyShort,
+  Button,
+  Label,
+  Search,
+  ToggleGroup,
+} from "@navikt/ds-react";
 import cl from "classnames";
 import { useEffect, useMemo, useState } from "react";
 import { indexListT } from "../pages/package/[name]";
@@ -22,21 +28,6 @@ const Sidebar = ({ indexList }: { indexList: indexListT }) => {
     )
   );
 
-  useEffect(() => {
-    setList(
-      indexList[filter.type].filter(
-        (x) =>
-          !!filter.tags.find((tag) => x.name.includes(tag)) ||
-          filter.tags.length === 0
-      )
-    );
-  }, [filter, indexList]);
-
-  useEffect(() => {
-    const el = document.getElementById(router.asPath);
-    if (el) el.scrollIntoView();
-  }, [router, filter]);
-
   const ListMemo = useMemo(
     () => (
       <>
@@ -45,7 +36,7 @@ const Sidebar = ({ indexList }: { indexList: indexListT }) => {
             <a
               id={x.url}
               className={cl(
-                "w-full scroll-m-2",
+                "w-full scroll-m-72",
                 "focus:shadow-focus-inset flex w-11/12 items-center justify-between rounded-lg border-none  px-6 py-4 text-left focus:outline-none",
                 {
                   "text-text-inverted bg-blue-900/60 hover:bg-blue-900/50":
@@ -70,8 +61,28 @@ const Sidebar = ({ indexList }: { indexList: indexListT }) => {
     [list, router]
   );
 
+  useEffect(() => {
+    setList(
+      indexList[filter.type].filter(
+        (x) =>
+          !!filter.tags.find((tag) => x.name.includes(tag)) ||
+          filter.tags.length === 0
+      )
+    );
+  }, [filter, indexList]);
+
+  useEffect(() => {
+    const el = document.getElementById(router.asPath);
+    if (el) el.scrollIntoView();
+  }, [router, filter, ListMemo]);
+
   return (
     <div className="flex max-h-screen min-h-screen w-full max-w-xs flex-col items-center bg-gray-50 shadow-lg">
+      <NextLink href="/" passHref prefetch={false}>
+        <Button as="a" className="absolute top-4 right-4" variant="tertiary">
+          <Close aria-hidden />
+        </Button>
+      </NextLink>
       <div className="sticky top-0 flex w-full flex-col items-center gap-2 bg-white/90 py-4 px-8 shadow-lg">
         <ToggleGroup
           size="small"

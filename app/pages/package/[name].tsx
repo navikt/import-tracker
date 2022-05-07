@@ -65,7 +65,7 @@ export type PackagePropsT = {
   };
 };
 
-const Card = ({ children, desc, src }) => {
+export const Card = ({ children, desc, src }) => {
   return (
     <div className="shadow-medium flex aspect-video h-28 flex-col justify-between rounded-lg bg-white px-4 py-2">
       <Detail className="text-text-muted">{desc}</Detail>
