@@ -8,24 +8,24 @@ const packages = ["@navikt/ds-react", "@navikt/ds-react-internal"];
 export const filterUnwanted = async (
   source: GroupedFilesByRepoT[]
 ): Promise<GroupedFilesByRepoT[]> => {
-  try {
-    const groupedPackageFiles = await getGroupedFiles(`**/package.json`);
-    const readJsons = await readPackageJsons(groupedPackageFiles);
+  const groupedPackageFiles = await getGroupedFiles(`**/package.json`);
+  const readJsons = await readPackageJsons(groupedPackageFiles);
 
-    const filteredNames = readJsons
-      .filter(
-        (x) =>
-          !!x.files.find(
-            (y) =>
-              !!packages.find((x) => x in y?.dependencies) ||
-              !!packages.find((x) => x in y?.devDependencies) ||
-              !!packages.find((x) => x in y?.peerDependencies)
-          )
-      )
-      .map((x) => x.name);
+  const filteredNames = readJsons
+    .filter(
+      (x) =>
+        !!x.files.find(
+          (y) =>
+            !!packages.find((x) => y?.dependencies && x in y?.dependencies) ||
+            !!packages.find(
+              (x) => y?.devDependencies && x in y?.devDependencies
+            ) ||
+            !!packages.find(
+              (x) => y?.peerDependencies && x in y?.peerDependencies
+            )
+        )
+    )
+    .map((x) => x.name);
 
-    return source.filter((x) => filteredNames.includes(x.name));
-  } catch (error) {
-    return source;
-  }
+  return source.filter((x) => filteredNames.includes(x.name));
 };

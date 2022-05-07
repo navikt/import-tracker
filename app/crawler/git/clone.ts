@@ -17,7 +17,7 @@ export const cloneSelected = async (git: SimpleGit, repos: RepoMetadataT[]) => {
           { "--depth": 1 }
         )
         .catch((e) => {
-          console.error(e);
+          console.error(`Failed ${repo.name}`);
         })
     )
   );
