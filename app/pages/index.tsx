@@ -1,4 +1,5 @@
 import React from "react";
+import { getIndexedList } from "../lib/get-data";
 
 /* export const files = [];
 
@@ -68,4 +69,12 @@ export default function Home({ ...rest }) {
       </div>
     </div>
   );
+}
+
+export async function getStaticProps(ctx) {
+  return {
+    props: {
+      indexList: getIndexedList(),
+    },
+  };
 }

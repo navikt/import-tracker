@@ -14,11 +14,21 @@ const packageList = (
     })
   );
 
-  const indexed = [...current.keys()].map((x, y) => ({ index: y, name: x }));
+  const indexed = [...current.keys()].map((x, y) => ({
+    index: y + 1,
+    name: x,
+    count: files[0].data[dataKey].get(x).counter ?? 0,
+    url: `/package/${encodeURI(x).replace("/", "-")}`,
+  }));
 
   const old = getPages(key)
     .filter((x) => ![...current.keys()].includes(x))
-    .map((x) => ({ index: null, name: x }));
+    .map((x) => ({
+      index: null,
+      name: x,
+      count: 0,
+      url: `/package/${encodeURI(x).replace("/", "-")}`,
+    }));
 
   return [...indexed, ...old];
 };

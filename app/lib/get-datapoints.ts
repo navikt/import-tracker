@@ -11,7 +11,6 @@ const dataFrom = (
   const current = files[0].data[dataKey].get(name)?.counter ?? 0;
   const prev = files[range ?? 3].data[dataKey].get(name)?.counter ?? 0;
 
-  console.log(files[range ?? 3].name);
   return { current: current, prev: prev };
 };
 
