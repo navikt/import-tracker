@@ -29,9 +29,17 @@ export const getDirectories = (root?: string): Promise<string[]> =>
 
 export const getGroupedFiles = async (
   glob: string,
-  root?: string
+  root?: string,
+  filter?: string[]
 ): Promise<GroupedFilesByRepoT[]> => {
-  const directories = await getDirectories(root);
+  let directories = await getDirectories(root);
+
+  if (filter) {
+    directories = directories.filter((x) =>
+      filter.includes(x.replace("crawler/files/repositories/", ""))
+    );
+  }
+
   const metadata = await readMetadata();
 
   const files: GroupedFilesByRepoT[] = [];

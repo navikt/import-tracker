@@ -1,11 +1,11 @@
 import { getGroupedFiles } from "../find-files";
-import { parseCode } from "./parse-code";
+import { mapImports } from "./map-imports";
 import { filterUnwanted } from "./filter-unwanted";
+import { parseImportData } from "./parse-import-data";
 
 const ParseReactCode = async () => {
-  const groupedReactFiles = await getGroupedFiles(`**/*.+(tsx|jsx|js|ts|mjs)`);
-
-  const result = await parseCode(await filterUnwanted(groupedReactFiles));
+  const imports = mapImports(await filterUnwanted());
+  const summary = parseImportData(imports);
 };
 
 export default ParseReactCode;

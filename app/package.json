@@ -11,6 +11,7 @@
     "test:watch": "jest --watch --roots crawler"
   },
   "dependencies": {
+    "ts-morph": "14.0.0",
     "react-render-if-visible": "1.0.3",
     "download-stats": "0.3.4",
     "next": "^12.1.0",
