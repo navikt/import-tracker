@@ -14,8 +14,6 @@ export default function Home({ ...rest }) {
 
 export async function getStaticProps() {
   return {
-    props: {
-      indexList: getIndexedList(),
-    },
+    props: {},
   };
 }

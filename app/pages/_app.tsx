@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }) {
         <title>Dependency oversikt - NAV</title>
       </Head>
       <div className="flex bg-gray-100">
-        {pageProps?.indexList && <Sidebar {...pageProps} />}
+        <Sidebar {...pageProps} />
         <main className="w-full">
           <Component {...pageProps} />
         </main>

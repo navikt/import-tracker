@@ -1,18 +1,24 @@
 import { Close } from "@navikt/ds-icons";
 import {
   BodyShort,
-  Button,
   Label,
+  Loader,
   Search,
   ToggleGroup,
 } from "@navikt/ds-react";
 import cl from "classnames";
-import { useEffect, useMemo, useState } from "react";
-import { indexListT } from "../pages/package/[name]";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
+import { useEffect, useMemo, useState } from "react";
 
-const Sidebar = ({ indexList }: { indexList: indexListT }) => {
+export type indexListT = {
+  all: { index: number | null; name: string; url: string; count: number }[];
+  dep: { index: number | null; name: string; url: string; count: number }[];
+  dev: { index: number | null; name: string; url: string; count: number }[];
+  peer: { index: number | null; name: string; url: string; count: number }[];
+};
+
+const Sidebar = () => {
   const router = useRouter();
 
   const [filter, setFilter] = useState({
@@ -20,56 +26,65 @@ const Sidebar = ({ indexList }: { indexList: indexListT }) => {
     tags: [],
   });
   const [search, setSearch] = useState("");
-  const [list, setList] = useState(
-    indexList[filter.type].filter(
-      (x) =>
-        !!filter.tags.find((tag) => x.name.includes(tag)) ||
-        filter.tags.length === 0
-    )
-  );
+  const [sourceList, setSourceList] = useState(null);
+  const [list, setList] = useState(null);
 
   const ListMemo = useMemo(
     () => (
       <>
-        {list.map((x, y) => (
-          <NextLink prefetch={false} key={x + y} href={`${x.url}`} passHref>
-            <a
-              id={x.url}
-              className={cl(
-                "w-full scroll-m-72",
-                "focus:shadow-focus-inset flex w-11/12 items-center justify-between rounded-lg border-none  px-6 py-4 text-left focus:outline-none",
-                {
-                  "text-text-inverted bg-blue-900/60 hover:bg-blue-900/50":
-                    router.asPath === x.url,
-                  "bg-blue-900/20 hover:bg-blue-900/30":
-                    router.asPath !== x.url,
-                }
-              )}
-            >
-              <Label>
-                {`${x.index ?? "X"}. `}
-                {x.name}
-              </Label>
-              <span>
-                <Label>{x.count}</Label>
-              </span>
-            </a>
-          </NextLink>
-        ))}
+        {list ? (
+          <>
+            {list.map((x, y) => (
+              <NextLink prefetch={false} key={x + y} href={`${x.url}`} passHref>
+                <a
+                  id={x.url}
+                  className={cl(
+                    "w-full scroll-m-72",
+                    "focus:shadow-focus-inset flex w-11/12 items-center justify-between rounded-lg border-none  px-6 py-4 text-left focus:outline-none",
+                    {
+                      "text-text-inverted bg-blue-900/60 hover:bg-blue-900/50":
+                        router.asPath === x.url,
+                      "bg-blue-900/20 hover:bg-blue-900/30":
+                        router.asPath !== x.url,
+                    }
+                  )}
+                >
+                  <Label>
+                    {`${x.index ?? "X"}. `}
+                    {x.name}
+                  </Label>
+                  <span>
+                    <Label>{x.count}</Label>
+                  </span>
+                </a>
+              </NextLink>
+            ))}
+          </>
+        ) : (
+          <Loader size="xlarge" className="my-auto h-full" />
+        )}
       </>
     ),
     [list, router]
   );
 
   useEffect(() => {
-    setList(
-      indexList[filter.type].filter(
-        (x) =>
-          !!filter.tags.find((tag) => x.name.includes(tag)) ||
-          filter.tags.length === 0
-      )
-    );
-  }, [filter, indexList]);
+    fetch("/api/getSidebar")
+      .then((x) => x.json())
+      .then(setSourceList)
+      .catch((e) => console.log(e));
+  }, []);
+
+  useEffect(() => {
+    sourceList &&
+      setList(
+        sourceList[filter.type].filter(
+          (x) =>
+            !!filter.tags.find((tag) => x.name.includes(tag)) ||
+            filter.tags.length === 0
+        )
+      );
+  }, [filter, sourceList]);
 
   useEffect(() => {
     const el = document.getElementById(router.asPath);
@@ -78,11 +93,6 @@ const Sidebar = ({ indexList }: { indexList: indexListT }) => {
 
   return (
     <div className="flex max-h-screen min-h-screen w-full max-w-xs flex-col items-center bg-gray-50 shadow-lg">
-      <NextLink href="/" passHref prefetch={false}>
-        <Button as="a" className="absolute top-4 right-4" variant="tertiary">
-          <Close aria-hidden />
-        </Button>
-      </NextLink>
       <div className="sticky top-0 flex w-full flex-col items-center gap-2 bg-white/90 py-4 px-8 shadow-lg">
         <ToggleGroup
           size="small"
@@ -129,7 +139,7 @@ const Sidebar = ({ indexList }: { indexList: indexListT }) => {
           ))}
         </div>
       </div>
-      <div className="flex w-full flex-col items-center gap-2 overflow-auto pt-4 pb-2">
+      <div className="flex h-full w-full flex-col items-center gap-2 overflow-auto pt-4 pb-2">
         {ListMemo}
       </div>
     </div>

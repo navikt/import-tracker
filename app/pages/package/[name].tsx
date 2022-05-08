@@ -1,21 +1,30 @@
-import { Detail, Heading, Link, Table, ToggleGroup } from "@navikt/ds-react";
-import { useCallback, useEffect, useState } from "react";
+import { Close } from "@navikt/ds-icons";
+import {
+  Button,
+  Detail,
+  Heading,
+  Link,
+  Table,
+  ToggleGroup,
+} from "@navikt/ds-react";
+import {
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip,
+} from "chart.js";
+import Head from "next/head";
+import NextLink from "next/link";
+import { useState } from "react";
+import { Line } from "react-chartjs-2";
 import { getChartData } from "../../lib/get-chartdata";
-import { getIndexedList } from "../../lib/get-data";
 import { getDataPoints } from "../../lib/get-datapoints";
 import { getPages } from "../../lib/get-pages";
 import { getVersions } from "../../lib/get-versions";
-import { Line } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
 
 ChartJS.register(
   CategoryScale,
@@ -27,18 +36,8 @@ ChartJS.register(
   Legend
 );
 
-import Head from "next/head";
-
-export type indexListT = {
-  all: { index: number | null; name: string; url: string; count: number }[];
-  dep: { index: number | null; name: string; url: string; count: number }[];
-  dev: { index: number | null; name: string; url: string; count: number }[];
-  peer: { index: number | null; name: string; url: string; count: number }[];
-};
-
 export type PackagePropsT = {
   name: string;
-  indexList: indexListT;
   dataPoints?: {
     all: { current: number; prev: number };
     dep: { current: number; prev: number };
@@ -114,6 +113,11 @@ const Page = ({ name, dataPoints, versions, chartData }: PackagePropsT) => {
         <title>{name} - NAV</title>
       </Head>
       <div className="flex max-h-screen min-h-screen w-full flex-col gap-6 overflow-auto p-12">
+        <NextLink href="/" passHref prefetch={false}>
+          <Button as="a" className="absolute top-4 right-4" variant="tertiary">
+            <Close aria-hidden />
+          </Button>
+        </NextLink>
         <ToggleGroup size="small" defaultValue="info" onChange={setValue}>
           <ToggleGroup.Item value="info">Info</ToggleGroup.Item>
           <ToggleGroup.Item value="versjon">Versjoner</ToggleGroup.Item>
@@ -121,7 +125,7 @@ const Page = ({ name, dataPoints, versions, chartData }: PackagePropsT) => {
         </ToggleGroup>
         {value === "info" && (
           <div>
-            <div className=" flex max-w-2xl flex-wrap gap-4">
+            <div className="flex max-w-2xl flex-wrap gap-4">
               <Card
                 desc="Pakkebruk totalt"
                 src={
@@ -316,7 +320,6 @@ export async function getStaticProps(ctx): Promise<{ props: PackagePropsT }> {
   return {
     props: {
       name: decodeURI(name),
-      indexList: getIndexedList(),
       dataPoints: getDataPoints(name),
       versions: getVersions(name),
       chartData: getChartData(name),
