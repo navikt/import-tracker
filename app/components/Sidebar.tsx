@@ -49,7 +49,7 @@ const Sidebar = () => {
                     }
                   )}
                 >
-                  <Label>
+                  <Label className="break-all">
                     {`${x.index ?? "X"}. `}
                     {x.name}
                   </Label>
