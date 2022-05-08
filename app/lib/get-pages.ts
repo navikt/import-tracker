@@ -16,7 +16,9 @@ export const getFiles = () => {
     const file = readFileSync(`public/data/${fileName}`, "utf8");
     files.push({
       name: fileName,
-      data: JSON.parse(file, reviver)?.packagedata ?? JSON.parse(file, reviver),
+      data:
+        JSON.parse(JSON.parse(file, reviver)?.packagedata, reviver) ??
+        JSON.parse(file, reviver),
       importData: JSON.parse(file, reviver)?.importData,
     });
   }

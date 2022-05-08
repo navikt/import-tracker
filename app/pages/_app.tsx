@@ -1,9 +1,12 @@
 import Head from "next/head";
 import "../styles/globals.css";
+import { useRouter } from "next/router";
 
 import Sidebar from "../components/Sidebar";
+import DsSidebar from "../components/DsSidebar";
 
 function MyApp({ Component, pageProps }) {
+  const router = useRouter();
   return (
     <>
       <Head>
@@ -11,7 +14,11 @@ function MyApp({ Component, pageProps }) {
         <title>Dependency oversikt - NAV</title>
       </Head>
       <div className="flex bg-gray-100">
-        <Sidebar {...pageProps} />
+        {router.asPath.startsWith("/ds") ? (
+          <DsSidebar />
+        ) : (
+          <Sidebar {...pageProps} />
+        )}
         <main className="w-full">
           <Component {...pageProps} />
         </main>

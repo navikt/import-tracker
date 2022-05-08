@@ -4,6 +4,8 @@ export const getRepos = (): number => {
   if (!files) getFiles();
   const packages = files[0].data.packages;
 
+  console.log(files[0]);
+
   const repos = new Set();
 
   [...packages.entries()].forEach(([x, val], y) => {

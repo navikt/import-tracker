@@ -1,6 +1,6 @@
-import { BodyLong, BodyShort, Heading } from "@navikt/ds-react";
+import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
+import NextLink from "next/link";
 import React from "react";
-import { getIndexedList } from "../lib/get-data";
 import { getLastUpdate } from "../lib/get-last-update";
 import { getDeprecated, getPackages, getScope } from "../lib/get-packages";
 import { getRepos } from "../lib/get-repos";
@@ -71,6 +71,9 @@ export default function Home({
           {deprecated}
         </Card>
       </div>
+      <NextLink href="/ds" passHref>
+        <Link className="w-fit">Designsystem-komponenter</Link>
+      </NextLink>
     </div>
   );
 }
