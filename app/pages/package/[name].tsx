@@ -284,7 +284,7 @@ const Page = ({ name, dataPoints, versions, chartData }: PackagePropsT) => {
           </div>
         )}
         {value === "info" && (
-          <div className="mb-4 flex w-full flex-col">
+          <div className="mb-4 flex w-fit flex-col">
             <Link
               className="text-text"
               href={`npmjs.com/package/${name}`}
