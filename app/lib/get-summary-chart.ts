@@ -48,3 +48,30 @@ export const getSummaryChart = (name: string) => {
       })),
   };
 };
+
+export const getSummaryChartTotal = (name: string) => {
+  if (!files) getFiles();
+  return {
+    labels: files
+      .map((y) =>
+        y.name.split(" ")[0].substring(0, 5).split("-").reverse().join("/")
+      )
+      .slice(0, 14)
+      .reverse(),
+    datasets: [
+      {
+        label: "Total bruk",
+        backgroundColor: "rgba(51, 134, 224, 1)",
+        borderColor: "rgba(51, 134, 224, 1)",
+        data: files
+          .map((z) =>
+            z.importData
+              .find((x) => x.name === name)
+              .summary.namedImport.reduce((old, n) => old + n.count, 0)
+          )
+          .slice(0, 14)
+          .reverse(),
+      },
+    ],
+  };
+};

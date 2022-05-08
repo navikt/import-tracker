@@ -27,7 +27,10 @@ import { getChartData } from "../../lib/get-chartdata";
 import { getDataPoints } from "../../lib/get-datapoints";
 import { getPages } from "../../lib/get-pages";
 import { getSummary } from "../../lib/get-summary";
-import { getSummaryChart } from "../../lib/get-summary-chart";
+import {
+  getSummaryChart,
+  getSummaryChartTotal,
+} from "../../lib/get-summary-chart";
 import { getVersions } from "../../lib/get-versions";
 
 ChartJS.register(
@@ -56,7 +59,7 @@ export const Card = ({ children, desc, src }) => {
   );
 };
 
-const Page = ({ name, summary, chartData }: PropsT) => {
+const Page = ({ name, summary, chartData, totalChart }: PropsT) => {
   const [value, setValue] = useState("info");
 
   function partition(list, n = 6) {
@@ -91,6 +94,7 @@ const Page = ({ name, summary, chartData }: PropsT) => {
           {value === "historie" && (
             <>
               <div className="relative flex w-full flex-col gap-8 overflow-scroll rounded-lg bg-white px-4 py-2 shadow-md">
+                <Line data={totalChart} />
                 <Line
                   data={{
                     labels: chartData.labels,
@@ -263,6 +267,7 @@ type PropsT = {
   name: string;
   summary: ImportSummaryT;
   chartData: any;
+  totalChart: any;
 };
 
 export async function getStaticProps(ctx): Promise<{ props: PropsT }> {
@@ -272,6 +277,7 @@ export async function getStaticProps(ctx): Promise<{ props: PropsT }> {
       name,
       summary: getSummary(name),
       chartData: getSummaryChart(name),
+      totalChart: getSummaryChartTotal(name),
     },
   };
 }
