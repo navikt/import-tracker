@@ -23,7 +23,7 @@ export default function Home({
         </Heading>
         <BodyLong spacing>
           Appen har sett gjennom all pakkebruk i NAVIT sine git-repo de siste
-          ~24 månedene. Dataen er så oppsummert her, så velg en pakke i
+          ~48 månedene. Dataen er så oppsummert her, så velg en pakke i
           venstremenyen for å komme i gang. Planen er å oppdatere en gang hver
           måndede fremover.
         </BodyLong>
