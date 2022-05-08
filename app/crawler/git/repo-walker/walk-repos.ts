@@ -1,9 +1,8 @@
-import simpleGit, { SimpleGit } from "simple-git";
+import fs from "fs";
 import { repoLocation } from "../..";
+import Parsing from "../../parsing/index";
 import checkoutRepos from "./checkout-repos";
 import { RepoHistoryT } from "./histories";
-import fs from "fs";
-import Parsing from "../../parsing/index";
 
 const prepareRepos = (
   histories: RepoHistoryT[],
@@ -29,7 +28,7 @@ const prepareRepos = (
   return [...checked];
 };
 
-const generateJsonData = async (histories: RepoHistoryT[], date) => {
+const generateData = async (histories: RepoHistoryT[], date) => {
   histories.forEach(
     (x) =>
       x.completed &&
@@ -49,7 +48,7 @@ const walkRepos = async (hist: RepoHistoryT[], dates: string[]) => {
     console.count("prepared");
     histories = await checkoutRepos(histories);
     console.count("checkedout");
-    histories = await generateJsonData(histories, key);
+    histories = await generateData(histories, key);
     console.log(key);
   }
 

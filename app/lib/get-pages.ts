@@ -1,8 +1,13 @@
 import { readdirSync, readFileSync } from "fs";
 import { replacer, reviver } from "../crawler/parsing/map-to-json";
 import { PackageJsonResults } from "../crawler/parsing/packagejson/parse-json-data";
+import { ImportSummaryT } from "../crawler/parsing/react/parse-import-data";
 
-export let files: { name: string; data: PackageJsonResults }[];
+export let files: {
+  name: string;
+  data: PackageJsonResults;
+  importData: ImportSummaryT[];
+}[];
 
 export const getFiles = () => {
   files = [];
@@ -11,7 +16,8 @@ export const getFiles = () => {
     const file = readFileSync(`public/data/${fileName}`, "utf8");
     files.push({
       name: fileName,
-      data: JSON.parse(file, reviver),
+      data: JSON.parse(file, reviver)?.packagedata ?? JSON.parse(file, reviver),
+      importData: JSON.parse(file, reviver)?.importData,
     });
   }
 };

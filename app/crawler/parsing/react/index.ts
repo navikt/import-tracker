@@ -5,7 +5,7 @@ import { parseImportData } from "./parse-import-data";
 
 const ParseReactCode = async () => {
   const imports = mapImports(await filterUnwanted());
-  const summary = parseImportData(imports);
+  return parseImportData(imports);
 };
 
 export default ParseReactCode;

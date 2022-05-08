@@ -43,7 +43,6 @@ export const mapImports = (
   try {
     return source
       .map((repo, y) => {
-        console.log(y);
         return {
           ...repo,
           files: repo.files.map((x) => getImports(x)),

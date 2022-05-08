@@ -13,8 +13,8 @@ export const cloneSelected = async (git: SimpleGit, repos: RepoMetadataT[]) => {
       git
         .clone(
           `https://${serverRuntimeConfig.gh_token}:x-oauth-basic@github.com/navikt/${repo.name}`,
-          repo.name,
-          { "--depth": 1 }
+          repo.name
+          /* { "--depth": 1 } */
         )
         .catch((e) => {
           console.error(`Failed ${repo.name}`);

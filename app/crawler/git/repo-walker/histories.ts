@@ -59,5 +59,5 @@ export const getAllDates = (data: RepoHistoryT[]): string[] => {
   data.forEach((x) => x.history.map((y) => dateSet.add(y.shortDate)));
   return [...dateSet.keys()]
     .sort((a, b) => new Date(b).getTime() - new Date(a).getTime())
-    .slice(0, 24);
+    .slice(0, 48);
 };
