@@ -10,13 +10,13 @@ export const repoLocation = "crawler/files/repositories";
 const Crawler = async () => {
   if (!fs.existsSync(filesLocation)) fs.mkdirSync(filesLocation);
   /* Jobs */
-  /* await git();
-  await parsing(); */
+  await git();
+  await parsing();
 
   /* Update status */
-  /* await updateLastCrawl(); */
-  await git();
-  await walker();
+  await updateLastCrawl();
+
+  /* await walker(); */
   console.log("Completed!");
 };
 
