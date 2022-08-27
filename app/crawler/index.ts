@@ -14,9 +14,9 @@ const Crawler = async () => {
   await parsing();
 
   /* Update status */
-  await updateLastCrawl();
+  /* await updateLastCrawl(); */
 
-  /* await walker(); */
+  await walker();
   console.log("Completed!");
 };
 
