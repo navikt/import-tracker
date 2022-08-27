@@ -160,9 +160,7 @@ const Page = ({ name, dataPoints, versions, chartData }: PackagePropsT) => {
         )}
       >
         <NextLink href="/" passHref prefetch={false}>
-          <Button as="a" className="absolute top-4 right-4" variant="tertiary">
-            <Close aria-hidden />
-          </Button>
+          <Button size="small" as="a" className="absolute top-4 right-4" variant="tertiary" icon={<Close aria-hidden />} />
         </NextLink>
         <ToggleGroup size="small" defaultValue="info" onChange={setValue}>
           <ToggleGroup.Item value="info">Info</ToggleGroup.Item>

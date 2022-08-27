@@ -6,17 +6,18 @@ import { useRouter } from "next/router";
 
 const Link = ({ name }: { name: string }) => {
   const router = useRouter();
+  const formatName = () => name.replace("/", "__")
   return (
-    <NextLink prefetch={false} href={`/ds/${name}`} passHref>
+    <NextLink prefetch={false} href={`/ds/${formatName()}`} passHref>
       <a
         className={cl(
           "w-full scroll-m-72",
           "focus:shadow-focus-inset flex w-11/12 items-center justify-between rounded-lg border-none px-2 py-2 text-left focus:outline-none",
           {
             "text-text-inverted bg-blue-900/60 hover:bg-blue-900/50":
-              router.asPath === `/ds/${name}`,
+              router.asPath === `/ds/${formatName()}`,
             "bg-blue-900/10 hover:bg-blue-900/30":
-              router.asPath !== `/ds/${name}`,
+              router.asPath !== `/ds/${formatName()}`,
           }
         )}
       >

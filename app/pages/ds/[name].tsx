@@ -1,12 +1,6 @@
-import { Close } from "@navikt/ds-icons";
 import {
-  Accordion,
-  Button,
-  Detail,
-  Heading,
-  Link,
   Table,
-  ToggleGroup,
+  ToggleGroup
 } from "@navikt/ds-react";
 import {
   CategoryScale,
@@ -16,22 +10,18 @@ import {
   LineElement,
   PointElement,
   Title,
-  Tooltip,
+  Tooltip
 } from "chart.js";
 import Head from "next/head";
-import NextLink from "next/link";
 import { useState } from "react";
 import { Line } from "react-chartjs-2";
 import { ImportSummaryT } from "../../crawler/parsing/react/parse-import-data";
-import { getChartData } from "../../lib/get-chartdata";
-import { getDataPoints } from "../../lib/get-datapoints";
-import { getPages } from "../../lib/get-pages";
 import { getSummary } from "../../lib/get-summary";
 import {
   getSummaryChart,
-  getSummaryChartTotal,
+  getSummaryChartTotal
 } from "../../lib/get-summary-chart";
-import { getVersions } from "../../lib/get-versions";
+import { Card } from "../package/[name]";
 
 ChartJS.register(
   CategoryScale,
@@ -43,21 +33,6 @@ ChartJS.register(
   Legend
 );
 
-export const Card = ({ children, desc, src }) => {
-  return (
-    <div className="shadow-medium flex aspect-video h-28 flex-col justify-between rounded-lg bg-white px-4 py-2">
-      <Detail className="text-text-muted">{desc}</Detail>
-      <Heading as="span" size="medium" className="mx-auto px-8">
-        {children}
-      </Heading>
-      {src && (
-        <Detail size="small" className="text-text-muted ml-auto">
-          {src}
-        </Detail>
-      )}
-    </div>
-  );
-};
 
 const Page = ({ name, summary, chartData, totalChart }: PropsT) => {
   const [value, setValue] = useState("info");
@@ -188,28 +163,28 @@ const Page = ({ name, summary, chartData, totalChart }: PropsT) => {
           )} */}
           {value === "info" && (
             <>
-              <div className="flex max-w-2xl flex-wrap gap-4">
+              <div className="flex min-w-[250px] flex-col w-fit flex-wrap gap-4">
                 <Card
                   desc="Antall imports"
-                  src={<span className="invisible">A</span>}
+
                 >
                   {summary.count}
                 </Card>
                 <Card
                   desc="Brukt i x repo"
-                  src={<span className="invisible">A</span>}
+
                 >
                   {summary.repo.length}
                 </Card>
               </div>
-              <div className="mt-8 flex max-w-2xl flex-wrap gap-4">
-                <Card desc="Default imports" src={`Comp from "x"`}>
+              <div className="mt-8 flex flex-col min-w-[250px] w-fit max-w-2xl flex-wrap gap-4">
+                <Card desc="Default imports" >
                   {summary.summary.defaultImport.count}
                 </Card>
-                <Card desc="Namespace import" src={`* as Alias from "x"`}>
+                <Card desc="Namespace import" >
                   {summary.summary.nameSpaceImport.count}
                 </Card>
-                <Card desc="Total named import" src={`{ Alert } from "x"`}>
+                <Card desc="Total named import" >
                   {summary.summary.namedImport.reduce(
                     (old, v) => old + v.count,
                     0
@@ -233,7 +208,7 @@ const Page = ({ name, summary, chartData, totalChart }: PropsT) => {
               <Table.Body>
                 {summary.summary.namedImport
                   .sort((a, b) => b.count - a.count)
-                  .map((x, y) => (
+                  ?.map((x, y) => (
                     <Table.Row key={x.name}>
                       <Table.HeaderCell scope="row">{x.name}</Table.HeaderCell>
                       <Table.DataCell className="text-right">
