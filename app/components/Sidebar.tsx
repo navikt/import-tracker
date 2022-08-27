@@ -1,15 +1,10 @@
 import { Close } from "@navikt/ds-icons";
-import {
-  BodyShort,
-  Label,
-  Loader,
-  Search,
-  ToggleGroup,
-} from "@navikt/ds-react";
+import { BodyShort, Loader, Search } from "@navikt/ds-react";
 import cl from "classnames";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
+import RenderIfVisible from "react-render-if-visible";
 
 export type indexListT = {
   all: { index: number | null; name: string; url: string; count: number }[];
@@ -32,29 +27,38 @@ const Sidebar = () => {
         {list ? (
           <>
             {list.map((x, y) => (
-              <NextLink prefetch={false} key={x + y} href={`${x.url}`} passHref>
-                <a
-                  id={x.url}
-                  className={cl(
-                    "w-full scroll-m-72",
-                    "focus:shadow-focus-inset flex w-11/12 items-center justify-between rounded-lg border-none  px-6 py-4 text-left focus:outline-none",
-                    {
-                      "text-text-inverted bg-blue-900/60 hover:bg-blue-900/50":
-                        router.asPath === x.url,
-                      "bg-blue-900/20 hover:bg-blue-900/30":
-                        router.asPath !== x.url,
-                    }
-                  )}
-                >
-                  <Label className="break-all">
-                    {`${x.index ?? "X"}. `}
-                    {x.name}
-                  </Label>
-                  <span>
-                    <Label>{x.count}</Label>
-                  </span>
-                </a>
-              </NextLink>
+              <RenderIfVisible
+                key={x + y}
+                defaultHeight={36}
+                rootElementClass="w-11/12"
+                stayRendered
+              >
+                <NextLink prefetch={false} href={`${x.url}`} passHref>
+                  <BodyShort
+                    size="small"
+                    as="a"
+                    id={x.url}
+                    className={cl(
+                      "w-full scroll-m-72",
+                      "focus:shadow-focus-inset flex items-center justify-between rounded-lg border-none px-2 py-2 text-left focus:outline-none",
+                      {
+                        "text-text-inverted bg-blue-900/60 hover:bg-blue-900/50":
+                          router.asPath === x.url,
+                        "bg-blue-900/10 hover:bg-blue-900/30":
+                          router.asPath !== x.url,
+                      }
+                    )}
+                  >
+                    <p className="break-all">
+                      {`${x.index ?? "X"}. `}
+                      <span className="font-semibold">{x.name}</span>
+                    </p>
+                    <span>
+                      <p>{x.count}</p>
+                    </span>
+                  </BodyShort>
+                </NextLink>
+              </RenderIfVisible>
             ))}
           </>
         ) : (

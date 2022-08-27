@@ -4,6 +4,7 @@ import {
   Detail,
   Heading,
   Link,
+  Popover,
   Table,
   ToggleGroup,
 } from "@navikt/ds-react";
@@ -19,12 +20,13 @@ import {
 } from "chart.js";
 import Head from "next/head";
 import NextLink from "next/link";
-import { useState } from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import { Line } from "react-chartjs-2";
 import { getChartData } from "../../lib/get-chartdata";
 import { getDataPoints } from "../../lib/get-datapoints";
 import { getPages } from "../../lib/get-pages";
 import { getVersions } from "../../lib/get-versions";
+import cl from "classnames";
 
 ChartJS.register(
   CategoryScale,
@@ -64,43 +66,82 @@ export type PackagePropsT = {
   };
 };
 
-export const Card = ({ children, desc, src }) => {
-  return (
-    <div className="shadow-medium flex aspect-video h-28 flex-col justify-between rounded-lg bg-white px-4 py-2">
-      <Detail className="text-text-muted">{desc}</Detail>
-      <Heading as="span" size="medium" className="mx-auto px-8">
-        {children}
-      </Heading>
-      {src && (
-        <Detail size="small" className="text-text-muted ml-auto">
-          {src}
+type CardT = { children: React.ReactNode; desc: any };
+
+interface CardButtonT extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children: React.ReactNode;
+  desc: any;
+}
+
+/* eslint-disable react/display-name */
+export const Card = forwardRef<HTMLDivElement, CardT>(
+  ({ children, desc, ...rest }, ref) => {
+    return (
+      <div {...rest} ref={ref} className="bg-white py-2 px-4">
+        <Detail className="flex justify-between">
+          {`${desc}: `}
+          <span className="text-text font-semibold">{`${children}`}</span>
         </Detail>
+      </div>
+    );
+  }
+);
+
+export const CardButton = forwardRef<HTMLButtonElement, CardButtonT>(
+  ({ children, desc, ...rest }, ref) => {
+    return (
+      <button {...rest} ref={ref} className="bg-white py-2 focus:z-10 px-4 w-full focus:shadow-focus focus:outline-none">
+        <Detail className="flex justify-between">
+          {`${desc}: `}
+          <span className="text-text font-semibold">{`${children}`}</span>
+        </Detail>
+      </button>
+    );
+  }
+);
+
+const Versions = ({ data }: any) => {
+  const [open, setOpen] = useState(false);
+  const [anchor, setAnchor] = useState(null);
+
+  return (
+    <div>
+      <CardButton ref={setAnchor} desc={data.version} onClick={() => setOpen(true)}>
+        {data.n}
+      </CardButton>
+      {open && (
+        <Popover
+          anchorEl={anchor}
+          open={open}
+          onClose={() => setOpen(false)}
+          arrow={false}
+          placement="right"
+          className="max-h-screen overflow-y-auto"
+        >
+          <Popover.Content>
+          <div>
+            <Heading level="3" size="xsmall">
+              Repos
+            </Heading>
+            <ul>
+              {data.repos
+                .filter((value, index, array) => array.indexOf(value) === index)
+                .map((x) => (
+                  <li key={x}>
+                    <Link
+                      className="text-text visited:text-purple-400"
+                      href={`https://github.com/navikt/${x}`}
+                    >
+                      {x}
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+          </div>
+          </Popover.Content>
+        </Popover>
       )}
     </div>
-  );
-};
-
-const Diff = ({ diff, noColor = false }) => {
-  if (diff === 0) return <span>Ingen endring | 3m</span>;
-
-  if (noColor) {
-    return <>{diff > 0 ? <span>+{diff}</span> : <span>{diff}</span>}</>;
-  }
-
-  return (
-    <>
-      {diff > 0 ? (
-        <span>
-          <span className="text-green-400">+{diff}</span>
-          {` | 3m`}
-        </span>
-      ) : (
-        <span>
-          <span className="text-red-400">{diff}</span>
-          {` | 3m`}
-        </span>
-      )}
-    </>
   );
 };
 
@@ -112,7 +153,12 @@ const Page = ({ name, dataPoints, versions, chartData }: PackagePropsT) => {
       <Head>
         <title>{name} - NAV</title>
       </Head>
-      <div className="flex max-h-screen min-h-screen w-full flex-col gap-6 overflow-auto p-12">
+      <div
+        className={cl(
+          "flex max-h-screen min-h-screen flex-col gap-6 overflow-auto p-12",
+          { "w-fit": value !== "historie", "w-full": value === "historie" }
+        )}
+      >
         <NextLink href="/" passHref prefetch={false}>
           <Button as="a" className="absolute top-4 right-4" variant="tertiary">
             <Close aria-hidden />
@@ -125,161 +171,27 @@ const Page = ({ name, dataPoints, versions, chartData }: PackagePropsT) => {
         </ToggleGroup>
         {value === "info" && (
           <div>
-            <div className="flex max-w-2xl flex-wrap gap-4">
-              <Card
-                desc="Pakkebruk totalt"
-                src={
-                  <Diff diff={dataPoints.all.current - dataPoints.all.prev} />
-                }
-              >
-                {dataPoints.all.current}
-              </Card>
-              <Card
-                desc="Repos som bruker pakke"
-                src={<span className="invisible">A</span>}
-              >
-                {dataPoints.reposN}
-              </Card>
-              <Card
-                desc="Uniker versjoner"
-                src={<span className="invisible">A</span>}
-              >
-                {versions.length}
-              </Card>
+            <div className="flex max-w-2xl flex-col gap-4">
+              <Card desc="Pakkebruk totalt">{dataPoints.all.current}</Card>
+              <Card desc="Repos som bruker pakke">{dataPoints.reposN}</Card>
+              <Card desc="Uniker versjoner">{versions.length}</Card>
             </div>
-            <div className="mt-16 flex max-w-2xl flex-wrap gap-4">
-              <Card
-                desc="dependencies"
-                src={
-                  <Diff diff={dataPoints.dep.current - dataPoints.dep.prev} />
-                }
-              >
-                {dataPoints.dep.current}
-              </Card>
-              <Card
-                desc="devDependencies"
-                src={
-                  <Diff diff={dataPoints.dev.current - dataPoints.dev.prev} />
-                }
-              >
-                {dataPoints.dev.current}
-              </Card>
-              <Card
-                desc="peerDependencies"
-                src={
-                  <Diff diff={dataPoints.peer.current - dataPoints.peer.prev} />
-                }
-              >
-                {dataPoints.peer.current}
-              </Card>
-            </div>
-            <div className="mt-8 flex max-w-2xl flex-wrap gap-4">
-              <Card
-                desc="Year to date"
-                src={<span className="invisible">A</span>}
-              >
-                {dataPoints.yearToDate.current - dataPoints.yearToDate.prev ===
-                0 ? (
-                  "0"
-                ) : (
-                  <Diff
-                    noColor
-                    diff={
-                      dataPoints.yearToDate.current - dataPoints.yearToDate.prev
-                    }
-                  />
-                )}
-              </Card>
-              <Card
-                desc="Siste 6 mnd"
-                src={<span className="invisible">A</span>}
-              >
-                {dataPoints.halfYearTrend.current -
-                  dataPoints.halfYearTrend.prev ===
-                0 ? (
-                  "0"
-                ) : (
-                  <Diff
-                    noColor
-                    diff={
-                      dataPoints.halfYearTrend.current -
-                      dataPoints.halfYearTrend.prev
-                    }
-                  />
-                )}
-              </Card>
-              <Card
-                desc="Siste 12 mnd"
-                src={<span className="invisible">A</span>}
-              >
-                {dataPoints.YearTrend.current - dataPoints.YearTrend.prev ===
-                0 ? (
-                  "0"
-                ) : (
-                  <Diff
-                    noColor
-                    diff={
-                      dataPoints.YearTrend.current - dataPoints.YearTrend.prev
-                    }
-                  />
-                )}
-              </Card>
+            <div className="mt-16 flex max-w-2xl flex-col gap-4">
+              <Card desc="dependencies">{dataPoints.dep.current}</Card>
+              <Card desc="devDependencies">{dataPoints.dev.current}</Card>
+              <Card desc="peerDependencies">{dataPoints.peer.current}</Card>
             </div>
           </div>
         )}
         {value === "versjon" && (
-          <div className="relative w-full max-w-lg overflow-scroll rounded-lg bg-white px-4 py-2 shadow-md">
-            <Table size="small" className="overflow-scroll">
-              <Table.Header>
-                <Table.Row>
-                  <Table.HeaderCell scope="col">Version</Table.HeaderCell>
-                  <Table.HeaderCell scope="col" className="text-right">
-                    Antall
-                  </Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                {versions.map((x, y) => (
-                  <Table.ExpandableRow
-                    key={x.version}
-                    togglePlacement="right"
-                    content={
-                      <div>
-                        <Heading level="3" size="xsmall">
-                          Repos
-                        </Heading>
-                        <ul>
-                          {x.repos
-                            .filter(
-                              (value, index, array) =>
-                                array.indexOf(value) === index
-                            )
-                            .map((x) => (
-                              <li key={x}>
-                                <Link
-                                  className="text-text visited:text-purple-400"
-                                  href={`https://github.com/navikt/${x}`}
-                                >
-                                  {x}
-                                </Link>
-                              </li>
-                            ))}
-                        </ul>
-                      </div>
-                    }
-                  >
-                    <Table.HeaderCell scope="row">{x.version}</Table.HeaderCell>
-                    <Table.DataCell className="text-right">
-                      {x.n}
-                    </Table.DataCell>
-                  </Table.ExpandableRow>
-                ))}
-              </Table.Body>
-            </Table>
+          <div className="overflow-auto flex flex-col gap-1 px-2 py-1">
+            {versions.map((x) => (
+              <Versions key={x.version} data={x} />
+            ))}
           </div>
         )}
         {value === "historie" && (
-          <div className="relative mt-8 w-full overflow-scroll rounded-lg bg-white px-4 py-2 shadow-md">
+          <div className="relative mt-8 w-full  overflow-scroll rounded-lg bg-white px-4 py-2 shadow-md">
             <Line data={chartData} />
           </div>
         )}

@@ -15,61 +15,22 @@ export default function Home({
   ...rest
 }) {
   return (
-    <div className="flex max-h-screen min-h-screen w-full flex-col gap-4 overflow-auto p-12">
-      <div className="max-w-3xl">
-        <BodyShort spacing>Sist oppdatert: {lastUpdate}</BodyShort>
-        <Heading spacing level="2" size="medium">
-          Hva er denne appen?
-        </Heading>
-        <BodyLong spacing>
-          Appen har sett gjennom all pakkebruk i NAVIT sine git-repo de siste
-          ~48 månedene. Dataen er så oppsummert her, så velg en pakke i
-          venstremenyen for å komme i gang. Planen er å oppdatere en gang hver
-          måndede fremover.
-        </BodyLong>
-      </div>
-      <Heading level="2" size="medium">
-        Datakilde
+    <div className="flex max-h-screen min-h-screen w-fit flex-col gap-4 overflow-auto p-12">
+      <Heading level="2" size="xsmall">
+        Kilde
       </Heading>
-      <div className="mb-8 flex max-w-2xl flex-wrap gap-4">
-        <Card
-          desc={"Repos w/package.json"}
-          src={<span className="invisible">a</span>}
-        >
-          {repos}
-        </Card>
-        <Card
-          desc={"Package.json filer"}
-          src={<span className="invisible">a</span>}
-        >
-          1484
-        </Card>
-        <Card
-          desc={"js/ts-filer funnet"}
-          src={<span className="invisible">a</span>}
-        >
-          56711
-        </Card>
+      <div className="mb-8 flex  flex-col gap-4">
+        <Card desc={"Repos w/package.json"}>{repos}</Card>
+        <Card desc={"Package.json filer"}>1484</Card>
+        <Card desc={"js/ts-filer funnet"}>56711</Card>
       </div>
-      <Heading level="2" size="medium">
+      <Heading level="2" size="xsmall">
         Pakker
       </Heading>
-      <div className="mb-8 flex max-w-2xl flex-wrap gap-4">
-        <Card desc={"Unike pakker"} src={<span className="invisible">a</span>}>
-          {packages}
-        </Card>
-        <Card
-          desc={"Under @navikt scope"}
-          src={<span className="invisible">a</span>}
-        >
-          {scoped}
-        </Card>
-        <Card
-          desc={"Ikke i bruk lengre"}
-          src={<span className="invisible">a</span>}
-        >
-          {deprecated}
-        </Card>
+      <div className="mb-8 flex max-w-2xl flex-col gap-4">
+        <Card desc={"Unike pakker"}>{packages}</Card>
+        <Card desc={"Under @navikt scope"}>{scoped}</Card>
+        <Card desc={"Ikke i bruk lengre"}>{deprecated}</Card>
       </div>
       <NextLink href="/ds" passHref>
         <Link className="w-fit">Designsystem-komponenter</Link>
