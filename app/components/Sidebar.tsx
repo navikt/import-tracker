@@ -21,10 +21,7 @@ export type indexListT = {
 const Sidebar = () => {
   const router = useRouter();
 
-  const [filter, setFilter] = useState({
-    type: "all",
-    tags: [],
-  });
+  const [tags, setTags] = useState<string[]>([]);
   const [search, setSearch] = useState("");
   const [sourceList, setSourceList] = useState(null);
   const [list, setList] = useState(null);
@@ -78,36 +75,24 @@ const Sidebar = () => {
   useEffect(() => {
     sourceList &&
       setList(
-        sourceList[filter.type].filter(
-          (x) =>
-            !!filter.tags.find((tag) => x.name.includes(tag)) ||
-            filter.tags.length === 0
+        sourceList.all.filter(
+          (x) => !!tags.find((tag) => x.name.includes(tag)) || tags.length === 0
         )
       );
-  }, [filter, sourceList]);
+  }, [tags, sourceList]);
 
   useEffect(() => {
     const el = document.getElementById(router.asPath);
     if (el) el.scrollIntoView();
-  }, [router, filter, ListMemo]);
+  }, [router, tags, ListMemo]);
 
   return (
-    <div className="flex max-h-screen min-h-screen w-full max-w-xs flex-col items-center bg-gray-50 shadow-lg">
-      <div className="sticky top-0 flex w-full flex-col items-center gap-2 bg-white/90 py-4 px-8 shadow-lg">
-        <ToggleGroup
-          size="small"
-          value={filter.type}
-          onChange={(e) => setFilter((x) => ({ ...x, type: e }))}
-        >
-          <ToggleGroup.Item value="all">All</ToggleGroup.Item>
-          <ToggleGroup.Item value="dep">Dep</ToggleGroup.Item>
-          <ToggleGroup.Item value="dev">Dev</ToggleGroup.Item>
-          <ToggleGroup.Item value="peer">Peer</ToggleGroup.Item>
-        </ToggleGroup>
+    <div className="flex max-h-screen min-h-screen w-full max-w-xs flex-col items-center bg-gray-50 ">
+      <div className="sticky top-0 flex w-full flex-col items-center gap-2 py-4 px-8 ">
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            setFilter((x) => ({ ...x, tags: [...x.tags, search] }));
+            setTags((x) => [...x, search]);
             setSearch("");
           }}
           className="w-full"
@@ -122,16 +107,11 @@ const Sidebar = () => {
         </form>
 
         <div className="flex w-full flex-wrap gap-2">
-          {filter.tags.map((x, y) => (
+          {tags.map((x, y) => (
             <button
               className="focus:shadow-focus flex items-center justify-center gap-1 rounded border border-gray-600 py-1 px-2 hover:border-blue-100 hover:bg-blue-100 focus:outline-none"
               key={x + y}
-              onClick={() =>
-                setFilter((z) => ({
-                  ...z,
-                  tags: z.tags.filter((y) => y !== x),
-                }))
-              }
+              onClick={() => setTags((z) => z.filter((y) => y !== x))}
             >
               <BodyShort size="small">{x}</BodyShort>
               <Close aria-hidden className="text-sm" />

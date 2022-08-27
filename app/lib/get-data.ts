@@ -36,9 +36,9 @@ const packageList = (
 const generateIndex = () => {
   indexedList = {
     all: packageList(),
-    dep: packageList("packagesDeps"),
+    /* dep: packageList("packagesDeps"),
     dev: packageList("packagesDevDeps"),
-    peer: packageList("packagesPeerDeps"),
+    peer: packageList("packagesPeerDeps"), */
   };
 };
 
