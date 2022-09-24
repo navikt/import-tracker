@@ -9,7 +9,7 @@ const Parsing = async (date?: string) => {
     JSON.stringify({ packagedata: packageJsonData, importData: reactData }),
     date
   );
-  console.log("Finished PARSING-job");
+  console.count("PARSING-job");
 };
 
 export default Parsing;
