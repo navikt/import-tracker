@@ -9,7 +9,7 @@ const dataFrom = (
 
   const dataKey = key && key !== "default" ? key : "packages";
   const current = files[0].data[dataKey].get(name)?.counter ?? 0;
-  const prev = files[range ?? 3].data[dataKey].get(name)?.counter ?? 0;
+  const prev = files[range ?? 1]?.data[dataKey].get(name)?.counter ?? 0;
 
   return { current: current, prev: prev };
 };
@@ -24,7 +24,7 @@ const yearToDate = (name: string) => {
   );
 
   const current = files[0].data["packages"].get(name)?.counter ?? 0;
-  const prev = prevYear.data["packages"].get(name)?.counter ?? 0;
+  const prev = prevYear?.data["packages"].get(name)?.counter ?? 0;
 
   return { current: current, prev: prev };
 };

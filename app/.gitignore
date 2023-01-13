@@ -40,3 +40,4 @@ crawler/files copy
 crawler/files.old
 crawler/files/
 public/data/*
+public/data.old
